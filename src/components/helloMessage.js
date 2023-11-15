@@ -1,8 +1,16 @@
 import React from 'react'
-
-function HelloMessage() {
+import './helloMessage.css'
+// function HelloMessage() {
+//   return (
+//     <div>helloMessage!!!!!!!</div>
+//   )
+// }
+const HelloMessage = (props) => {
   return (
-    <div>helloMessage!!!!!!!</div>
+    <div>
+        <p id="paragraphHello">Hello Message</p>
+
+    </div>
   )
 }
 
