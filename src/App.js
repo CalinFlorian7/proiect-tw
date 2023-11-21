@@ -24,8 +24,6 @@ function App() {
                     <Route path="/SignOff" Component={SignOff} />
                 </Routes>
             </Router>
-            {/* <HelloMessage /> */}
-            {/* <HelloMessage /> */}
         </div>
     )
 }

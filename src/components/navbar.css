@@ -55,10 +55,15 @@
     background-color: #131862;
     width: 100%;
     height: 80px;
+    marker: none;
     display: flex;
     justify-content: start;
     align-items: center;
 }
+.navbar-toogle li {
+    list-style-type: none;
+}
+
 span {
     margin-left: 16px;
 }
