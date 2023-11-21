@@ -1,17 +1,12 @@
-// import React,{useState} from 'react'
-// import { Link } from 'react-router-dom'
 import './LogIn.css'
-// import SignUp from './SignUp'
+import { useState } from 'react'
 function LogIn() {
-    // const [singUp,showSignUp] = useState(false);
-    // const showSignUp = () => setShowSignUp(!showSignUp);
+    const [action, setAction] = useState('Log In')
 
     return (
         <div className="container">
             <div className="login">
-                <span className="loginTitle">
-                    Complete the form to log in :)
-                </span>
+                <span className="loginTitle">{action}</span>
                 <span className="label-span">Username:</span>
                 <input
                     type="text"
@@ -24,11 +19,31 @@ function LogIn() {
                     className="input-password"
                     placeholder="Enter your password..."
                 />
-                <button className="loginButton">Log In</button>
-                <span className="label-span">Forgotten your password?</span>
+                <button
+                    className={action === 'Log In' ? 'submit-gray' : 'submit'}
+                    onClick={() => setAction('Log In')}
+                >
+                    Log In
+                </button>
+                {action === 'Sign Up' ? (
+                    <div></div>
+                ) : (
+                    <div className="div-span">
+                        <span className="label-span">
+                            Forgotten your password?
+                        </span>
+                        <span className="label-span">
+                            Don't have an account?
+                        </span>
+                    </div>
+                )}
 
-                <span className="label-span">Don't have an account?</span>
-                <button className="sign-up">Sign Up</button>
+                <button
+                    className={action === 'Sign Up' ? 'submit-gray' : 'submit'}
+                    onClick={() => setAction('Sign Up')}
+                >
+                    Sign upp
+                </button>
                 {/* <Link to="/SignUp">Forgotten your password?</Link> */}
                 {/* <Link to="/SignUp">Don't have an account? Sign Up</Link> */}
             </div>

@@ -23,22 +23,29 @@ body {
     align-items: center;
     justify-content: center;
     top: 100px;
+    border-radius: 10px;
 }
 .label-span {
-    justify-content: start;
+    /* justify-content: start; */
     align-self: self-start;
 }
 span {
     color: #131862;
 }
-button {
+.submit {
+    border-color: blanchedalmond;
+    border-radius: 4px;
+    background-color: slategray;
+    height: 30px;
+}
+.submit-gray {
     border-color: blanchedalmond;
     border-radius: 4px;
     background-color: #131862;
     height: 30px;
 }
 button:hover {
-    background-color: slategray;
+    cursor: pointer;
 }
 input {
     height: 30px;
@@ -46,4 +53,14 @@ input {
     border-color: #131862;
     border-radius: 4px;
     margin: 12px;
+}
+.div-span {
+    display: flex;
+    flex-direction: column;
+    /* align-self: self-start; */
+    width: 100%;
+}
+
+.div-span span {
+    align-self: self-start;
 }

@@ -7,7 +7,7 @@ import Profile from './pages/Profile.js'
 import MyStuff from './pages/MyStuff.js'
 import Settings from './pages/Settings.js'
 import SignOff from './pages/SignOff.js'
-
+import LogIn from './pages/LogIn.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
                     <Route path="/Profile" Component={Profile} />
                     <Route path="/Settings" Component={Settings} />
                     <Route path="/SignOff" Component={SignOff} />
+                    <Route path="/LogIn" Component={LogIn} />
                 </Routes>
             </Router>
         </div>
