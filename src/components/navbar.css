@@ -29,13 +29,13 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    padding: 10px 0px 10px 15px;
+    padding: 10px 0px 5px 12px;
     list-style: none;
     height: 60px;
 }
 .nav-text a {
     text-decoration: none;
-    color: #131862;
+    color: blanchedalmond;
     font-size: 20px;
     width: 95%;
     height: 100%;
@@ -45,8 +45,9 @@
     border-radius: 4px;
 }
 .nav-text a:hover {
-    background-color: lightblue;
+    background-color: slategray;
 }
+
 .nav-menu-items {
     width: 100%;
 }
