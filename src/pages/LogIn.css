@@ -15,7 +15,7 @@ body {
 }
 
 .login {
-    padding: 20px;
+    padding: 40px;
     width: max-content;
     background-color: blanchedalmond;
     display: flex;
@@ -37,12 +37,14 @@ span {
     border-radius: 4px;
     background-color: slategray;
     height: 30px;
+    /* cursor: not-allowed; */
 }
 .submit-gray {
     border-color: blanchedalmond;
     border-radius: 4px;
     background-color: #131862;
     height: 30px;
+    /* cursor: pointer; */
 }
 button:hover {
     cursor: pointer;
@@ -63,4 +65,8 @@ input {
 
 .div-span span {
     align-self: self-start;
+    padding: 5px;
+}
+button {
+    margin: 15px;
 }
