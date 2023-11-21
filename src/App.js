@@ -1,9 +1,13 @@
 // import HelloMessage from './components/helloMessage.js'
 // // import './App.css';
 import Navbar from './components/Navbar.js'
-// import { BrowserRouter as Router } from 'react-router-dom'
-// import { Switch } from 'react-router-dom'
-// import { Route } from 'react-router-dom'
+import Home from './pages/Home.js'
+import Groups from './pages/Groups.js'
+import Profile from './pages/Profile.js'
+import MyStuff from './pages/MyStuff.js'
+import Settings from './pages/Settings.js'
+import SignOff from './pages/SignOff.js'
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -12,7 +16,12 @@ function App() {
             <Router>
                 <Navbar />
                 <Routes>
-                    <Route path="/" />
+                    <Route path="/" Component={Home} />
+                    <Route path="/MyStuff" Component={MyStuff} />
+                    <Route path="/Groups" Component={Groups} />
+                    <Route path="/Profile" Component={Profile} />
+                    <Route path="/Settings" Component={Settings} />
+                    <Route path="/SignOff" Component={SignOff} />
                 </Routes>
             </Router>
             {/* <HelloMessage /> */}
