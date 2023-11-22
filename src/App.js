@@ -6,7 +6,7 @@ import Groups from './pages/Groups.js'
 import Profile from './pages/Profile.js'
 import MyStuff from './pages/MyStuff.js'
 import Settings from './pages/Settings.js'
-import SignOff from './pages/SignOff.js'
+// import SignOff from './pages/SignOff.js'
 import LogIn from './pages/LogIn.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -16,12 +16,12 @@ function App() {
             <Router>
                 <Navbar />
                 <Routes>
-                    <Route path="/" Component={Home} />
+                    <Route path="/" Component={LogIn} />
+                    <Route path="/Home" Component={Home} />
                     <Route path="/MyStuff" Component={MyStuff} />
                     <Route path="/Groups" Component={Groups} />
                     <Route path="/Profile" Component={Profile} />
                     <Route path="/Settings" Component={Settings} />
-                    <Route path="/SignOff" Component={SignOff} />
                     <Route path="/LogIn" Component={LogIn} />
                 </Routes>
             </Router>

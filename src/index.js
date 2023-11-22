@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-// import App from './App'
-import LogIn from './pages/LogIn'
+import App from './App'
+// import LogIn from './pages/LogIn'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-    // <App />
-    <LogIn />
+    <App />
+    // <LogIn />
 )
 
 // import ReactDOM from 'react-dom/client';

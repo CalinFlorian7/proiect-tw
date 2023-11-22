@@ -2,7 +2,7 @@
     background-color: #131862;
     height: 80px;
     display: flex;
-    justify-content: start;
+    justify-content: x-start;
     align-items: center;
 }
 .menu-bars {
@@ -24,10 +24,11 @@
 .nav-menu.active {
     left: 0;
     transition: 350ms;
+    background-color: blanchedalmond;
 }
 .nav-text {
     display: flex;
-    justify-content: start;
+    justify-content: x-start;
     align-items: center;
     padding: 10px 0px 5px 12px;
     list-style: none;
@@ -57,7 +58,7 @@
     height: 80px;
     marker: none;
     display: flex;
-    justify-content: start;
+    justify-content: x-start;
     align-items: center;
 }
 .navbar-toogle li {

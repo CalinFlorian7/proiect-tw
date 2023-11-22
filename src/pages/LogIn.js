@@ -1,12 +1,11 @@
 import './LogIn.css'
 import { useState } from 'react'
-import App from '../App.js'
+// import App from '../App.js'
 function LogIn() {
     const [action, setAction] = useState('Log In')
 
     return (
         <>
-            <App />
             <div className="container">
                 <div className="login">
                     <span className="loginTitle">{action}</span>

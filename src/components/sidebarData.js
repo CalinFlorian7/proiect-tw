@@ -8,7 +8,7 @@ import * as CgIcons from 'react-icons/cg'
 export const SidebarData = [
     {
         title: 'Home',
-        path: '/',
+        path: '/Home',
         icon: <AiIcons.AiFillHome />,
         cName: 'nav-text',
     },
@@ -38,7 +38,7 @@ export const SidebarData = [
     },
     {
         title: 'Sign Off',
-        path: '/SignOff',
+        path: '/LogIn',
         icon: <FaIcons.FaSignOutAlt />,
         cName: 'nav-text',
     },
