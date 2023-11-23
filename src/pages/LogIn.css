@@ -29,7 +29,7 @@ body {
     /* justify-content: start; */
     align-self: self-start;
 }
-span {
+.label-span {
     color: #131862;
 }
 .submit {

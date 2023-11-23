@@ -2,9 +2,15 @@
     background-color: #131862;
     height: 80px;
     display: flex;
-    justify-content: x-start;
+    /* justify-content: x-start; */
     align-items: center;
 }
+.navbar > .menu-container {
+    margin-left: auto;
+    margin-right: 40px;
+    right: 30px;
+}
+
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
@@ -24,7 +30,8 @@
 .nav-menu.active {
     left: 0;
     transition: 350ms;
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
+    background-color: #131862;
 }
 .nav-text {
     display: flex;
