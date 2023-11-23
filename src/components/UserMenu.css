@@ -1,3 +1,9 @@
+.user-menu {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
 .user-name {
     color: blanchedalmond;
     /* background-color: red !important; */
@@ -5,6 +11,7 @@
 a {
     text-decoration: none;
 }
-/* img {
-    width: 30px !important;
-} */
+img {
+    /* shape-margin: circle; */
+    border-radius: 50%;
+}

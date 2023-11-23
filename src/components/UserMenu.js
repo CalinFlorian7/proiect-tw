@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './UserMenu.css'
 import { RiArrowDownSFill } from 'react-icons/ri'
-import defalutImage from '../Images/defaultProfile.jpg'
+import defalutImage from '../Images/defaultProfilePicture.jpg'
 function UserMenu() {
     return (
         <div className="container-menu-components">
