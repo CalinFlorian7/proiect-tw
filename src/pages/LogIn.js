@@ -7,12 +7,13 @@ function LogIn() {
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [message, setMessage] = useState('')
-    const [messageStatus, setMessageStatus] = useState('')
+    const [messageStatus, setMessageStatus] = useState('notTested')
     const handleLogInSubmit = () => {
         if (action === 'Sign Up') {
             setAction('Log In')
             setUsername('')
             setPassword('')
+            setMessageStatus('notTested')
             // setMessage('')
         } else {
             if (username === '') {
@@ -32,7 +33,7 @@ function LogIn() {
             setAction('Sign Up')
             setUsername('')
             setPassword('')
-
+            setMessageStatus('notTested')
             setPasswordConfirmation('')
         } else {
             if (username === '') {
@@ -50,7 +51,7 @@ function LogIn() {
             } else {
                 setMessage('Sign Up successful')
                 setMessageStatus('success')
-                setAction('Log In')
+                // setAction('Log In')
                 setPassword('')
                 setUsername('')
             }
@@ -65,14 +66,29 @@ function LogIn() {
                     // action === 'Log In' ? 'form-Log-In' : 'form-Sign-Up'
                     // }
                 > */}
+                {/* {messageStatus === 'notTested'
+                    ? 'message-container-none'
+                    : 'message-container'} */}
                 <div className="login">
                     <span className="loginTitle">{action}</span>
                     {messageStatus === 'success' ? (
-                        <div className="message-container">
+                        <div
+                            className={
+                                messageStatus === 'notTested'
+                                    ? 'message-container-none'
+                                    : 'message-container'
+                            }
+                        >
                             <span className="message-success">{message}</span>
                         </div>
                     ) : (
-                        <div className="message-container">
+                        <div
+                            className={
+                                messageStatus === 'notTested'
+                                    ? 'message-container-none'
+                                    : 'message-container'
+                            }
+                        >
                             <span className="message-error">{message}</span>
                         </div>
                     )}

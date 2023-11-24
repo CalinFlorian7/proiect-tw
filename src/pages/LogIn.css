@@ -107,3 +107,6 @@ button {
     justify-content: left;
     border-radius: 4px;
 }
+.message-container-none {
+    display: none;
+}
