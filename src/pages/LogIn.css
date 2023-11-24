@@ -70,3 +70,16 @@ input {
 button {
     margin: 15px;
 }
+.message-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    border-radius: 4px;
+}
+.message {
+    /* color: red; */
+    font-size: 20px;
+    align-self: self-start;
+    padding: 5px;
+}

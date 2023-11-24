@@ -7,8 +7,17 @@ function LogIn() {
     return (
         <>
             <div className="container">
+                {/* <form
+                    className="sdas"
+                    // {
+                    // action === 'Log In' ? 'form-Log-In' : 'form-Sign-Up'
+                    // }
+                > */}
                 <div className="login">
                     <span className="loginTitle">{action}</span>
+                    <div className="message-container">
+                        <span className="message">eroare</span>
+                    </div>
                     <span className="label-span">Username:</span>
                     <input
                         type="text"
@@ -53,6 +62,7 @@ function LogIn() {
                     {/* <Link to="/SignUp">Forgotten your password?</Link> */}
                     {/* <Link to="/SignUp">Don't have an account? Sign Up</Link> */}
                 </div>
+                {/* </form> */}
             </div>
         </>
     )
