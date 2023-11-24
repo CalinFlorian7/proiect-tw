@@ -1,0 +1,154 @@
+import './LogIn.css'
+import { useState } from 'react'
+
+function LogIn() {
+    const [action, setAction] = useState('Log In')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value)
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value)
+    }
+
+    const handleSubmit = () => {
+        // Perform validation here
+        if (action === 'Log In') {
+            // Validate username and password for Log In action
+            if (username === '') {
+                // Handle empty username
+                console.log('Please enter your username')
+                return
+            }
+            if (password === '') {
+                // Handle empty password
+                console.log('Please enter your password')
+                return
+            }
+            // Perform Log In action
+            console.log('Performing Log In...')
+        } else {
+            // Validate username, password, and confirmPassword for Sign Up action
+            if (username === '') {
+                // Handle empty username
+                console.log('Please enter your username')
+                return
+            }
+            if (password === '') {
+                // Handle empty password
+                console.log('Please enter your password')
+                return
+            }
+            if (confirmPassword === '') {
+                // Handle empty confirmPassword
+                console.log('Please confirm your password')
+                return
+            }
+            if (password !== confirmPassword) {
+                // Handle password mismatch
+                console.log('Passwords do not match')
+                return
+            }
+            // Perform Sign Up action
+            console.log('Performing Sign Up...')
+        }
+    }
+
+    return (
+        <>
+            <div className="container">
+                <div className="login">
+                    <span className="loginTitle">{action}</span>
+                    <div className="message-container">
+                        <span className="message">eroare</span>
+                    </div>
+                    <span className="label-span">Username:</span>
+                    <input
+                        type="text"
+                        className="input-username"
+                        placeholder="Enter your username..."
+                        value={username}
+                        onChange={handleUsernameChange}
+                    />
+                    <span className="label-span">Password:</span>
+                    <input
+                        type="password"
+                        className="input-password"
+                        placeholder="Enter your password..."
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    {action === 'Sign Up' ? (
+                        <div className="div-password-confirmation">
+                            <span className="label-span">
+                                Confirm Password:
+                            </span>
+                            <input
+                                className="input-password-confiramtion"
+                                type="password"
+                                placeholder="Confirm your password..."
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                            />
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
+                    <button
+                        className={
+                            action === 'Log In' ? 'submit-gray' : 'submit'
+                        }
+                        onClick={handleSubmit}
+                    >
+                        {action}
+                    </button>
+                    {action === 'Sign Up' ? (
+                        <div></div>
+                    ) : (
+                        <div className="div-span">
+                            <span className="label-span">
+                                Forgotten your password?
+                            </span>
+                            <span className="label-span">
+                                Don't have an account?
+                            </span>
+                        </div>
+                    )}
+
+                    <button
+                        className={
+                            action === 'Sign Up' ? 'submit-gray' : 'submit'
+                        }
+                        onClick={() => setAction('Sign Up')}
+                    >
+                        Sign up
+                    </button>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default LogIn
+                        
+                    >
+                        Sign up
+                    </button>
+                    {/* <Link to="/SignUp">Forgotten your password?</Link> */}
+                    {/* <Link to="/SignUp">Don't have an account? Sign Up</Link> */}
+                </div>
+                {/* </form> */}
+            </div>
+        </>
+    )
+}
+
+export default LogIn

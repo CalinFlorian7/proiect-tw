@@ -3,7 +3,59 @@ import { useState } from 'react'
 // import App from '../App.js'
 function LogIn() {
     const [action, setAction] = useState('Log In')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [message, setMessage] = useState('')
+    const [messageStatus, setMessageStatus] = useState('')
+    const handleLogInSubmit = () => {
+        if (action === 'Sign Up') {
+            setAction('Log In')
+            setUsername('')
+            setPassword('')
+            // setMessage('')
+        } else {
+            if (username === '') {
+                setMessage('Please enter your username')
+                setMessageStatus('error')
+            } else if (password === '') {
+                setMessage('Please enter your password')
+                setMessageStatus('error')
+            } else {
+                setMessage('Log In successful')
+                setMessageStatus('success')
+            }
+        }
+    }
+    const handleSignUpSubmit = () => {
+        if (action === 'Log In') {
+            setAction('Sign Up')
+            setUsername('')
+            setPassword('')
 
+            setPasswordConfirmation('')
+        } else {
+            if (username === '') {
+                setMessage('Please enter your username')
+                setMessageStatus('error')
+            } else if (password === '') {
+                setMessage('Please enter your password')
+                setMessageStatus('error')
+            } else if (passwordConfirmation === '') {
+                setMessage('Please confirm your password')
+                setMessageStatus('error')
+            } else if (password !== passwordConfirmation) {
+                setMessage('Passwords do not match')
+                setMessageStatus('error')
+            } else {
+                setMessage('Sign Up successful')
+                setMessageStatus('success')
+                setAction('Log In')
+                setPassword('')
+                setUsername('')
+            }
+        }
+    }
     return (
         <>
             <div className="container">
@@ -15,20 +67,33 @@ function LogIn() {
                 > */}
                 <div className="login">
                     <span className="loginTitle">{action}</span>
-                    <div className="message-container">
+                    {messageStatus === 'success' ? (
+                        <div className="message-container">
+                            <span className="message-success">{message}</span>
+                        </div>
+                    ) : (
+                        <div className="message-container">
+                            <span className="message-error">{message}</span>
+                        </div>
+                    )}
+                    {/* <div className="message-container">
                         <span className="message">eroare</span>
-                    </div>
+                    </div> */}
                     <span className="label-span">Username:</span>
                     <input
                         type="text"
                         className="input-username"
                         placeholder="Enter your username..."
+                        onChange={(e) => setUsername(e.target.value)}
+                        value={username}
                     />
                     <span className="label-span">Password:</span>
                     <input
                         type="password"
                         className="input-password"
                         placeholder="Enter your password..."
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
                     />
                     {action === 'Sign Up' ? (
                         <div className="div-password-confirmation">
@@ -39,6 +104,10 @@ function LogIn() {
                                 className="input-password-confiramtion"
                                 type="password"
                                 placeholder="Confirm your password..."
+                                onChange={(e) =>
+                                    setPasswordConfirmation(e.target.value)
+                                }
+                                value={passwordConfirmation}
                             />
                         </div>
                     ) : (
@@ -48,7 +117,8 @@ function LogIn() {
                         className={
                             action === 'Log In' ? 'submit-gray' : 'submit'
                         }
-                        onClick={() => setAction('Log In')}
+                        onClick={handleLogInSubmit}
+                        // onClick={() => setAction('Log In')}
                     >
                         Log In
                     </button>
@@ -69,7 +139,7 @@ function LogIn() {
                         className={
                             action === 'Sign Up' ? 'submit-gray' : 'submit'
                         }
-                        onClick={() => setAction('Sign Up')}
+                        onClick={handleSignUpSubmit}
                     >
                         Sign up
                     </button>
