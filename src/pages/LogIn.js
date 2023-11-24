@@ -30,6 +30,20 @@ function LogIn() {
                         className="input-password"
                         placeholder="Enter your password..."
                     />
+                    {action === 'Sign Up' ? (
+                        <div className="div-password-confirmation">
+                            <span className="label-span">
+                                Confirm Password:
+                            </span>
+                            <input
+                                className="input-password-confiramtion"
+                                type="password"
+                                placeholder="Confirm your password..."
+                            />
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
                     <button
                         className={
                             action === 'Log In' ? 'submit-gray' : 'submit'
