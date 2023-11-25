@@ -8,6 +8,7 @@ function LogIn() {
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [message, setMessage] = useState('')
     const [messageStatus, setMessageStatus] = useState('notTested')
+    const [name, setName] = useState('')
     function validateUserName() {
         const UserEmailRegex = new RegExp(/@stud\.ase\.ro$/)
         const TeacherEmailRexex = new RegExp(/@ie\.ase\.ro$/)
@@ -68,7 +69,10 @@ function LogIn() {
             setMessageStatus('notTested')
             setPasswordConfirmation('')
         } else {
-            if (username === '') {
+            if (name === '') {
+                setMessage('Please enter your name')
+                setMessageStatus('error')
+            } else if (username === '') {
                 setMessage('Please enter your username')
                 setMessageStatus('error')
             } else if (validateUserName() === false) {
@@ -133,6 +137,20 @@ function LogIn() {
                     {/* <div className="message-container">
                         <span className="message">eroare</span>
                     </div> */}
+                    {action === 'Sign Up' ? (
+                        <div className="div-password-confirmation">
+                            <span className="label-span">Name:</span>
+                            <input
+                                className="input-name"
+                                type="text"
+                                placeholder="Enter your name..."
+                                onChange={(e) => setName(e.target.value)}
+                                value={name}
+                            ></input>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
                     <span className="label-span">Username:</span>
                     <input
                         type="text"
@@ -141,6 +159,7 @@ function LogIn() {
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
                     />
+
                     <span className="label-span">Password:</span>
                     <input
                         type="password"
