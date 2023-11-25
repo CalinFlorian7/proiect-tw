@@ -25,13 +25,7 @@ body {
     top: 100px;
     border-radius: 10px;
 }
-.label-span {
-    /* justify-content: start; */
-    align-self: self-start;
-}
-.label-span {
-    color: #131862;
-}
+
 .submit {
     border-color: blanchedalmond;
     border-radius: 4px;
@@ -100,13 +94,30 @@ button {
     align-self: self-start;
     padding: 5px;
 }
-.div-password-confirmation {
+/* .div-password-confirmation {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: left;
     border-radius: 4px;
+} */
+.div-password-confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    /* align-self: self-start; */
+    border-radius: 4px;
 }
+
 .message-container-none {
     display: none;
+}
+.label-span {
+    justify-content: start;
+    align-self: self-start;
+}
+.label-span {
+    color: #131862;
 }

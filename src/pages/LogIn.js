@@ -67,6 +67,7 @@ function LogIn() {
             setUsername('')
             setPassword('')
             setMessageStatus('notTested')
+            setName('')
             setPasswordConfirmation('')
         } else {
             if (name === '') {
