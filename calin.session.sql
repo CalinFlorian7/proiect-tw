@@ -2,7 +2,7 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit;
 
--- describe users;
+describe users;
 -- DESCRIBE teachers;
 -- describe documents;
 -- alter Table documents drop COLUMN document_id;
