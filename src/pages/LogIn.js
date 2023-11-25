@@ -36,13 +36,20 @@ function LogIn() {
 
         return false
     }
-    const usernnameChange = (e) => {
+    const usernameChange = (e) => {
         setUsername(e.target.value)
-        setUserType(
-            e.target.value.includes('@ie.ase.ro') ? 'teacher' : 'student'
-        )
+        // setUserType('student')
+        console.log(action)
+        if (action !== 'Log In')
+            setUserType(
+                e.target.value.includes('@ie.ase.ro') ? 'teacher' : 'student'
+            )
+
+        console.log(userType)
     }
     const handleLogInSubmit = () => {
+        setUserType('student')
+        console.log('username log in', username)
         if (action === 'Sign Up') {
             setAction('Log In')
             setUsername('')
@@ -75,10 +82,13 @@ function LogIn() {
             setAction('Sign Up')
             setUsername('')
             setPassword('')
+            // setUserType('student')
             setMessageStatus('notTested')
             setName('')
             setPasswordConfirmation('')
         } else {
+            console.log('username sign up ', username)
+            // setUserType('student')
             console.log('user type: ', userType)
             console.log('username: ', username)
             if (name === '') {
@@ -107,6 +117,7 @@ function LogIn() {
                 setMessageStatus('success')
                 // setAction('Log In')
                 setPassword('')
+                // setUserType('student')
                 setUsername('')
             }
         }
@@ -167,7 +178,9 @@ function LogIn() {
                         type="text"
                         className="input-username"
                         placeholder="Enter your username..."
-                        onChange={usernnameChange}
+                        value={username}
+                        onChange={usernameChange}
+
                         // onChange={(e) =>
                         //     setUsername(e.target.value) &&
                         //     setUserType(
@@ -176,10 +189,15 @@ function LogIn() {
                         //             : 'student'
                         //     )
                         // }
-                        value={username}
                     />
                     {userType === 'teacher' ? (
-                        <div className="div-password-confirmation">
+                        <div
+                            className={
+                                userType === 'teacher'
+                                    ? 'div-combo-container'
+                                    : 'div-faculty'
+                            }
+                        >
                             <span className="label-span">Faculty:</span>
                             <select className="input-faculty">
                                 <option value="ASE">???</option>
