@@ -8,6 +8,32 @@ function LogIn() {
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [message, setMessage] = useState('')
     const [messageStatus, setMessageStatus] = useState('notTested')
+    function validateUserName() {
+        const UserEmailRegex = new RegExp(/@stud\.ase\.ro$/)
+        const TeacherEmailRexex = new RegExp(/@ie\.ase\.ro$/)
+        const SpaceRegex = new RegExp(/^\S+$/)
+
+        if (
+            ((UserEmailRegex.test(username) &&
+                username.length > UserEmailRegex.source.length - 3) ||
+                TeacherEmailRexex.test(username)) &&
+            SpaceRegex.test(username)
+        ) {
+            return true
+        }
+
+        return false
+    }
+    function ValidatePassword() {
+        const PasswordRegex =
+            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+
+        if (PasswordRegex.test(password)) {
+            return true
+        }
+
+        return false
+    }
     const handleLogInSubmit = () => {
         if (action === 'Sign Up') {
             setAction('Log In')
@@ -19,8 +45,14 @@ function LogIn() {
             if (username === '') {
                 setMessage('Please enter your username')
                 setMessageStatus('error')
-            } else if (password === '') {
-                setMessage('Please enter your password')
+            } else if (validateUserName() === false) {
+                setMessageStatus('error')
+                setMessage('Please enter a valid email address')
+                // } else if (password === '') {
+                //     setMessage('Please enter your password')
+                //     setMessageStatus('error')
+                // } else if (ValidatePassword() === false) {
+                setMessage('The passsword is not strong enough')
                 setMessageStatus('error')
             } else {
                 setMessage('Log In successful')
@@ -39,8 +71,14 @@ function LogIn() {
             if (username === '') {
                 setMessage('Please enter your username')
                 setMessageStatus('error')
+            } else if (validateUserName() === false) {
+                setMessageStatus('error')
+                setMessage('Please enter a valid email address')
             } else if (password === '') {
                 setMessage('Please enter your password')
+                setMessageStatus('error')
+            } else if (ValidatePassword() === false) {
+                setMessage('The passsword is not strong enough')
                 setMessageStatus('error')
             } else if (passwordConfirmation === '') {
                 setMessage('Please confirm your password')
