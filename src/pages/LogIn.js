@@ -11,16 +11,13 @@ function LogIn() {
     const [name, setName] = useState('')
     const [userType, setUserType] = useState('student')
     function validateUserName() {
-        const UserEmailRegex = new RegExp(/@stud\.ase\.ro$/)
-        const TeacherEmailRexex = new RegExp(/@ie\.ase\.ro$/)
-        const SpaceRegex = new RegExp(/^\S+$/)
+        const UserEmailRegex = new RegExp(/^[a-zA-Z0-9]+@stud\.ase\.ro$/)
 
-        if (
-            ((UserEmailRegex.test(username) &&
-                username.length > UserEmailRegex.source.length - 3) ||
-                TeacherEmailRexex.test(username)) &&
-            SpaceRegex.test(username)
-        ) {
+        const TeacherEmailRegex = new RegExp(/^[a-zA-A0-9]+@ie\.ase\.ro$/)
+        // const SpaceRegex = new RegExp(/^\S+$/)
+
+        // if (SpaceRegex.test(username))
+        if (UserEmailRegex.test(username) || TeacherEmailRegex.test(username)) {
             return true
         }
 
