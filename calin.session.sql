@@ -2,7 +2,8 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit;
 
--- show tables;
+-- describe users;
+-- DESCRIBE teachers;
 -- describe documents;
 -- alter Table documents drop COLUMN document_id;
 -- alter table documents add COLUMN document_id int auto_increment PRIMARY KEY;
