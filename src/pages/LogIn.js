@@ -9,6 +9,7 @@ function LogIn() {
     const [message, setMessage] = useState('')
     const [messageStatus, setMessageStatus] = useState('notTested')
     const [name, setName] = useState('')
+    const [userType, setUserType] = useState('student')
     function validateUserName() {
         const UserEmailRegex = new RegExp(/@stud\.ase\.ro$/)
         const TeacherEmailRexex = new RegExp(/@ie\.ase\.ro$/)
@@ -35,6 +36,12 @@ function LogIn() {
 
         return false
     }
+    const usernnameChange = (e) => {
+        setUsername(e.target.value)
+        setUserType(
+            e.target.value.includes('@ie.ase.ro') ? 'teacher' : 'student'
+        )
+    }
     const handleLogInSubmit = () => {
         if (action === 'Sign Up') {
             setAction('Log In')
@@ -49,13 +56,15 @@ function LogIn() {
             } else if (validateUserName() === false) {
                 setMessageStatus('error')
                 setMessage('Please enter a valid email address')
-                // } else if (password === '') {
-                //     setMessage('Please enter your password')
-                //     setMessageStatus('error')
-                // } else if (ValidatePassword() === false) {
-                setMessage('The passsword is not strong enough')
+            } else if (password === '') {
+                setMessage('Please enter your password')
                 setMessageStatus('error')
-            } else {
+            }
+            //      else if (ValidatePassword() === false) {
+            //     setMessage('The passsword is not strong enough')
+            //     setMessageStatus('error')
+            // }
+            else {
                 setMessage('Log In successful')
                 setMessageStatus('success')
             }
@@ -70,6 +79,8 @@ function LogIn() {
             setName('')
             setPasswordConfirmation('')
         } else {
+            console.log('user type: ', userType)
+            console.log('username: ', username)
             if (name === '') {
                 setMessage('Please enter your name')
                 setMessageStatus('error')
@@ -135,9 +146,7 @@ function LogIn() {
                             <span className="message-error">{message}</span>
                         </div>
                     )}
-                    {/* <div className="message-container">
-                        <span className="message">eroare</span>
-                    </div> */}
+
                     {action === 'Sign Up' ? (
                         <div className="div-password-confirmation">
                             <span className="label-span">Name:</span>
@@ -152,15 +161,33 @@ function LogIn() {
                     ) : (
                         <div></div>
                     )}
+
                     <span className="label-span">Username:</span>
                     <input
                         type="text"
                         className="input-username"
                         placeholder="Enter your username..."
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={usernnameChange}
+                        // onChange={(e) =>
+                        //     setUsername(e.target.value) &&
+                        //     setUserType(
+                        //         e.target.value.includes('@ie.ase.ro')
+                        //             ? 'teacher'
+                        //             : 'student'
+                        //     )
+                        // }
                         value={username}
                     />
-
+                    {userType === 'teacher' ? (
+                        <div className="div-password-confirmation">
+                            <span className="label-span">Faculty:</span>
+                            <select className="input-faculty">
+                                <option value="ASE">???</option>
+                            </select>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
                     <span className="label-span">Password:</span>
                     <input
                         type="password"
