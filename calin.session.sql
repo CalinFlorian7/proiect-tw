@@ -2,7 +2,29 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit;
 
-describe users;
+-- delete from teachers;
+-- delete   from faculty where university_id = 1 ;
+-- SELECT * from faculty;
+-- commit;
+-- INSERT INTO faculty (university_id, faculty_name)
+-- VALUES
+-- (1, 'Faculty of Business and Tourism'),
+-- (1, 'Faculty of Accounting and Management Information Systems'),
+-- (1, 'Faculty of Finance, Insurance, Banking, and Stock Exchange'),
+-- (1, 'Faculty of Economic Cybernetics, Statistics, and Informatics'),
+-- (1, 'Faculty of International Business and Economics'),
+-- (1, 'Faculty of Marketing'),
+-- (1, 'Faculty of Management'),
+-- (1, 'Faculty of Economic Sciences'),
+-- (1, 'Faculty of Agro-Food and Environmental Economics'),
+-- (1, 'Faculty of Administration and Public Management'),
+-- (1, 'Faculty of Commerce'),
+-- (1, 'Faculty of Economic Engineering and Business'),
+-- (1, 'Faculty of Entrepreneurship, Business Engineering, and Management'),
+-- (1, 'Faculty of Domestic and International Commercial and Financial Banking Relations'),
+-- (1, 'Faculty of Economics of Commerce, Tourism, and Services');
+
+-- update university set university_adress="Piața Romană 6, București 010374" where university_id=1;
 -- DESCRIBE teachers;
 -- describe documents;
 -- alter Table documents drop COLUMN document_id;
