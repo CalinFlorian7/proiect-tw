@@ -1,10 +1,9 @@
-const db = require('../models')
+const db = require('../models/index.js')
 const Faculty = db.faculty
 
-const getAllFaculies = async (req, res) => {
-    let faculties = await Faculty.findAll({
-        attributes: ['faculty_name'],
-    })
+const getAllFaculties = async (req, res) => {
+    let faculties = await Faculty.findAll({})
     res.status(200).send(faculties)
+    console.log('this are the faculties------------------: ', faculties)
 }
-module.exports = getAllFaculies
+module.exports = { getAllFaculties }
