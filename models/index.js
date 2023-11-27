@@ -28,6 +28,7 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.users = require('./user.js')(sequelize, DataTypes)
+db.faculty = require('./faculty.js')(sequelize, DataTypes)
 db.sequelize.sync({ force: false }).then(() => {
     console.log('Drop and re-sync db.')
 })
