@@ -1,5 +1,5 @@
 import './LogIn.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import App from '../App.js'
 function LogIn() {
     const [action, setAction] = useState('Log In')
@@ -10,6 +10,12 @@ function LogIn() {
     const [messageStatus, setMessageStatus] = useState('notTested')
     const [name, setName] = useState('')
     const [userType, setUserType] = useState('student')
+    // const [backendData, setMessageBackendData] = useState({})
+    useEffect(() => {
+        fetch('/api')
+            .then((res) => res.json())
+            .then((data) => console.log(data))
+    }, [])
     function validateUserName() {
         const UserEmailRegex = new RegExp(/^[a-zA-Z0-9]+@stud\.ase\.ro$/)
 
