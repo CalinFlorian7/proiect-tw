@@ -28,4 +28,5 @@ module.exports = (sequelize, Datatypes) => {
             allowNull: true,
         },
     })
+    return User
 }

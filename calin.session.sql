@@ -1,7 +1,7 @@
 -- Active: 1698130823267@@127.0.0.1@3306
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit;
-describe users;
+describe faculty;
 -- alter table users add column user_image BLOB;
 -- alter table users add column user_date date DEFAULT null;
 
