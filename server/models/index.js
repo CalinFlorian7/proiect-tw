@@ -1,4 +1,4 @@
-const e = require('express')
+// const e = require('express')
 const dbConfig = require('../config/dbconfig.js')
 
 const { Sequelize, DataTypes } = require('sequelize')
@@ -30,7 +30,7 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.users = require('../models/user.js')(sequelize, DataTypes)
-db.faculty = require('../models/faculty.js')(sequelize, DataTypes)
+db.faculties = require('../models/faculty.js')(sequelize, DataTypes)
 // db.sequelize.sync({ force: false }).then(() => {
 //     console.log('Drop and re-sync db.')
 // })

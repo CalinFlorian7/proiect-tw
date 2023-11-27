@@ -3,12 +3,15 @@
 -- commit
 -- show TABLEs;
 -- DESCRIBE faculties;
+-- drop TABLE faculties;
 -- DESCRIBE faculty;
 -- alter table users add column user_image BLOB;
 -- alter table users add column user_date date DEFAULT null;
 -- DESCRIBE users;
 
-
+-- commit;
+-- rename table faculty to faculties;
+select * from faculties;
 
 -- delete from teachers;
 -- delete   from faculty where university_id = 1 ;
