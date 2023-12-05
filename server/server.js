@@ -3,14 +3,15 @@ const cors = require('cors')
 const app = express()
 const appfront = express()
 const router = require('./routes/facultyRoute.js')
-var corOptions = {
-    origin: 'http://localhost:8081',
-}
+// var corOptions = {
+//     origin: 'http://localhost:8080',
+// }
 // // var corOptionsFront = { origin: 'http://localhost:5000' }
 appfront.use(express.json())
 appfront.use(cors())
 // // appfront.use(cors(corOptionsFront))
-app.use(cors(corOptions))
+// app.use(cors(corOptions))
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

@@ -10,13 +10,29 @@ function LogIn() {
     const [messageStatus, setMessageStatus] = useState('notTested')
     const [name, setName] = useState('')
     const [userType, setUserType] = useState('student')
+    const [faculties, setFaculties] = useState([])
+    const [facultyId, setFacultyId] = useState('Facula')
+    const [facultyName, setFacultyName] = useState('fafc')
     // const [backendData, setMessageBackendData] = useState({})
     useEffect(() => {
-        console.log('esti in func useEffect')
-        fetch('http://localhost:5000/api')
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error))
+        // console.log('esti in func useEffect')
+        // fetch('http://localhost:5000/api')
+        //     .then((res) => res.json())
+        //     .then((data) => console.log(data))
+        //     .catch((error) => console.log(error))
+        // /api/faculties/getAllFaculties
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/faculties/getAllFaculties')
+                const data = await response.json()
+                console.log(data)
+                setFaculties(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        fetchData()
     }, [])
     function validateUserName() {
         const UserEmailRegex = new RegExp(/^[a-zA-Z0-9]+@stud\.ase\.ro$/)
@@ -31,6 +47,26 @@ function LogIn() {
 
         return false
     }
+    function validateFaculty() {
+        const select = document.querySelector('.input-faculty')
+        const options = document.querySelectorAll('option')
+        console.log('number of selected options: ', options.length)
+        for (let i = 0; i < options.length; i++) {
+            // console.log('option: ', options[i].value)
+            // console.log('key: ', options[i].key)
+            if (options[i].value === select.value) {
+                console.log('faculty id: ', options[i].value)
+                return true
+            }
+        }
+        if (select.value === '') {
+            setMessage('A server error occurred. Please try again later.')
+            setMessageStatus('error')
+            return false
+        }
+        return false
+    }
+
     function ValidatePassword() {
         const PasswordRegex =
             /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
@@ -105,6 +141,8 @@ function LogIn() {
             } else if (validateUserName() === false) {
                 setMessageStatus('error')
                 setMessage('Please enter a valid email address')
+            } else if (validateFaculty() === false) {
+                // console.log('faculty id: ', facultyId)
             } else if (password === '') {
                 setMessage('Please enter your password')
                 setMessageStatus('error')
@@ -204,8 +242,23 @@ function LogIn() {
                             }
                         >
                             <span className="label-span">Faculty:</span>
-                            <select className="input-faculty">
-                                <option value="ASE">???</option>
+
+                            <select
+                                className="input-faculty"
+                                value={facultyId}
+                                onChange={(e) => setFacultyId(e.target.value)}
+                            >
+                                {/* <option value="ASE">???</option> */}
+
+                                {faculties.map((faculty) => (
+                                    // console.log('faculty: ', faculty),
+                                    <option
+                                        value={faculty.faculty_id}
+                                        key={faculty.faculty_id}
+                                    >
+                                        {faculty.faculty_name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     ) : (
