@@ -12,9 +12,11 @@ function LogIn() {
     const [userType, setUserType] = useState('student')
     // const [backendData, setMessageBackendData] = useState({})
     useEffect(() => {
-        fetch('/api')
+        console.log('esti in func useEffect')
+        fetch('http://localhost:5000/api')
             .then((res) => res.json())
             .then((data) => console.log(data))
+            .catch((error) => console.log(error))
     }, [])
     function validateUserName() {
         const UserEmailRegex = new RegExp(/^[a-zA-Z0-9]+@stud\.ase\.ro$/)

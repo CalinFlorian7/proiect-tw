@@ -11,7 +11,8 @@
 
 -- commit;
 -- rename table faculty to faculties;
-select * from faculties;
+-- select * from faculties;
+DESCRIBE
 
 -- delete from teachers;
 -- delete   from faculty where university_id = 1 ;
