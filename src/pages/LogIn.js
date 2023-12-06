@@ -12,7 +12,7 @@ function LogIn() {
     const [userType, setUserType] = useState('student')
     const [faculties, setFaculties] = useState([])
     const [facultyId, setFacultyId] = useState('Facula')
-    const [facultyName, setFacultyName] = useState('fafc')
+
     // const [backendData, setMessageBackendData] = useState({})
     useEffect(() => {
         // console.log('esti in func useEffect')
