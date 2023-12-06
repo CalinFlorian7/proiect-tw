@@ -192,8 +192,7 @@ function LogIn() {
             } else {
                 setMessage('Sign Up successful')
                 setMessageStatus('success')
-
-                sendDataStudent()
+                if (userType === 'student') sendDataStudent()
                 // setPassword('')
                 // setUsername('')
                 // setPasswordConfirmation('')
