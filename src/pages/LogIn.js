@@ -34,6 +34,23 @@ function LogIn() {
 
         fetchData()
     }, [])
+    const sendDataStudent = async () => {
+        const response = await fetch('/api/users/insertUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_name: name,
+                user_email: username,
+                user_password: password,
+            }),
+        }).catch((error) => console.log(error))
+        console.log('Sending data to backend: ', name, username, password)
+        const data = await response.json()
+        console.log('data from backend: ', data)
+        // setMessageBackendData(data)
+    }
     function validateUserName() {
         const UserEmailRegex = new RegExp(/^[a-zA-Z0-9]+@stud\.ase\.ro$/)
 
@@ -42,28 +59,31 @@ function LogIn() {
 
         // if (SpaceRegex.test(username))
         if (UserEmailRegex.test(username) || TeacherEmailRegex.test(username)) {
+            console.log('email corect!')
             return true
         }
-
+        console.log('email gresit!')
         return false
     }
     function validateFaculty() {
         const select = document.querySelector('.input-faculty')
         const options = document.querySelectorAll('option')
-        console.log('number of selected options: ', options.length)
+        // console.log('number of selected options: ', options.length)
         for (let i = 0; i < options.length; i++) {
             // console.log('option: ', options[i].value)
             // console.log('key: ', options[i].key)
             if (options[i].value === select.value) {
-                console.log('faculty id: ', options[i].value)
+                // console.log('faculty id: ', options[i].value)
+                setFacultyId(options[i].value)
                 return true
             }
         }
-        if (select.value === '') {
-            setMessage('A server error occurred. Please try again later.')
-            setMessageStatus('error')
-            return false
-        }
+        if (userType === 'teacher')
+            if (select.value === '') {
+                setMessage('A server error occurred. Please try again later.')
+                setMessageStatus('error')
+                return false
+            }
         return false
     }
 
@@ -139,10 +159,15 @@ function LogIn() {
                 setMessage('Please enter your username')
                 setMessageStatus('error')
             } else if (validateUserName() === false) {
+                console.log('se verifica email')
                 setMessageStatus('error')
                 setMessage('Please enter a valid email address')
-            } else if (validateFaculty() === false) {
-                // console.log('faculty id: ', facultyId)
+            } else if (userType === 'teacher') {
+                if (validateFaculty() === false) {
+                    setMessageStatus('error')
+                    setMessage('Please select a faculty')
+                    // console.log('faculty id: ', facultyId)
+                }
             } else if (password === '') {
                 setMessage('Please enter your password')
                 setMessageStatus('error')
@@ -158,10 +183,12 @@ function LogIn() {
             } else {
                 setMessage('Sign Up successful')
                 setMessageStatus('success')
-                // setAction('Log In')
-                setPassword('')
-                // setUserType('student')
-                setUsername('')
+
+                sendDataStudent()
+                // setPassword('')
+                // setUsername('')
+                // setPasswordConfirmation('')
+                // setName('')
             }
         }
     }

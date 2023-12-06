@@ -4,6 +4,7 @@ const app = express()
 // const appfront = express()
 const FacultyRouter = require('./routes/facultyRoute.js')
 const UserRouter = require('./routes/userRoute.js')
+const bodyParser = require('body-parser')
 // var corOptions = {
 //     origin: 'http://localhost:8080',
 // }
@@ -15,8 +16,8 @@ const UserRouter = require('./routes/userRoute.js')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 app.use('/api/faculties', FacultyRouter)
+app.use(bodyParser.json())
 
 app.use('/api/users', UserRouter)
 
