@@ -8,12 +8,14 @@
 -- alter table users add column user_image BLOB;
 -- alter table users add column user_date date DEFAULT null;
 -- DESCRIBE users;
+-- rename table userssss to users;
 
 -- commit;
 -- rename table faculty to faculties;
 -- select * from faculties;
-DESCRIBE users;
-
+-- select * from userssss;
+-- createdAt`, `updatedAt
+-- alter table  users drop COLUMN created_at;
 -- delete from teachers;
 -- delete   from faculty where university_id = 1 ;
 -- SELECT * from faculty;

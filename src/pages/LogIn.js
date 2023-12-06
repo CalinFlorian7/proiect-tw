@@ -35,20 +35,29 @@ function LogIn() {
         fetchData()
     }, [])
     const sendDataStudent = async () => {
-        const response = await fetch('/api/users/insertUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                user_name: name,
-                user_email: username,
-                user_password: password,
-            }),
-        }).catch((error) => console.log(error))
+        const response = await fetch(
+            'http://localhost:8080/api/users/insertUser',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_name: name,
+                    user_email: username,
+                    user_password: password,
+                }),
+            }
+        ).catch((error) => console.log(error))
         console.log('Sending data to backend: ', name, username, password)
         const data = await response.json()
         console.log('data from backend: ', data)
+        if (data.error === 'SequelizeUniqueConstraintError') {
+            setMessage(
+                'The email address is already in use by another account.'
+            )
+            setMessageStatus('error')
+        }
         // setMessageBackendData(data)
     }
     function validateUserName() {
