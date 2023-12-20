@@ -144,7 +144,7 @@ function LogIn() {
         setUsername(e.target.value)
         // setUserType('student')
         console.log(action)
-        if (action !== 'Log In')
+        if (action !== 'Log In' || action === 'Log In')
             setUserType(
                 e.target.value.includes('@ie.ase.ro') ? 'teacher' : 'student'
             )
@@ -161,6 +161,7 @@ function LogIn() {
             setMessageStatus('notTested')
             // setMessage('')
         } else {
+            console.log('usertype log in', userType)
             if (username === '') {
                 setMessage('Please enter your username')
                 setMessageStatus('error')
@@ -312,7 +313,7 @@ function LogIn() {
                         //     )
                         // }
                     />
-                    {userType === 'teacher' ? (
+                    {userType === 'teacher' && action === 'Sign Up' ? (
                         <div
                             className={
                                 userType === 'teacher'
