@@ -9,6 +9,8 @@
 -- alter table users add column user_date date DEFAULT null;
 -- DESCRIBE users;
 -- rename table userssss to users;
+describe teachers;
+-- 
 
 -- commit;
 -- rename table faculty to faculties;

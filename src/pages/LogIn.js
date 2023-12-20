@@ -60,6 +60,39 @@ function LogIn() {
         }
         // setMessageBackendData(data)
     }
+    const sendDataTeacher = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/teachers/insertTeacher',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    teacher_name: name,
+                    teacher_email: username,
+                    teacher_password: password,
+                    faculty_id: facultyId,
+                }),
+            }
+        ).catch((error) => console.log(error))
+        console.log(
+            'Sending data to backend: ',
+            name,
+            username,
+            password,
+            facultyId
+        )
+        const data = await response.json()
+        console.log('data from backend: ', data)
+        if (data.error === 'SequelizeUniqueConstraintError') {
+            setMessage(
+                'The email address is already in use by another account.'
+            )
+            setMessageStatus('error')
+        }
+        // setMessageBackendData(data)
+    }
     function validateUserName() {
         const UserEmailRegex = new RegExp(/^[a-zA-Z0-9]+@stud\.ase\.ro$/)
 
@@ -193,6 +226,7 @@ function LogIn() {
                 setMessage('Sign Up successful')
                 setMessageStatus('success')
                 if (userType === 'student') sendDataStudent()
+                if (userType === 'teacher') sendDataTeacher()
                 // setPassword('')
                 // setUsername('')
                 // setPasswordConfirmation('')
