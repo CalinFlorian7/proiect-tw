@@ -35,4 +35,34 @@ const insertTeacher = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
-module.exports = { insertTeacher }
+const selectAllTeachers = async (req, res) => {
+    try {
+        const teachers = await Teacher.findAll()
+        res.status(200).json(teachers)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error selecting all teachers' })
+    }
+}
+const selectTeacherId = async (req, res) => {
+    const email = req.body.teacher_email
+    const password = req.body.teacher_password
+    try {
+        const teacher = await Teacher.findOne({
+            where: {
+                email: email,
+                teacher_password: password,
+            },
+            attributes: ['teacher_id'],
+        })
+        if (teacher) {
+            res.status(200).json({ id: teacher.teacher_id })
+        } else {
+            res.status(404).json({ error: 'Teacher not found' })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error selecting teacher ID' })
+    }
+}
+module.exports = { insertTeacher, selectTeacherId, selectAllTeachers }

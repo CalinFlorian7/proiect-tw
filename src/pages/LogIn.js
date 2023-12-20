@@ -60,6 +60,35 @@ function LogIn() {
         }
         // setMessageBackendData(data)
     }
+
+    const getTeacherId = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/teachers/selectTeacherId',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    teacher_email: username,
+                    teacher_password: password,
+                }),
+            }
+        ).catch((error) => console.log(error))
+        console.log('Sending data to backend: ', username, password)
+        const data = await response.json()
+        console.log('data from backend: ', data)
+        if (response.status === 200) {
+            console.log('user id from database:', data.id)
+        } else if (response.status === 404) {
+            setMessage('User not found')
+            setMessageStatus('error')
+        } else if (response.status === 500) {
+            setMessage('Error selecting user ID')
+            setMessageStatus('error')
+        }
+        // setMessageBackendData(data)
+    }
     const getStudentId = async () => {
         const response = await fetch(
             'http://localhost:8080/api/users/selectUserId',
@@ -179,7 +208,7 @@ function LogIn() {
         console.log(userType)
     }
     const handleLogInSubmit = () => {
-        setUserType('student')
+        // setUserType('student')
         console.log('username log in', username)
         if (action === 'Sign Up') {
             setAction('Log In')
@@ -205,6 +234,10 @@ function LogIn() {
             // }
             else {
                 if (userType === 'student') getStudentId()
+                if (userType === 'teacher') {
+                    console.log('user type tacher shoul work', userType)
+                    getTeacherId()
+                }
             }
         }
     }
