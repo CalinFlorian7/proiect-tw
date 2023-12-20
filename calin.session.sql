@@ -5,12 +5,13 @@
 -- DESCRIBE faculties;
 -- drop TABLE faculties;
 -- DESCRIBE faculty;
+select * from users;
 -- alter table users add column user_image BLOB;
 -- alter table users add column user_date date DEFAULT null;
 -- DESCRIBE users;
 -- rename table userssss to users;
 -- describe teachers;
-SELECT * from teachers
+-- SELECT * from teachers
 -- 
 
 -- commit;

@@ -60,7 +60,34 @@ function LogIn() {
         }
         // setMessageBackendData(data)
     }
-
+    const getStudentId = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/users/selectUserId',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_email: username,
+                    user_password: password,
+                }),
+            }
+        ).catch((error) => console.log(error))
+        console.log('Sending data to backend: ', username, password)
+        const data = await response.json()
+        console.log('data from backend: ', data)
+        if (response.status === 200) {
+            console.log('user id from database:', data.id)
+        } else if (response.status === 404) {
+            setMessage('User not found')
+            setMessageStatus('error')
+        } else if (response.status === 500) {
+            setMessage('Error selecting user ID')
+            setMessageStatus('error')
+        }
+        // setMessageBackendData(data)
+    }
     const sendDataTeacher = async () => {
         const response = await fetch(
             'http://localhost:8080/api/teachers/insertTeacher',
@@ -177,8 +204,7 @@ function LogIn() {
             //     setMessageStatus('error')
             // }
             else {
-                setMessage('Log In successful')
-                setMessageStatus('success')
+                if (userType === 'student') getStudentId()
             }
         }
     }

@@ -35,6 +35,29 @@ const insertUser = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
+const selectUserId = async (req, res) => {
+    const email = req.body.user_email
+    const password = req.body.user_password
+
+    try {
+        const user = await User.findOne({
+            where: {
+                user_email: email,
+                user_password: password,
+            },
+            attributes: ['user_id'],
+        })
+
+        if (user) {
+            res.status(200).json({ id: user.user_id })
+        } else {
+            res.status(404).json({ error: 'User not found' })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error selecting user ID' })
+    }
+}
 const selectAllUsers = async (req, res) => {
     try {
         const users = await User.findAll()
@@ -44,4 +67,4 @@ const selectAllUsers = async (req, res) => {
         res.status(500).json({ error: 'eroare selectare all users' })
     }
 }
-module.exports = { insertUser, selectAllUsers }
+module.exports = { insertUser, selectAllUsers, selectUserId }
