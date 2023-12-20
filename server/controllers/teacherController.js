@@ -35,3 +35,4 @@ const insertTeacher = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
+module.exports = { insertTeacher }
