@@ -19,7 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/api/faculties', FacultyRouter)
 app.use(bodyParser.json())
-app.use('api/teachers', TeacherRouter)
+app.use('/api/teachers', TeacherRouter)
 app.use('/api/users', UserRouter)
 
 // appfront.get('/api', (req, res) => {

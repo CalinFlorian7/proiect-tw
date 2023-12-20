@@ -60,6 +60,7 @@ function LogIn() {
         }
         // setMessageBackendData(data)
     }
+
     const sendDataTeacher = async () => {
         const response = await fetch(
             'http://localhost:8080/api/teachers/insertTeacher',
@@ -190,9 +191,10 @@ function LogIn() {
             setName('')
             setPasswordConfirmation('')
         } else {
+            console.log('ai apasat pe sign upppppppppppppppppp')
             console.log('username sign up ', username)
             // setUserType('student')
-            console.log('user type: ', userType)
+            console.log('user type:', userType)
             console.log('username: ', username)
             if (name === '') {
                 setMessage('Please enter your name')
@@ -204,12 +206,15 @@ function LogIn() {
                 console.log('se verifica email')
                 setMessageStatus('error')
                 setMessage('Please enter a valid email address')
-            } else if (userType === 'teacher') {
-                if (validateFaculty() === false) {
-                    setMessageStatus('error')
-                    setMessage('Please select a faculty')
-                    // console.log('faculty id: ', facultyId)
-                }
+            } else if (userType === 'teacher' && validateFaculty() === false) {
+                // if (validateFaculty() === false) {
+                //     setMessageStatus('error')
+                //     setMessage('Please select a faculty')
+                //     // console.log('faculty id: ', facultyId)
+                // }
+
+                setMessageStatus('error')
+                setMessage('Please select a faculty')
             } else if (password === '') {
                 setMessage('Please enter your password')
                 setMessageStatus('error')
@@ -223,10 +228,15 @@ function LogIn() {
                 setMessage('Passwords do not match')
                 setMessageStatus('error')
             } else {
+                console.log('se trimite datele')
                 setMessage('Sign Up successful')
                 setMessageStatus('success')
                 if (userType === 'student') sendDataStudent()
-                if (userType === 'teacher') sendDataTeacher()
+                console.log('user type dupa validari: ', userType)
+                if (userType === 'teacher') {
+                    console.log(' ar trebui sa send data teacher')
+                    sendDataTeacher()
+                }
                 // setPassword('')
                 // setUsername('')
                 // setPasswordConfirmation('')
