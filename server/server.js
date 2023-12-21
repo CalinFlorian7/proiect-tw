@@ -6,14 +6,8 @@ const FacultyRouter = require('./routes/facultyRoute.js')
 const UserRouter = require('./routes/userRoute.js')
 const TeacherRouter = require('./routes/teacherRoute.js')
 const bodyParser = require('body-parser')
-// var corOptions = {
-//     origin: 'http://localhost:8080',
-// }
-// // var corOptionsFront = { origin: 'http://localhost:5000' }
-// appfront.use(express.json())
-// appfront.use(cors())
-// // appfront.use(cors(corOptionsFront))
-// app.use(cors(corOptions))
+const jwt = require('jsonwebtoken')
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -22,13 +16,6 @@ app.use(bodyParser.json())
 app.use('/api/teachers', TeacherRouter)
 app.use('/api/users', UserRouter)
 
-// appfront.get('/api', (req, res) => {
-//     res.json({ success: 1, message: 'This is REST API' })
-// })
-
-// // app.get('/', (req, res) => {
-// //     res.json({ message: 'hellow world API' })
-// // })
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`)
