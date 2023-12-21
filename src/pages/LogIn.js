@@ -1,5 +1,6 @@
 import './LogIn.css'
 import { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 // import App from '../App.js'
 function LogIn() {
     const [action, setAction] = useState('Log In')
@@ -13,6 +14,7 @@ function LogIn() {
     const [faculties, setFaculties] = useState([])
     const [facultyId, setFacultyId] = useState('Facula')
     const [user_id, setUser_id] = useState('')
+    const navigate = useNavigate()
 
     // const [backendData, setMessageBackendData] = useState({})
     useEffect(() => {
@@ -82,8 +84,11 @@ function LogIn() {
                 localStorage.setItem('userType', userType)
                 localStorage.setItem('userId', user_id)
                 localStorage.setItem('logged', 'true')
-
+                navigate('/Home')
+                // Call the navigateToHome function
                 // Do something with the access token
+
+                // Redirect to the home page
             })
             .catch((error) => console.log(error))
     }
@@ -278,6 +283,9 @@ function LogIn() {
                     console.log('user type tacher shoul work', userType)
                     getTeacherId()
                 }
+                if (localStorage.getItem('logged') === 'true') {
+                    return <Navigate to="/Home" />
+                }
             }
         }
     }
@@ -337,6 +345,7 @@ function LogIn() {
                     console.log(' ar trebui sa send data teacher')
                     sendDataTeacher()
                 }
+
                 // setPassword('')
                 // setUsername('')
                 // setPasswordConfirmation('')
