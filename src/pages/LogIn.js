@@ -82,6 +82,7 @@ function LogIn() {
                 localStorage.setItem('userType', userType)
                 localStorage.setItem('userId', user_id)
                 localStorage.setItem('logged', 'true')
+
                 // Do something with the access token
             })
             .catch((error) => console.log(error))

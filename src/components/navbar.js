@@ -3,7 +3,7 @@ import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 // import { IoIosClose } from 'react-icons/io'
-import { SidebarData } from './SidebarData'
+import { SidebarDataStudent, SidebarDataTeacher } from './SidebarData'
 import './Navbar.css'
 import { IconContext } from 'react-icons'
 import UserMenu from './UserMenu'
@@ -28,16 +28,28 @@ function Navbar() {
                                 <AiIcons.AiOutlineClose />
                             </Link>
                         </li>
-                        {SidebarData.map((item, index) => {
-                            return (
-                                <li key={index} className={item.cName}>
-                                    <Link to={item.path}>
-                                        {item.icon}
-                                        <span>{item.title}</span>
-                                    </Link>{' '}
-                                </li>
-                            )
-                        })}
+
+                        {localStorage.getItem('userType') === 'student'
+                            ? SidebarDataStudent.map((item, index) => {
+                                  return (
+                                      <li key={index} className={item.cName}>
+                                          <Link to={item.path}>
+                                              {item.icon}
+                                              <span>{item.title}</span>
+                                          </Link>{' '}
+                                      </li>
+                                  )
+                              })
+                            : SidebarDataTeacher.map((item, index) => {
+                                  return (
+                                      <li key={index} className={item.cName}>
+                                          <Link to={item.path}>
+                                              {item.icon}
+                                              <span>{item.title}</span>
+                                          </Link>{' '}
+                                      </li>
+                                  )
+                              })}
                     </ul>
                 </nav>
             </IconContext.Provider>

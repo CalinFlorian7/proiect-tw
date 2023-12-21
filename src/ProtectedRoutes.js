@@ -4,8 +4,10 @@ import { Navigate, Outlet } from 'react-router-dom'
 // import LogIn from './pages/LogIn'
 // import RestrictedNavbar from './components/RestrictedNavbar'
 const useAuthorization = () => {
-    const user = { loggedIn: true }
-    return user && user.loggedIn
+    if (localStorage.getItem('logged') === 'true') {
+        return true
+    }
+    return false
 }
 function ProtectedRoutes() {
     const isAuthorized = useAuthorization()
