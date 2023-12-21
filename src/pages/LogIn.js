@@ -79,6 +79,9 @@ function LogIn() {
             .then((data) => {
                 // console.log(data.access_token)
                 localStorage.setItem('accessToken', data.access_token)
+                localStorage.setItem('userType', userType)
+                localStorage.setItem('userId', user_id)
+                localStorage.setItem('logged', 'true')
                 // Do something with the access token
             })
             .catch((error) => console.log(error))
@@ -137,6 +140,7 @@ function LogIn() {
         console.log('data from backend: ', data)
         if (response.status === 200) {
             setUser_id(data.id)
+
             console.log('user id from database:', data.id)
             authenticateUser()
             console.log(
