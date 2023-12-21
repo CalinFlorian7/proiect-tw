@@ -12,6 +12,7 @@ function LogIn() {
     const [userType, setUserType] = useState('student')
     const [faculties, setFaculties] = useState([])
     const [facultyId, setFacultyId] = useState('Facula')
+    const [user_id, setUser_id] = useState('')
 
     // const [backendData, setMessageBackendData] = useState({})
     useEffect(() => {
@@ -34,6 +35,7 @@ function LogIn() {
 
         fetchData()
     }, [])
+
     const sendDataStudent = async () => {
         const response = await fetch(
             'http://localhost:8080/api/users/insertUser',
@@ -61,6 +63,27 @@ function LogIn() {
         // setMessageBackendData(data)
     }
 
+    const authenticateUser = async () => {
+        await fetch('http://localhost:8080/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                id: user_id,
+                user_type: userType,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                // console.log(data.access_token)
+                localStorage.setItem('accessToken', data.access_token)
+                // Do something with the access token
+            })
+            .catch((error) => console.log(error))
+    }
+
     const getTeacherId = async () => {
         const response = await fetch(
             'http://localhost:8080/api/teachers/selectTeacherId',
@@ -80,6 +103,12 @@ function LogIn() {
         console.log('data from backend: ', data)
         if (response.status === 200) {
             console.log('user id from database:', data.id)
+            setUser_id(data.id)
+            authenticateUser()
+            console.log(
+                'token din local storrage: ',
+                localStorage.getItem('accessToken')
+            )
         } else if (response.status === 404) {
             setMessage('User not found')
             setMessageStatus('error')
@@ -107,7 +136,13 @@ function LogIn() {
         const data = await response.json()
         console.log('data from backend: ', data)
         if (response.status === 200) {
+            setUser_id(data.id)
             console.log('user id from database:', data.id)
+            authenticateUser()
+            console.log(
+                'token din local storrage: ',
+                localStorage.getItem('accessToken')
+            )
         } else if (response.status === 404) {
             setMessage('User not found')
             setMessageStatus('error')
