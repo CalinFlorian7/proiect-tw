@@ -18,6 +18,7 @@ function LogIn() {
 
     // const [backendData, setMessageBackendData] = useState({})
     useEffect(() => {
+        localStorage.setItem('logged', 'false')
         // console.log('esti in func useEffect')
         // fetch('http://localhost:5000/api')
         //     .then((res) => res.json())
