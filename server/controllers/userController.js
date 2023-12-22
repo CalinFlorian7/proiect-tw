@@ -67,4 +67,25 @@ const selectAllUsers = async (req, res) => {
         res.status(500).json({ error: 'eroare selectare all users' })
     }
 }
-module.exports = { insertUser, selectAllUsers, selectUserId }
+const selectUserNameImage = async (req, res) => {
+    const id = req.body.id
+
+    try {
+        const users = await User.findAll({
+            where: {
+                user_id: id,
+            },
+            attributes: ['user_name', 'user_image'],
+        })
+        res.status(200).json(users)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error selecting user name and image' })
+    }
+}
+module.exports = {
+    insertUser,
+    selectAllUsers,
+    selectUserId,
+    selectUserNameImage,
+}

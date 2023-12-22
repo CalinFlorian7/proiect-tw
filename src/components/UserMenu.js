@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './UserMenu.css'
 import { RiArrowDownSFill } from 'react-icons/ri'
+
 import defalutImage from '../Images/defaultProfilePicture.jpg'
 function UserMenu() {
+    useEffect(() => {}, [])
+
     return (
         <div className="container-menu-components">
             <Link to="/Profile">
