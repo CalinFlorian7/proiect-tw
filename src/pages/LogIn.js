@@ -14,6 +14,7 @@ function LogIn() {
     const [faculties, setFaculties] = useState([])
     const [facultyId, setFacultyId] = useState('Facula')
     const [user_id, setUser_id] = useState('')
+
     const navigate = useNavigate()
 
     // const [backendData, setMessageBackendData] = useState({})
@@ -66,7 +67,7 @@ function LogIn() {
         // setMessageBackendData(data)
     }
 
-    const authenticateUser = async () => {
+    const authenticateUser = async (userID) => {
         await fetch('http://localhost:8080/api/login', {
             method: 'POST',
             headers: {
@@ -74,7 +75,8 @@ function LogIn() {
             },
             body: JSON.stringify({
                 username: username,
-                id: user_id,
+                // id: user_id,
+                id: userID,
                 user_type: userType,
             }),
         })
@@ -83,7 +85,8 @@ function LogIn() {
                 // console.log(data.access_token)
                 localStorage.setItem('accessToken', data.access_token)
                 localStorage.setItem('userType', userType)
-                localStorage.setItem('userId', user_id)
+                // localStorage.setItem('userId', user_id)
+                localStorage.setItem('userId', userID)
                 localStorage.setItem('logged', 'true')
                 navigate('/Home')
                 // Call the navigateToHome function
@@ -107,14 +110,16 @@ function LogIn() {
                     teacher_password: password,
                 }),
             }
-        ).catch((error) => console.log(error))
+        ).catch((error) => console.log(error)).then
+
         console.log('Sending data to backend: ', username, password)
         const data = await response.json()
         console.log('data from backend: ', data)
         if (response.status === 200) {
             console.log('user id from database:', data.id)
             setUser_id(data.id)
-            authenticateUser()
+            authenticateUser(data.id)
+
             console.log(
                 'token din local storrage: ',
                 localStorage.getItem('accessToken')
@@ -126,8 +131,10 @@ function LogIn() {
             setMessage('Error selecting user ID')
             setMessageStatus('error')
         }
+
         // setMessageBackendData(data)
     }
+
     const getStudentId = async () => {
         const response = await fetch(
             'http://localhost:8080/api/users/selectUserId',
@@ -147,9 +154,10 @@ function LogIn() {
         console.log('data from backend: ', data)
         if (response.status === 200) {
             setUser_id(data.id)
-
+            authenticateUser(data.id)
+            localStorage.setItem('user_id', data.id)
             console.log('user id from database:', data.id)
-            authenticateUser()
+
             console.log(
                 'token din local storrage: ',
                 localStorage.getItem('accessToken')
@@ -161,6 +169,7 @@ function LogIn() {
             setMessage('Error selecting user ID')
             setMessageStatus('error')
         }
+
         // setMessageBackendData(data)
     }
     const sendDataTeacher = async () => {
@@ -279,11 +288,13 @@ function LogIn() {
             //     setMessageStatus('error')
             // }
             else {
-                if (userType === 'student') getStudentId()
+                if (userType === 'student') {
+                    getStudentId()
+                }
                 if (userType === 'teacher') {
-                    console.log('user type tacher shoul work', userType)
                     getTeacherId()
                 }
+
                 if (localStorage.getItem('logged') === 'true') {
                     return <Navigate to="/Home" />
                 }

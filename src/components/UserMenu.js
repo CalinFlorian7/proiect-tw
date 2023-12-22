@@ -8,15 +8,19 @@ function UserMenu() {
     useEffect(() => {
         if (localStorage.getItem('userType') === 'student') {
             const id = localStorage.getItem('userId')
+            console.log('id student : ', id)
             const fechUserNameImage = async () => {
                 const response = await fetch(
-                    'http://localhost:3001/selectUserNameImage',
+                    'http://localhost:8080/api/users/selectUserNameImage',
                     {
-                        method: 'GET',
+                        method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ id: id }),
+
+                        body: JSON.stringify({
+                            id: localStorage.getItem('userId'),
+                        }),
                     }
                 ).catch((err) => {
                     console.log(err)
@@ -25,7 +29,7 @@ function UserMenu() {
                 if (response.status === 500) {
                     console.log('server error')
                 }
-                if (response.status === 200) {
+                if (response.status === 200 && data !== null) {
                     console.log(data)
                     document.querySelector('.user-name').innerHTML =
                         data[0].user_name
