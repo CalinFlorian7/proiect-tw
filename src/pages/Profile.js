@@ -1,9 +1,11 @@
 import React from 'react'
 import defaultImage300 from '../Images/profilePicture300x300.png'
 import '../pages/Profile.css'
-import { FaRegEdit } from 'react-icons/fa'
+// import { FaRegEdit } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
+import { useState } from 'react'
 function Profile() {
+    const [image, setImage] = useState(defaultImage300)
     return (
         <>
             <IconContext.Provider value={{ color: 'cyan' }}>
@@ -12,19 +14,38 @@ function Profile() {
                         <h1>Profile</h1>
                         <div className="image-container">
                             <div id="profile-img">
+                                <input
+                                    id="file"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(event) => {
+                                        const file = event.target.files[0]
+                                        const reader = new FileReader()
+                                        reader.onload = (e) => {
+                                            // const img =
+                                            //     document.getElementById(
+                                            //         'profile-img'
+                                            //     )
+                                            // img.src = e.target.result
+                                            setImage(e.target.result)
+                                            console.log('se incarca poza')
+                                        }
+                                        reader.readAsDataURL(file)
+                                    }}
+                                />
                                 <img
                                     className="profile-img"
-                                    src={defaultImage300}
+                                    src={image}
                                     width="200px"
                                     height="200px"
                                     alt="profile"
                                 />
                             </div>
-                            <div className="img-edit">
+                            {/* <div className="img-edit">
                                 <button className="btn btn-primary">
                                     <FaRegEdit className="edit-icon" />
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="profile-info">
