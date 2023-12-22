@@ -26,6 +26,44 @@ function Profile() {
                                 </button>
                             </div>
                         </div>
+
+                        <div className="profile-info">
+                            <div className="profile-info-data">
+                                <h3>
+                                    Username:
+                                    <span className="span-name">Username</span>
+                                </h3>
+                                <h3>
+                                    Email:
+                                    <span className="span-email">Email</span>
+                                </h3>
+
+                                {localStorage.getItem('userType') ===
+                                'student' ? (
+                                    <h3>
+                                        Notes:
+                                        <span className="span-notes">
+                                            Total notes
+                                        </span>
+                                    </h3>
+                                ) : (
+                                    <>
+                                        <h3>
+                                            Faculty:
+                                            <span className="span-faculty">
+                                                Total notes
+                                            </span>
+                                        </h3>
+                                        <h3>
+                                            Subjects:
+                                            <span className="span-subjects">
+                                                Total subjects
+                                            </span>
+                                        </h3>
+                                    </>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </IconContext.Provider>
