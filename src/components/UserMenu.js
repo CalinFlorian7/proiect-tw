@@ -8,7 +8,7 @@ function UserMenu() {
     useEffect(() => {
         if (localStorage.getItem('userType') === 'student') {
             const id = localStorage.getItem('userId')
-            console.log('id student : ', id)
+            console.log('id student pt user menu: ', id)
             const fechUserNameImage = async () => {
                 const response = await fetch(
                     'http://localhost:8080/api/users/selectUserNameImage',

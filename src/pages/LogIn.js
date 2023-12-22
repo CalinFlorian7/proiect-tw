@@ -13,7 +13,6 @@ function LogIn() {
     const [userType, setUserType] = useState('student')
     const [faculties, setFaculties] = useState([])
     const [facultyId, setFacultyId] = useState('Facula')
-    const [user_id, setUser_id] = useState('')
 
     const navigate = useNavigate()
 
@@ -117,7 +116,7 @@ function LogIn() {
         console.log('data from backend: ', data)
         if (response.status === 200) {
             console.log('user id from database:', data.id)
-            setUser_id(data.id)
+
             authenticateUser(data.id)
 
             console.log(
@@ -153,7 +152,6 @@ function LogIn() {
         const data = await response.json()
         console.log('data from backend: ', data)
         if (response.status === 200) {
-            setUser_id(data.id)
             authenticateUser(data.id)
             localStorage.setItem('user_id', data.id)
             console.log('user id from database:', data.id)
