@@ -7,6 +7,7 @@ const FacultyRouter = require('./routes/facultyRoute.js')
 const UserRouter = require('./routes/userRoute.js')
 const TeacherRouter = require('./routes/teacherRoute.js')
 const bodyParser = require('body-parser')
+const ProtectedUserRouter = require('./routes/protectedUserRoute.js')
 const jwt = require('jsonwebtoken')
 
 app.use(cors())
@@ -17,6 +18,8 @@ app.use('/api/faculties', FacultyRouter)
 app.use(bodyParser.json())
 app.use('/api/teachers', TeacherRouter)
 app.use('/api/users', UserRouter)
+
+app.use('/api/users', authenticateToken, ProtectedUserRouter)
 
 app.post('/api/login', (req, res) => {
     const username = req.params.username
@@ -33,6 +36,7 @@ function authenticateToken(req, res, next) {
     const token = authHeader && authHeader.split(' ')[1]
     if (token == null) return res.sendStatus(401)
     jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
+        console.log('verify token: ', token)
         if (err) return res.sendStatus(403)
         req.user = user
 

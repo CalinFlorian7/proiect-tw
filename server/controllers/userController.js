@@ -67,6 +67,46 @@ const selectAllUsers = async (req, res) => {
         res.status(500).json({ error: 'eroare selectare all users' })
     }
 }
+const updateUserImage = async (req, res) => {
+    const id = req.body.id
+    const image = req.body.image
+    // const checkUserImageColumn = async () => {
+    //     try {
+    //         const table = await User.describe()
+    //         const columns = Object.keys(table)
+
+    //         if (columns.includes('user_image')) {
+    //             console.log('user_image column exists')
+    //         } else {
+    //             console.log('user_image column does not exist')
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    // checkUserImageColumn()
+
+    try {
+        const user = await User.update(
+            {
+                user_image: image,
+            },
+            {
+                where: {
+                    user_id: id,
+                },
+            }
+        )
+
+        if (user > 0) {
+            console.log('succes updating image:', user)
+        }
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error updating user image' })
+    }
+}
 const selectUserNameImage = async (req, res) => {
     const id = req.body.id
 
@@ -88,4 +128,5 @@ module.exports = {
     selectAllUsers,
     selectUserId,
     selectUserNameImage,
+    updateUserImage,
 }

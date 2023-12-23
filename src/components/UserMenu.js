@@ -33,9 +33,14 @@ function UserMenu() {
                     console.log(data)
                     document.querySelector('.user-name').innerHTML =
                         data[0].user_name
-                    if (data[0].user_image !== null)
+                    if (data[0].user_image !== null) {
+                        console.log('data image is not null')
+                        console.log('data image: ', data[0].user_image)
                         document.querySelector('.user-image img').src =
                             data[0].user_image
+                    } else {
+                        console.log('data image is null for the user menu')
+                    }
                 }
             }
             fechUserNameImage()

@@ -6,6 +6,32 @@ import { IconContext } from 'react-icons'
 import { useState } from 'react'
 function Profile() {
     const [image, setImage] = useState(defaultImage300)
+
+    const sendStudentImage = async (image) => {
+        const formData = new FormData()
+        formData.append('image', image)
+        const response = await fetch(
+            'http://localhost:8080/api/users/updateUserImage',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                },
+                body: { formData, id: localStorage.getItem('userId') },
+            }
+        )
+        const data = await response.json()
+        console.log(data)
+        if (response.status === 200) {
+            console.log('succes updating image')
+        } else if (response.status === 500) {
+            console.log('error updating image')
+        }
+    }
+
     return (
         <>
             <IconContext.Provider value={{ color: 'cyan' }}>
@@ -20,17 +46,35 @@ function Profile() {
                                     accept="image/*"
                                     onChange={(event) => {
                                         const file = event.target.files[0]
+                                        if (file instanceof Blob) {
+                                            console.log('e blob')
+                                        } else console.log('nu e blob')
                                         const reader = new FileReader()
-                                        reader.onload = (e) => {
-                                            // const img =
-                                            //     document.getElementById(
-                                            //         'profile-img'
-                                            //     )
-                                            // img.src = e.target.result
-                                            setImage(e.target.result)
-                                            console.log('se incarca poza')
-                                        }
-                                        reader.readAsDataURL(file)
+                                        if (file instanceof Blob) {
+                                            reader.onload = (e) => {
+                                                // const img =
+                                                //     document.getElementById(
+                                                //         'profile-img'
+                                                //     )
+                                                // img.src = e.target.result
+                                                console.log(
+                                                    'token cand se incarca imaginea:',
+                                                    localStorage.getItem(
+                                                        'accessToken'
+                                                    )
+                                                )
+                                                setImage(e.target.result)
+                                                console.log('se incarca poza')
+                                                if (
+                                                    localStorage.getItem(
+                                                        'userType'
+                                                    ) === 'student'
+                                                )
+                                                    sendStudentImage(file)
+                                            }
+
+                                            reader.readAsDataURL(file)
+                                        } else console.log('nu e blob fis ales')
                                     }}
                                 />
                                 <img
