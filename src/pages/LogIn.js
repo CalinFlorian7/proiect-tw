@@ -47,6 +47,7 @@ function LogIn() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+
                 body: JSON.stringify({
                     user_name: name,
                     user_email: username,
@@ -55,7 +56,11 @@ function LogIn() {
             }
         ).catch((error) => console.log(error))
         console.log('Sending data to backend: ', name, username, password)
+
         const data = await response.json()
+        if (data) {
+            console.log('Sending data to backend: ', name, username, password)
+        } else console.log('data is null')
         console.log('data from backend: ', data)
         if (data.error === 'SequelizeUniqueConstraintError') {
             setMessage(
@@ -95,7 +100,7 @@ function LogIn() {
             })
             .catch((error) => console.log(error))
     }
-
+    //  'http://localhost:8080/api/teachers/selectTeacherId'
     const getTeacherId = async () => {
         const response = await fetch(
             'http://localhost:8080/api/teachers/selectTeacherId',
@@ -109,15 +114,14 @@ function LogIn() {
                     teacher_password: password,
                 }),
             }
-        ).catch((error) => console.log(error)).then
-
+        ).catch((error) => console.log(error))
         console.log('Sending data to backend: ', username, password)
         const data = await response.json()
         console.log('data from backend: ', data)
         if (response.status === 200) {
-            console.log('user id from database:', data.id)
-
             authenticateUser(data.id)
+            localStorage.setItem('user_id', data.id)
+            console.log('user id from database:', data.id)
 
             console.log(
                 'token din local storrage: ',
@@ -130,6 +134,41 @@ function LogIn() {
             setMessage('Error selecting user ID')
             setMessageStatus('error')
         }
+
+        // const response = await fetch(
+        //     'http://localhost:8080/api/teachers/selectTeacherId',
+        //     {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             teacher_email: username,
+        //             teacher_password: password,
+        //         }),
+        //     }
+        // ).catch((error) => console.log(error)).then
+
+        // console.log('Sending data to backend: ', username, password)
+
+        // const data = await response.json()
+        // console.log('data from backend: ', data)
+        // if (response.status === 200) {
+        //     console.log('user id from database:', data.id)
+
+        //     authenticateUser(data.id)
+
+        //     console.log(
+        //         'token din local storrage: ',
+        //         localStorage.getItem('accessToken')
+        //     )
+        // } else if (response.status === 404) {
+        //     setMessage('User not found')
+        //     setMessageStatus('error')
+        // } else if (response.status === 500) {
+        //     setMessage('Error selecting user ID')
+        //     setMessageStatus('error')
+        // }
 
         // setMessageBackendData(data)
     }

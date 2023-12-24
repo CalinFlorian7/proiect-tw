@@ -6,6 +6,8 @@ import Profile from './pages/Profile.js'
 import Notes from './pages/Notes.js'
 import Settings from './pages/Settings.js'
 import ProtectedRoutes from './ProtectedRoutes.js'
+import AddNote from './pages/AddNote.js'
+import AddSubject from './pages/AddSubject.js'
 import LogIn from './pages/LogIn.js'
 import RestrictedNavbar from './components/RestrictedNavbar.js'
 import {
@@ -34,6 +36,8 @@ function App() {
                         <Route path="/Groups" Component={Groups} />
                         <Route path="/Profile" Component={Profile} />
                         <Route path="/Settings" Component={Settings} />
+                        <Route path="/AddNote" Component={AddNote} />
+                        <Route path="/AddSubject" Component={AddSubject} />
                     </Route>
                     <Route
                         path="*"

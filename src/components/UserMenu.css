@@ -15,3 +15,15 @@ img {
     /* shape-margin: circle; */
     border-radius: 50%;
 }
+.button-add {
+    border: 4px solid;
+    border-color: blanchedalmond;
+    background-color: slategray;
+    padding: 15px;
+    color: black;
+}
+.container-menu-components {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

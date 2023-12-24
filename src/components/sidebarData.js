@@ -19,6 +19,12 @@ export const SidebarDataStudent = [
         cName: 'nav-text',
     },
     {
+        title: 'Add note',
+        path: '/AddNote',
+        icon: <TbIcons.TbNote />,
+        cName: 'nav-text',
+    },
+    {
         title: 'Groups',
         path: '/Groups',
         icon: <MdIcons.MdGroups />,
@@ -54,6 +60,18 @@ export const SidebarDataTeacher = [
         title: 'Subjects',
         path: '/Subjects',
         icon: <TbIcons.TbNote />,
+        cName: 'nav-text',
+    },
+    {
+        title: 'Add subject',
+        path: '/AddSubject',
+        icon: <TbIcons.TbNote />,
+        cName: 'nav-text',
+    },
+    {
+        title: 'Groups',
+        path: '/Groups',
+        icon: <MdIcons.MdGroups />,
         cName: 'nav-text',
     },
     {

@@ -1,4 +1,5 @@
 const db = require('../models/index.js')
+// const teacher = require('../models/teacher.js')
 const Teacher = db.teachers
 const insertTeacher = async (req, res) => {
     const teacher_name = req.body.teacher_name
@@ -65,4 +66,45 @@ const selectTeacherId = async (req, res) => {
         res.status(500).json({ error: 'Error selecting teacher ID' })
     }
 }
-module.exports = { insertTeacher, selectTeacherId, selectAllTeachers }
+const selectTeacherNameImage = async (req, res) => {
+    const id = req.body.id
+
+    try {
+        const users = await Teacher.findAll({
+            where: {
+                teacher_id: id,
+            },
+            attributes: ['teacher_name', 'teacher_image'],
+        })
+
+        // users.forEach((user) => {
+        //     if (user.user_image) {
+        //         user.user_image = user.user_image.toString()
+        //     }
+        // })
+
+        // res.status(200).json(users)
+
+        if (users[0].teacher_image) console.log('user image is not null')
+        else console.log('teacher image is null')
+        if (users[0].teacher_name) console.log('user name is not null')
+        else console.log('teacher name is null')
+
+        res.status(200).json({
+            user_name: users[0].teacher_name,
+
+            user_image: users[0].teacher_image
+                ? users[0].teacher_image.toString('base64')
+                : null,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error selecting user name and image' })
+    }
+}
+module.exports = {
+    insertTeacher,
+    selectTeacherId,
+    selectAllTeachers,
+    selectTeacherNameImage,
+}
