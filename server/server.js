@@ -1,19 +1,22 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+
 const app = express()
-// const appfront = express()
+const bodyParser = require('body-parser')
+
+// Use the json() method instead of raw()
+app.use(bodyParser.json())
+
 const FacultyRouter = require('./routes/facultyRoute.js')
 const UserRouter = require('./routes/userRoute.js')
 const TeacherRouter = require('./routes/teacherRoute.js')
-const bodyParser = require('body-parser')
 const ProtectedUserRouter = require('./routes/protectedUserRoute.js')
 const jwt = require('jsonwebtoken')
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 app.use('/api/faculties', FacultyRouter)
 app.use(bodyParser.json())
 app.use('/api/teachers', TeacherRouter)

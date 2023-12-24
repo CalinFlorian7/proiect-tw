@@ -35,6 +35,7 @@ const insertUser = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
+
 const selectUserId = async (req, res) => {
     const email = req.body.user_email
     const password = req.body.user_password
@@ -70,6 +71,7 @@ const selectAllUsers = async (req, res) => {
 const updateUserImage = async (req, res) => {
     const id = req.body.id
     const image = req.body.image
+    console.log('image: ', image)
     const isBase64 = (str) => {
         if (typeof str !== 'string') {
             return false

@@ -13,7 +13,7 @@ function LogIn() {
     const [userType, setUserType] = useState('student')
     const [faculties, setFaculties] = useState([])
     const [facultyId, setFacultyId] = useState('Facula')
-    const [token, setToken] = useState('')
+
     const navigate = useNavigate()
 
     // const [backendData, setMessageBackendData] = useState({})

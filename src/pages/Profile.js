@@ -11,6 +11,8 @@ function Profile() {
     const sendStudentImage = async (image) => {
         console.log('image: ' + image)
 
+        const id = localStorage.getItem('userId')
+
         const response = await fetch(
             'http://localhost:8080/api/users/updateUserImage',
             {
@@ -22,10 +24,8 @@ function Profile() {
 
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    image: image,
-                    id: localStorage.getItem('userId'),
-                }),
+
+                body: JSON.stringify({ id: id, image: image }),
             }
         )
         const data = await response.json()
