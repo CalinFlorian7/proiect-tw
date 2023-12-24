@@ -5,7 +5,9 @@
 -- DESCRIBE faculties;
 -- drop TABLE faculties;
 -- DESCRIBE faculty;
-DESCRIBE subjects;
+-- DESCRIBE subjects;
+select * from subjects;
+-- delete from subjects;
 -- select * from users;
 -- select user_image from users where user_id=51;
 -- select user_image from users where user_id=51;
