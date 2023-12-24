@@ -4,29 +4,34 @@ import '../pages/Profile.css'
 // import { FaRegEdit } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 import { useState } from 'react'
+
 function Profile() {
     const [image, setImage] = useState(defaultImage300)
 
     const sendStudentImage = async (image) => {
-        const formData = new FormData()
-        formData.append('image', image)
+        console.log('image: ' + image)
+
         const response = await fetch(
             'http://localhost:8080/api/users/updateUserImage',
             {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'multipart/form-data',
                     authorization: `Bearer ${localStorage.getItem(
                         'accessToken'
                     )}`,
+
+                    'Content-Type': 'application/json',
                 },
-                body: { formData, id: localStorage.getItem('userId') },
+                body: JSON.stringify({
+                    image: image,
+                    id: localStorage.getItem('userId'),
+                }),
             }
         )
         const data = await response.json()
         console.log(data)
         if (response.status === 200) {
-            console.log('succes updating image')
+            console.log('success updating image')
         } else if (response.status === 500) {
             console.log('error updating image')
         }
@@ -50,13 +55,11 @@ function Profile() {
                                             console.log('e blob')
                                         } else console.log('nu e blob')
                                         const reader = new FileReader()
-                                        if (file instanceof Blob) {
+                                        if (
+                                            file instanceof Blob &&
+                                            file !== null
+                                        ) {
                                             reader.onload = (e) => {
-                                                // const img =
-                                                //     document.getElementById(
-                                                //         'profile-img'
-                                                //     )
-                                                // img.src = e.target.result
                                                 console.log(
                                                     'token cand se incarca imaginea:',
                                                     localStorage.getItem(
@@ -64,17 +67,26 @@ function Profile() {
                                                     )
                                                 )
                                                 setImage(e.target.result)
-                                                console.log('se incarca poza')
+
                                                 if (
                                                     localStorage.getItem(
                                                         'userType'
                                                     ) === 'student'
-                                                )
-                                                    sendStudentImage(file)
+                                                ) {
+                                                    // sendStudentImage(file)
+                                                }
                                             }
-
-                                            reader.readAsDataURL(file)
                                         } else console.log('nu e blob fis ales')
+                                        reader.readAsDataURL(file)
+                                        reader.onloadend = () => {
+                                            if (
+                                                localStorage.getItem(
+                                                    'userType'
+                                                ) === 'student'
+                                            ) {
+                                                sendStudentImage(reader.result)
+                                            }
+                                        }
                                     }}
                                 />
                                 <img

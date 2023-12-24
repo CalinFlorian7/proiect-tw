@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './UserMenu.css'
 import { RiArrowDownSFill } from 'react-icons/ri'
-
+import { useState } from 'react'
 import defalutImage from '../Images/defaultProfilePicture.jpg'
 function UserMenu() {
+    const [image, setImage] = useState(defalutImage)
     useEffect(() => {
         if (localStorage.getItem('userType') === 'student') {
             const id = localStorage.getItem('userId')
@@ -31,13 +32,26 @@ function UserMenu() {
                 }
                 if (response.status === 200 && data !== null) {
                     console.log(data)
-                    document.querySelector('.user-name').innerHTML =
-                        data[0].user_name
-                    if (data[0].user_image !== null) {
-                        console.log('data image is not null')
-                        console.log('data image: ', data[0].user_image)
-                        document.querySelector('.user-image img').src =
-                            data[0].user_image
+
+                    if (data.user_name !== null)
+                        document.querySelector('.user-name').innerHTML =
+                            data.user_name
+                    if (data.user_image !== null) {
+                        try {
+                            console.log(
+                                'data image is not null for the user menu image'
+                            )
+                            console.log(
+                                'data image from db for user_menu: ',
+                                data.user_image
+                            )
+
+                            const imageUrl = `url("${data.user_image}")`
+                            setImage(imageUrl)
+                            // console.log('image url: ', imageUrl)
+                        } catch (err) {
+                            console.log(err)
+                        }
                     } else {
                         console.log('data image is null for the user menu')
                     }
@@ -52,7 +66,7 @@ function UserMenu() {
             <Link to="/Profile">
                 <div className="user-menu">
                     <span className="user-image">
-                        <img src={defalutImage} alt=" " />
+                        <img className="img" src={image} alt=" " />
                     </span>
                     <span className="user-name">User Name</span>
                     <span className="user-arrow"></span>

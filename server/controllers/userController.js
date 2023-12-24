@@ -70,26 +70,26 @@ const selectAllUsers = async (req, res) => {
 const updateUserImage = async (req, res) => {
     const id = req.body.id
     const image = req.body.image
-    // const checkUserImageColumn = async () => {
-    //     try {
-    //         const table = await User.describe()
-    //         const columns = Object.keys(table)
+    const isBase64 = (str) => {
+        if (typeof str !== 'string') {
+            return false
+        }
+        const regex = /^(data:image\/[a-z]+;base64,)/
+        return regex.test(str)
+    }
+    console.log('is base 64?: ', isBase64(image))
 
-    //         if (columns.includes('user_image')) {
-    //             console.log('user_image column exists')
-    //         } else {
-    //             console.log('user_image column does not exist')
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-    // checkUserImageColumn()
+    const imageBuffer = Buffer.from(req.body.image, 'base64')
+    console.log('image', image)
+    console.log('image buffer', imageBuffer)
+
+    const string = Buffer.from(imageBuffer).toString('base64')
+    console.log('image string--------:', string)
 
     try {
         const user = await User.update(
             {
-                user_image: image,
+                user_image: imageBuffer,
             },
             {
                 where: {
@@ -117,7 +117,21 @@ const selectUserNameImage = async (req, res) => {
             },
             attributes: ['user_name', 'user_image'],
         })
-        res.status(200).json(users)
+
+        // users.forEach((user) => {
+        //     if (user.user_image) {
+        //         user.user_image = user.user_image.toString()
+        //     }
+        // })
+
+        // res.status(200).json(users)
+        if (users[0].user_image) console.log('user image is not null')
+        else console.log('user image is null')
+        res.status(200).json({
+            user_name: users[0].user_name,
+
+            user_image: Buffer.from(users[0].user_image).toString('base64'),
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: 'Error selecting user name and image' })
