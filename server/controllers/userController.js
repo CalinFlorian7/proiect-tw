@@ -69,9 +69,24 @@ const selectAllUsers = async (req, res) => {
     }
 }
 const updateUserImage = async (req, res) => {
+    const sir =
+        'dadmasnhyrgyuwinbvnz,lsdjsagd  as436748328r93r2ujdh27dy2njsdnsajndka'
+    const bufferSir = Buffer.from(sir, 'base64')
+    const sirFromBuffer = Buffer.from(bufferSir, 'base64').toString('base64')
+    console.log('sir size:', Buffer.byteLength(sir, 'utf8'))
+    console.log('buffer size:', Buffer.byteLength(bufferSir, 'utf8'))
+
+    console.log('sir: ', sir)
+    console.log('buffer sir: ', bufferSir)
+    console.log('sir from buffer: ', sirFromBuffer)
     const id = req.body.id
     const image = req.body.image
     console.log('image: ', image)
+    console.log('dimensiune imagine: ', Buffer.byteLength(image, 'utf8'))
+    console.log(
+        'dimensiune buffer imagine: ',
+        Buffer.byteLength(Buffer.from(image, 'base64'), 'base64')
+    )
     const isBase64 = (str) => {
         if (typeof str !== 'string') {
             return false

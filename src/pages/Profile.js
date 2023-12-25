@@ -74,28 +74,31 @@ function Profile() {
         console.log('image: ' + image)
 
         const id = localStorage.getItem('userId')
+        try {
+            const response = await fetch(
+                'http://localhost:8080/api/users/updateUserImage',
+                {
+                    method: 'POST',
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem(
+                            'accessToken'
+                        )}`,
 
-        const response = await fetch(
-            'http://localhost:8080/api/users/updateUserImage',
-            {
-                method: 'POST',
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem(
-                        'accessToken'
-                    )}`,
+                        'Content-Type': 'application/json',
+                    },
 
-                    'Content-Type': 'application/json',
-                },
-
-                body: JSON.stringify({ id: id, image: image }),
+                    body: JSON.stringify({ id: id, image: image }),
+                }
+            )
+            const data = await response.json()
+            console.log(data)
+            if (response.status === 200) {
+                console.log('success updating image')
+            } else if (response.status === 500) {
+                console.log('error updating image')
             }
-        )
-        const data = await response.json()
-        console.log(data)
-        if (response.status === 200) {
-            console.log('success updating image')
-        } else if (response.status === 500) {
-            console.log('error updating image')
+        } catch (error) {
+            console.log(error)
         }
     }
 
