@@ -91,7 +91,7 @@ const updateUserImage = async (req, res) => {
     try {
         const user = await User.update(
             {
-                user_image: imageBuffer,
+                user_image: image,
             },
             {
                 where: {
@@ -120,19 +120,11 @@ const selectUserNameImage = async (req, res) => {
             attributes: ['user_name', 'user_image'],
         })
 
-        // users.forEach((user) => {
-        //     if (user.user_image) {
-        //         user.user_image = user.user_image.toString()
-        //     }
-        // })
-
-        // res.status(200).json(users)
         if (users[0].user_image) console.log('user image is not null')
         else console.log('user image is null')
         res.status(200).json({
             user_name: users[0].user_name,
-
-            user_image: Buffer.from(users[0].user_image).toString('base64'),
+            user_image: users[0].user_image.toString(),
         })
     } catch (error) {
         console.log(error)

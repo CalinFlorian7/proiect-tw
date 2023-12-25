@@ -48,8 +48,8 @@ function UserMenu() {
                                 data.user_image
                             )
                             console.log('image type: ', typeof data.user_image)
-                            const imageUrl = `url("${data.user_image}")`
-                            setImage(imageUrl)
+                            // const imageUrl = `url("${data.user_image}")`
+                            setImage(data.user_image)
                             // console.log('image url: ', imageUrl)
                         } catch (err) {
                             console.log(err)
@@ -138,7 +138,13 @@ function UserMenu() {
             <Link to="/Profile">
                 <div className="user-menu">
                     <span className="user-image">
-                        <img className="img" src={image} alt=" " />
+                        <img
+                            className="img"
+                            width="30"
+                            height="30"
+                            src={image}
+                            alt=" "
+                        />
                     </span>
                     <span className="user-name">User Name</span>
                     <span className="user-arrow"></span>

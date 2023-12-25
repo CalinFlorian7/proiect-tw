@@ -8,11 +8,11 @@
 -- DESCRIBE subjects;
 -- select * from subjects;
 -- describe teachers;
-DESCRIBE faculties;
+-- DESCRIBE faculties;
 -- delete from subjects where subject_id>8;
 -- select * from users;
 -- select user_image from users where user_id=51;
--- select user_image from users where user_id=51;
+select user_image from users where user_id=51;
 -- select * from teachers;
 -- alter table users add column user_image BLOB;
 -- alter table users add column user_date date DEFAULT null;
