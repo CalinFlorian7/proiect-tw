@@ -5,4 +5,9 @@ protectedRouter.post(
     '/selectSubjectIdName',
     subjectController.selectSubjectIdName
 )
+protectedRouter.post(
+    '/selectCountSubjects',
+    subjectController.selectCountSubjects
+)
+
 module.exports = protectedRouter

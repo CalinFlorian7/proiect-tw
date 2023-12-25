@@ -4,10 +4,45 @@ import '../pages/Profile.css'
 // import { FaRegEdit } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 import { useState } from 'react'
-
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 function Profile() {
     const [image, setImage] = useState(defaultImage300)
+    const [numberofSubjects, setnumberofSubjects] = useState(0)
 
+    useEffect(() => {
+        if (localStorage.getItem('userType') === 'teacher') {
+            selectCountSubjects()
+        }
+    }, [])
+    const selectCountSubjects = async () => {
+        const id = localStorage.getItem('userId')
+
+        const response = await fetch(
+            'http://localhost:8080/api/subjects/selectCountSubjects',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify({ teacher_id: id }),
+            }
+        )
+        const data = await response.json()
+        console.log(data)
+        if (response.status === 200) {
+            console.log('success count subjects')
+
+            setnumberofSubjects(data)
+        } else if (response.status === 500) {
+            console.log('error count subjects')
+        }
+    }
     const sendStudentImage = async (image) => {
         console.log('image: ' + image)
 
@@ -131,12 +166,16 @@ function Profile() {
                                                 Total notes
                                             </span>
                                         </h3>
-                                        <h3>
-                                            Subjects:
-                                            <span className="span-subjects">
-                                                Total subjects
-                                            </span>
-                                        </h3>
+                                        <Link to="/Subjects" className="link">
+                                            <h3>
+                                                Subjects:
+                                                <span className="span-subjects">
+                                                    {numberofSubjects
+                                                        ? numberofSubjects
+                                                        : 'Total subjects'}
+                                                </span>
+                                            </h3>
+                                        </Link>
                                     </>
                                 )}
                             </div>
