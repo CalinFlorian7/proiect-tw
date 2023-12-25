@@ -9,12 +9,39 @@ import { Link } from 'react-router-dom'
 function Profile() {
     const [image, setImage] = useState(defaultImage300)
     const [numberofSubjects, setnumberofSubjects] = useState(0)
+    const [facultyName, setfacultyName] = useState('faculty name')
 
     useEffect(() => {
         if (localStorage.getItem('userType') === 'teacher') {
             selectCountSubjects()
+            selectTeacherFaculty()
         }
     }, [])
+    const selectTeacherFaculty = async () => {
+        const id = localStorage.getItem('userId')
+        const response = await fetch(
+            'http://localhost:8080/api/teachers/selectTeacherFaculty',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    teacher_id: id,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log('success select faculty name')
+            setfacultyName(data.faculty_name)
+        } else if (response.status === 500) {
+            console.log('error select faculty name')
+        }
+    }
     const selectCountSubjects = async () => {
         const id = localStorage.getItem('userId')
 
@@ -163,7 +190,9 @@ function Profile() {
                                         <h3>
                                             Faculty:
                                             <span className="span-faculty">
-                                                Total notes
+                                                {facultyName
+                                                    ? facultyName
+                                                    : 'Faculty name'}
                                             </span>
                                         </h3>
                                         <Link to="/Subjects" className="link">

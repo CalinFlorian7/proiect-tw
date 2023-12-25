@@ -4,5 +4,8 @@ protectedRouter.post(
     '/selectTeacherNameImage',
     teacherController.selectTeacherNameImage
 )
-
+protectedRouter.post(
+    '/selectTeacherFaculty',
+    teacherController.selectTeacherFaculty
+)
 module.exports = protectedRouter

@@ -35,5 +35,11 @@ module.exports = (sequelize, Datatypes) => {
             timestamps: false,
         }
     )
+
+    // Teacher.associate = (models) => {
+    //     Teacher.belongsTo(models.faculty, {
+    //         foreignKey: 'faculty_id',
+    //     })
+    // }
     return Teacher
 }

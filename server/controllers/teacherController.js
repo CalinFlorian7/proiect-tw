@@ -1,6 +1,7 @@
 const db = require('../models/index.js')
 // const teacher = require('../models/teacher.js')
 const Teacher = db.teachers
+const Faculty = db.faculties
 const insertTeacher = async (req, res) => {
     const teacher_name = req.body.teacher_name
     const email = req.body.teacher_email
@@ -102,9 +103,45 @@ const selectTeacherNameImage = async (req, res) => {
         res.status(500).json({ error: 'Error selecting user name and image' })
     }
 }
+
+const selectTeacherFaculty = async (req, res) => {
+    const teacherId = req.body.teacher_id
+
+    try {
+        const faculty = await Faculty.findOne({
+            attributes: ['faculty_name'],
+            include: [
+                {
+                    model: Teacher,
+                    as: 'Teacher',
+                    where: {
+                        teacher_id: teacherId,
+                    },
+                },
+            ],
+        })
+
+        if (faculty) {
+            const facultyName = faculty.faculty_name
+            console.log(
+                '||||||||||||||||||||||||||||faculty name:||||||||||||||  ',
+                facultyName
+            )
+            res.status(200).json({ faculty_name: facultyName })
+        } else {
+            res.status(404).json({
+                error: 'Faculty not found for the given teacher',
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error selecting teacher faculty' })
+    }
+}
 module.exports = {
     insertTeacher,
     selectTeacherId,
     selectAllTeachers,
     selectTeacherNameImage,
+    selectTeacherFaculty,
 }

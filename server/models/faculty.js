@@ -16,5 +16,15 @@ module.exports = (sequelize, Datatypes) => {
             foreignkey: true,
         },
     })
+
+    // Faculty.associate = (models) => {
+    //     Faculty.hasMany(models.teacher, {
+    //         foreignKey: 'faculty_id',
+    //     })
+    //     Faculty.belongsTo(models.university, {
+    //         foreignKey: 'university_id',
+    //     })
+    // }
+
     return Faculty
 }

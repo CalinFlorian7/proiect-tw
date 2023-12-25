@@ -33,6 +33,7 @@ function Subjects() {
     }
     return (
         <>
+            s
             <div className="page-container">
                 <div className="subjects-container"></div>
                 {subjects?.map((subject) => (

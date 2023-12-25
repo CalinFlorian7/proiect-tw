@@ -8,4 +8,5 @@ const getAllFaculties = async (req, res) => {
     res.status(200).send(faculties)
     // console.log('this are the faculties------------------: ', faculties)
 }
+
 module.exports = { getAllFaculties }
