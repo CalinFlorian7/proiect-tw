@@ -1,0 +1,13 @@
+h1 {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.subject-container {
+    background-color: blanchedalmond;
+    border: 2px solid #131862;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+.subjects-container {
+    padding: 15px;
+}
