@@ -29,6 +29,8 @@ function AddSubject() {
             setMessageStatus('success')
             setMessage(data.message)
             console.log('data was successfully inserted')
+            const input = document.getElementById('subjectName')
+            input.value = ''
         } else if (response.status === 500) {
             setMessageStatus('error')
             setMessage(data.error)
@@ -43,6 +45,7 @@ function AddSubject() {
             inserSubject()
         }
     }
+
     return (
         <>
             <div className="page-container">

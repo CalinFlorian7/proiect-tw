@@ -7,7 +7,7 @@
 -- DESCRIBE faculty;
 -- DESCRIBE subjects;
 select * from subjects;
--- delete from subjects;
+-- delete from subjects where subject_id>8;
 -- select * from users;
 -- select user_image from users where user_id=51;
 -- select user_image from users where user_id=51;
