@@ -25,4 +25,20 @@ const insertSubject = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
-module.exports = { insertSubject }
+const selectSubjectIdName = async (req, res) => {
+    const teacher_id = req.body.teacher_id
+
+    try {
+        const subject = await Subject.findAll({
+            where: {
+                teacher_id: teacher_id,
+            },
+            attributes: ['subject_id', 'subject_name'],
+        })
+        res.status(200).json(subject)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
+module.exports = { insertSubject, selectSubjectIdName }
