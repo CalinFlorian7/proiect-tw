@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import '../pages/Subjects.css'
 function Subjects() {
     const [subjects, setSubjects] = useState([])
-    const tel = { subject: 'Subject', id: { type: 'number', nameid: 1 } }
+
     useEffect(() => {
         if (localStorage.getItem('userType') === 'teacher') selectSubjects()
         if (localStorage.getItem('userType') === 'student') selectAllSubjects()

@@ -33,6 +33,7 @@ db.users = require('../models/user.js')(sequelize, DataTypes)
 db.subjects = require('../models/subject.js')(sequelize, DataTypes) // Fix the casing of the file name
 db.faculties = require('../models/faculty.js')(sequelize, DataTypes)
 db.teachers = require('../models/teacher.js')(sequelize, DataTypes)
+db.enrollments = require('../models/enrollment.js')(sequelize, DataTypes)
 
 db.faculties.hasMany(db.teachers, { foreignKey: 'faculty_id', as: 'Teacher' }) //
 db.teachers.belongsTo(db.faculties, { foreignKey: 'faculty_id', as: 'Faculty' })

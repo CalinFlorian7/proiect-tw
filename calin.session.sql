@@ -3,23 +3,8 @@
 -- commit
 -- show TABLEs;
 --
--- delete from subjects where subject_id<7;
--- select * from subjects;
--- select * from users;
--- select user_image from users where user_id=51;
--- select user_image from users where user_id=51;
--- describe subjects;
--- DESCRIBE teachers;
--- delete from subjects where teacher_id is NULL;
--- delete  from subjects where teacher_id is NULL;
--- delete from enrollments ;
--- select * from teachers;
--- alter table users add column user_image BLOB;
--- alter table users add column user_date date DEFAULT null;
--- DESCRIBE users;
--- rename table userssss to users;
+DESCRIBE enrollments;
 -- describe teachers;
--- SELECT * from teachers
 -- 
 
 -- commit;
