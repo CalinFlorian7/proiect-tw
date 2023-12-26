@@ -4,7 +4,6 @@ import '../pages/Subjects.css'
 function Subjects() {
     const [subjects, setSubjects] = useState([])
     const [enrollments, setEnrollments] = useState([])
-    const [buttonClassName, setButtonClassName] = useState('Enroll')
 
     useEffect(() => {
         if (localStorage.getItem('userType') === 'teacher') selectSubjects()
@@ -14,6 +13,44 @@ function Subjects() {
         }
     }, [])
 
+    const handleButtonClick = (e) => {
+        if (e.target.className === 'Enroll') {
+            enrollStudent(e.target.value).then(() => {
+                console.log('succcess')
+                e.target.className = 'Enrolled'
+                e.target.innerHTML = 'Enrolled'
+            })
+            console.log('enroll student,subject:', e.target.value)
+        } else {
+            console.log('student deja inscris')
+        }
+    }
+    const enrollStudent = async (subject_id) => {
+        const response = await fetch(
+            'http://localhost:8080/api/enrollments/enrollStudent',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: localStorage.getItem('userId'),
+                    subject_id: subject_id,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log(data)
+
+            console.log('the enrollment  was successful')
+        } else if (response.status === 500) {
+            console.log('the student is already enrolled')
+        }
+    }
     const getStudentEnrollments = async () => {
         const response = await fetch(
             'http://localhost:8080/api/enrollments/getAllEnrollments',
@@ -108,22 +145,30 @@ function Subjects() {
                           >
                               <h1>{subject.subject_name}</h1>
                               <div className="subject-button">
-                                  {enrollments.length > 0
-                                      ? enrollments.some(
-                                            (enrollment) =>
-                                                enrollment.subject_id ===
-                                                subject.subject_id
-                                        )
-                                          ? setButtonClassName('Enrolled')
-                                          : setButtonClassName('Enroll')
-                                      : console.log('da')}
                                   <button
-                                      className={buttonClassName}
-                                      onClick={(e) =>
-                                          console.log(e.target.className)
-                                      }
+                                      className={`${
+                                          enrollments.length > 0
+                                              ? enrollments.some(
+                                                    (enrollment) =>
+                                                        enrollment.subject_id ===
+                                                        subject.subject_id
+                                                )
+                                                  ? 'Enrolled'
+                                                  : 'Enroll'
+                                              : 'Enroll'
+                                      }`}
+                                      value={subject.subject_id}
+                                      onClick={(e) => handleButtonClick(e)}
                                   >
-                                      {buttonClassName}
+                                      {enrollments.length > 0
+                                          ? enrollments.some(
+                                                (enrollment) =>
+                                                    enrollment.subject_id ===
+                                                    subject.subject_id
+                                            )
+                                              ? 'Enrolled'
+                                              : 'Enroll'
+                                          : 'Enroll'}
                                   </button>
                               </div>
                               <h3>Teacher: {subject.Teacher.teacher_name}</h3>

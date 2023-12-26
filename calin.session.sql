@@ -3,10 +3,12 @@
 -- commit
 -- show TABLEs;
 --
-DESCRIBE enrollments;
+-- DESCRIBE enrollments;
+-- select * from enrollments;
+-- DESCRIBE notes;
 -- describe teacher;
 -- 
-
+delete from enrollments;
 -- commit;
 -- rename table faculty to faculties;
 -- select * from faculties;

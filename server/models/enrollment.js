@@ -5,12 +5,12 @@ module.exports = (sequelize, Datatypes) => {
             user_id: {
                 type: Datatypes.INTEGER,
                 allowNull: true,
-                foreignkey: true,
+                primaryKey: true,
             },
             subject_id: {
                 type: Datatypes.INTEGER,
                 allowNull: true,
-                foreignkey: true,
+                primaryKey: true,
             },
             enrollment_date: {
                 type: Datatypes.DATE,

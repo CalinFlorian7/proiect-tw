@@ -10,7 +10,9 @@ const getAllEnrollments = async (req, res) => {
     }
 }
 const enrollStudent = async (req, res) => {
-    const { subject_id, user_id, enrollment_date } = req.body
+    const subject_id = req.body.subject_id
+    const user_id = req.body.user_id
+    const enrollment_date = new Date(Date.now())
 
     try {
         // Insert the enrollment into the database
@@ -19,10 +21,7 @@ const enrollStudent = async (req, res) => {
             user_id,
             enrollment_date,
         })
-        res.status(200).json(
-            { message: 'Enrollment was successful' },
-            enrollment
-        )
+        res.status(200).json(enrollment)
     } catch (error) {
         res.status(500).json({ message: 'Error enrolling student', error })
     }
