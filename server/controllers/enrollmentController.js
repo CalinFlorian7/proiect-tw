@@ -9,4 +9,22 @@ const getAllEnrollments = async (req, res) => {
         res.status(500).json({ message: 'Error retrieving enrollments', error })
     }
 }
-module.exports = { getAllEnrollments }
+const enrollStudent = async (req, res) => {
+    const { subject_id, user_id, enrollment_date } = req.body
+
+    try {
+        // Insert the enrollment into the database
+        const enrollment = await Enrollment.create({
+            subject_id,
+            user_id,
+            enrollment_date,
+        })
+        res.status(200).json(
+            { message: 'Enrollment was successful' },
+            enrollment
+        )
+    } catch (error) {
+        res.status(500).json({ message: 'Error enrolling student', error })
+    }
+}
+module.exports = { getAllEnrollments, enrollStudent }

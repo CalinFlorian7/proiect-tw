@@ -4,4 +4,5 @@ protectedRouter.post(
     '/getAllEnrollments',
     enrollmentController.getAllEnrollments
 )
+protectedRouter.post('/enrollStudent', enrollmentController.enrollStudent)
 module.exports = protectedRouter
