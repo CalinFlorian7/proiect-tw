@@ -36,6 +36,8 @@ db.teachers = require('../models/teacher.js')(sequelize, DataTypes)
 
 db.faculties.hasMany(db.teachers, { foreignKey: 'faculty_id', as: 'Teacher' }) //
 db.teachers.belongsTo(db.faculties, { foreignKey: 'faculty_id', as: 'Faculty' })
+db.teachers.hasMany(db.subjects, { foreignKey: 'teacher_id', as: 'Subject' }) //
+db.subjects.belongsTo(db.teachers, { foreignKey: 'teacher_id', as: 'Teacher' })
 
 // db.sequelize.sync({ force: false }).then(() => {
 //     console.log('Drop and re-sync db.')

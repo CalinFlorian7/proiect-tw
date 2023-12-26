@@ -9,5 +9,5 @@ protectedRouter.post(
     '/selectCountSubjects',
     subjectController.selectCountSubjects
 )
-
+protectedRouter.get('/selectAllSubjects', subjectController.selectAllSubjects)
 module.exports = protectedRouter

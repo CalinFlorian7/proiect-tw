@@ -2,17 +2,17 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit
 -- show TABLEs;
--- DESCRIBE faculties;
--- drop TABLE faculties;
--- DESCRIBE faculty;
--- DESCRIBE subjects;
+--
+-- delete from subjects where subject_id<7;
 -- select * from subjects;
--- describe teachers;
--- DESCRIBE faculties;
--- delete from subjects where subject_id>8;
 -- select * from users;
 -- select user_image from users where user_id=51;
-select user_image from users where user_id=51;
+-- select user_image from users where user_id=51;
+-- describe subjects;
+-- DESCRIBE teachers;
+-- delete from subjects where teacher_id is NULL;
+-- delete  from subjects where teacher_id is NULL;
+-- delete from enrollments ;
 -- select * from teachers;
 -- alter table users add column user_image BLOB;
 -- alter table users add column user_date date DEFAULT null;

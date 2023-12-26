@@ -25,6 +25,12 @@ export const SidebarDataStudent = [
         cName: 'nav-text',
     },
     {
+        title: 'Subjects',
+        path: '/Subjects',
+        icon: <TbIcons.TbNote />,
+        cName: 'nav-text',
+    },
+    {
         title: 'Groups',
         path: '/Groups',
         icon: <MdIcons.MdGroups />,
@@ -68,12 +74,7 @@ export const SidebarDataTeacher = [
         icon: <TbIcons.TbNote />,
         cName: 'nav-text',
     },
-    {
-        title: 'Groups',
-        path: '/Groups',
-        icon: <MdIcons.MdGroups />,
-        cName: 'nav-text',
-    },
+
     {
         title: 'Profile',
         path: '/Profile',

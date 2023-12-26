@@ -1,5 +1,6 @@
 const db = require('../models/index.js')
 const Subject = db.subjects
+const Teacher = db.teachers
 const insertSubject = async (req, res) => {
     const subject_name = req.body.subject_name
     console.log('Subject to be inserted: ' + subject_name)
@@ -56,4 +57,28 @@ const selectCountSubjects = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
-module.exports = { insertSubject, selectSubjectIdName, selectCountSubjects }
+
+const selectAllSubjects = async (req, res) => {
+    try {
+        const subjects = await Subject.findAll({
+            attributes: ['subject_id', 'subject_name'],
+            include: [
+                {
+                    model: Teacher,
+                    as: 'Teacher',
+                    attributes: ['teacher_name'],
+                },
+            ],
+        })
+        res.status(200).json(subjects)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
+module.exports = {
+    insertSubject,
+    selectSubjectIdName,
+    selectCountSubjects,
+    selectAllSubjects,
+}
