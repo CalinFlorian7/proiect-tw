@@ -4,6 +4,7 @@ import '../pages/Subjects.css'
 function Subjects() {
     const [subjects, setSubjects] = useState([])
     const [enrollments, setEnrollments] = useState([])
+    const [buttonClassName, setButtonClassName] = useState('Enroll')
 
     useEffect(() => {
         if (localStorage.getItem('userType') === 'teacher') selectSubjects()
@@ -107,16 +108,22 @@ function Subjects() {
                           >
                               <h1>{subject.subject_name}</h1>
                               <div className="subject-button">
-                                  <button>
-                                      {enrollments.length > 0
-                                          ? enrollments.some(
-                                                (enrollment) =>
-                                                    enrollment.subject_id ===
-                                                    subject.subject_id
-                                            )
-                                              ? 'Enroll'
-                                              : 'Enrolled'
-                                          : 'Enroll'}
+                                  {enrollments.length > 0
+                                      ? enrollments.some(
+                                            (enrollment) =>
+                                                enrollment.subject_id ===
+                                                subject.subject_id
+                                        )
+                                          ? setButtonClassName('Enrolled')
+                                          : setButtonClassName('Enroll')
+                                      : console.log('da')}
+                                  <button
+                                      className={buttonClassName}
+                                      onClick={(e) =>
+                                          console.log(e.target.className)
+                                      }
+                                  >
+                                      {buttonClassName}
                                   </button>
                               </div>
                               <h3>Teacher: {subject.Teacher.teacher_name}</h3>
