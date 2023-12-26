@@ -4,7 +4,7 @@
 -- show TABLEs;
 --
 DESCRIBE enrollments;
--- describe teachers;
+-- describe teacher;
 -- 
 
 -- commit;
