@@ -14,6 +14,7 @@ const TeacherRouter = require('./routes/teacherRoute.js')
 const ProtectedSubjectRouter = require('./routes/protectedSubjectRoute.js')
 const ProtectedUserRouter = require('./routes/protectedUserRoute.js')
 const ProtectedTeacherRouter = require('./routes/protectedTeacherRoute.js')
+const ProtectedEnrollmentRouter = require('./routes/protectedEnrollmentRoute.js')
 const jwt = require('jsonwebtoken')
 
 app.use(cors())
@@ -27,7 +28,7 @@ app.use(bodyParser.json())
 app.use('/api/teachers', TeacherRouter)
 app.use('/api/users', UserRouter)
 app.use('/api/subjects', authenticateToken, ProtectedSubjectRouter)
-
+app.use('/api/enrollments', authenticateToken, ProtectedEnrollmentRouter)
 app.use('/api/users', authenticateToken, ProtectedUserRouter)
 app.use('/api/teachers', authenticateToken, ProtectedTeacherRouter)
 app.post('/api/login', (req, res) => {
