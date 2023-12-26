@@ -75,7 +75,9 @@ function Subjects() {
                               key={subject.subject_id}
                           >
                               <h1>{subject.subject_name}</h1>
-
+                              <div className="subject-button">
+                                  <button>Enroll</button>
+                              </div>
                               <h3>Teacher: {subject.Teacher.teacher_name}</h3>
                           </div>
                       ))}
