@@ -1,9 +1,34 @@
 const db = require('../models/index.js')
 const Enrollment = db.enrollments
+const Subject = db.subjects
+const Teacher = db.teachers
 const getAllEnrollments = async (req, res) => {
     const user_id = req.body.user_id
     try {
         const enrollments = await Enrollment.findAll({ where: { user_id } })
+        res.status(200).json(enrollments)
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving enrollments', error })
+    }
+}
+const getStudentEnrollments = async (req, res) => {
+    const user_id = req.body.user_id
+    try {
+        const enrollments = await Enrollment.findAll({
+            where: { user_id },
+            include: [
+                {
+                    model: Subject,
+                    as: 'Subject',
+                    include: [
+                        {
+                            model: Teacher,
+                            as: 'Teacher',
+                        },
+                    ],
+                },
+            ],
+        })
         res.status(200).json(enrollments)
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving enrollments', error })
@@ -26,4 +51,4 @@ const enrollStudent = async (req, res) => {
         res.status(500).json({ message: 'Error enrolling student', error })
     }
 }
-module.exports = { getAllEnrollments, enrollStudent }
+module.exports = { getAllEnrollments, enrollStudent, getStudentEnrollments }
