@@ -10,8 +10,11 @@ function AddNote() {
 
     let subject = []
 
-    if (location.state.subject) subject = location.state.subject
-    console.log('subject from the addnote page:', subject)
+    if (location && location.state)
+        if (location.state.subject) {
+            subject = location.state.subject
+            console.log('subject from the addnote page:', subject)
+        }
 
     const getStudentEnrollments = async () => {
         const response = await fetch(
@@ -43,36 +46,48 @@ function AddNote() {
 
     useEffect(() => {
         getStudentEnrollments()
-    }, [])
+        if (subject.subject_id) {
+            setSubjectId(subject.subject_id)
+        }
+    }, [subject.subject_id])
     return (
         <>
             <div className="page-container">
                 <div className="add-note-container">
-                    <h1>Notes</h1>
+                    <h1>Add a note</h1>
                     <div className="add-note">
                         <div className="subject-name-teacher">
                             <div className="subject-container-select">
-                                <h3>Subject:</h3>
-                                <select
-                                    className="subjects"
-                                    value={subjectId}
-                                    onChange={(e) => {
-                                        setSubjectId(e.target.value)
-                                    }}
-                                >
-                                    {enrollments?.map((enrollment) => (
-                                        <option
-                                            value={
-                                                enrollment.Subject.subject_id
-                                            }
+                                {enrollments && enrollments.length > 0 ? (
+                                    <div>
+                                        <h3>Subject:</h3>
+                                        <select
+                                            className="subjects"
+                                            value={subjectId}
+                                            onChange={(e) => {
+                                                setSubjectId(e.target.value)
+                                            }}
                                         >
-                                            {enrollment.Subject.subject_name +
-                                                '-' +
-                                                enrollment.Subject.Teacher
-                                                    .teacher_name}
-                                        </option>
-                                    ))}
-                                </select>
+                                            {enrollments?.map((enrollment) => (
+                                                <option
+                                                    value={
+                                                        enrollment.Subject
+                                                            .subject_id
+                                                    }
+                                                >
+                                                    {enrollment.Subject
+                                                        .subject_name +
+                                                        '-' +
+                                                        enrollment.Subject
+                                                            .Teacher
+                                                            .teacher_name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                ) : (
+                                    <h1>You dont have any subjects!!</h1>
+                                )}
                             </div>
                         </div>
                     </div>
