@@ -9,6 +9,7 @@ import ProtectedRoutes from './ProtectedRoutes.js'
 import AddNote from './pages/AddNote.js'
 import AddSubject from './pages/AddSubject.js'
 import LogIn from './pages/LogIn.js'
+import Enrollments from './pages/Enrollments.js'
 import RestrictedNavbar from './components/RestrictedNavbar.js'
 import {
     BrowserRouter as Router,
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/Settings" Component={Settings} />
                         <Route path="/AddNote" Component={AddNote} />
                         <Route path="/AddSubject" Component={AddSubject} />
+                        <Route path="/Enrollments" Component={Enrollments} />
                     </Route>
                     <Route
                         path="*"

@@ -14,7 +14,7 @@ export const SidebarDataStudent = [
     },
     {
         title: 'Notes',
-        path: '/Notes',
+        path: '/Enrollments',
         icon: <TbIcons.TbNote />,
         cName: 'nav-text',
     },
