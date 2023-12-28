@@ -7,16 +7,23 @@ import { SidebarDataStudent, SidebarDataTeacher } from './SidebarData'
 import './Navbar.css'
 import { IconContext } from 'react-icons'
 import UserMenu from './UserMenu'
+import { useLocation } from 'react-router-dom'
 function Navbar() {
+    const location = useLocation()
     const [sidebar, setSidebar] = useState(false)
     const showSidebar = () => setSidebar(!sidebar)
     return (
         <>
             <IconContext.Provider value={{ color: 'cyan' }}>
                 <div className="navbar">
-                    <Link to="#" className="menu-bars">
+                    {/* <Link to="#" className="menu-bars"> */}
+                    <span
+                        // to={location}
+                        onClick={console.log('locatie menu!!!:', location)}
+                        className="menu-bars"
+                    >
                         <FaIcons.FaBars onClick={showSidebar} />
-                    </Link>
+                    </span>
                     <div className="menu-container">
                         <UserMenu />
                     </div>
@@ -24,9 +31,13 @@ function Navbar() {
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className="nav-menu-items" onClick={showSidebar}>
                         <li className="navbar-toggle">
-                            <Link to="#" className="menu-bars">
+                            {/* <Link to="#" className="menu-bars"> */}
+                            <span
+                                // to={location}
+                                className="menu-bars"
+                            >
                                 <AiIcons.AiOutlineClose />
-                            </Link>
+                            </span>
                         </li>
 
                         {localStorage.getItem('userType') === 'student'

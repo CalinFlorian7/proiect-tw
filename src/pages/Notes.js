@@ -1,15 +1,28 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+
+import './Notes.css'
 function Notes() {
     const location = useLocation()
     console.log(location.state)
-    console.log(location.state.subject.teacher_name)
-    // console.log('subject id from notes: ', location.state.subject_id)
-    // console.log('subject name from notes: ', location.state.subject_name)
+    let subject = []
+    if (location.pathname === '/Notes')
+        subject = location.state ? location.state.subject : null
+    console.log(subject)
+
     return (
         <>
             <div className="page-container">
                 <div className="notes-container">
+                    <div className="subject-details">
+                        <div className="subject-name-teacher">
+                            <h1>{subject ? subject.subject_name : null}</h1>
+                            <h3>
+                                Teacher: {subject ? subject.teacher_name : null}
+                            </h3>
+                            <div className="break"></div>
+                        </div>
+                    </div>
                     <div className="notes"></div>
                 </div>
             </div>
