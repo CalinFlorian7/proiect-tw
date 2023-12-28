@@ -1,6 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import '../pages/Enrollments.css'
+
 function Enrollments() {
     const [enrollments, setEnrollments] = useState([])
 
@@ -35,6 +37,7 @@ function Enrollments() {
     useEffect(() => {
         getStudentEnrollments()
     }, [])
+
     return (
         <>
             <div className="page-container">
@@ -42,15 +45,44 @@ function Enrollments() {
                     <div className="enrollments">
                         {enrollments && enrollments.length > 0 ? (
                             enrollments.map((enrollment) => (
-                                <div className="enrollment">
+                                <div className="enrollment" key={enrollment.id}>
                                     <div className="enrollment-name">
-                                        <h1>
-                                            {enrollment.Subject.subject_name}
-                                        </h1>
+                                        <span>
+                                            <Link
+                                                to="/Notes"
+                                                state={{
+                                                    subject: {
+                                                        subject_id:
+                                                            enrollment.Subject
+                                                                .subject_id,
+                                                        subject_name:
+                                                            enrollment.Subject
+                                                                .subject_name,
+                                                        teacher_name:
+                                                            enrollment.Subject
+                                                                .Teacher
+                                                                .teacher_name,
+                                                    },
+                                                    //     subject_id:
+                                                    //         enrollment.Subject
+                                                    //             .subject_id,
+                                                    //     subject_name:
+                                                    //         enrollment.Subject
+                                                    //             .subject_name,
+                                                }}
+                                            >
+                                                <h1>
+                                                    {
+                                                        enrollment.Subject
+                                                            .subject_name
+                                                    }
+                                                </h1>
+                                            </Link>
+                                        </span>
                                     </div>
                                     <div className="enrollment-teacher">
                                         <h3>
-                                            Teacher:
+                                            Teacher:{' '}
                                             {
                                                 enrollment.Subject.Teacher
                                                     .teacher_name

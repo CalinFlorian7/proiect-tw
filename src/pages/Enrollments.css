@@ -8,3 +8,6 @@
 .enrollments {
     padding-top: 20px;
 }
+span {
+    cursor: pointer;
+}
