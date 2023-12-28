@@ -7,8 +7,9 @@
 -- select * from enrollments;
 -- DESCRIBE notes;
 -- describe teacher;
--- 
-delete from enrollments;
+select * from teachers;
+update teachers set teacher_name="Zavoianu George" where teacher_id=3;
+-- delete from enrollments;
 -- commit;
 -- rename table faculty to faculties;
 -- select * from faculties;

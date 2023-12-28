@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import './AddNote.css'
 function AddNote() {
     const location = useLocation()
-    console.log('subject from the addnote page:', location.state)
+
     const [enrollments, setEnrollments] = useState()
     const [subjectId, setSubjectId] = useState('')
+
     let subject = []
+
     if (location.state.subject) subject = location.state.subject
     console.log('subject from the addnote page:', subject)
+
     const getStudentEnrollments = async () => {
         const response = await fetch(
             'http://localhost:8080/api/enrollments/getStudentEnrollments',
@@ -28,7 +32,7 @@ function AddNote() {
         )
         const data = await response.json()
         if (response.status === 200) {
-            console.log(data)
+            console.log('enrollments:!!!!!!', data)
             setEnrollments(data)
 
             console.log('the response was successful')
@@ -47,19 +51,29 @@ function AddNote() {
                     <h1>Notes</h1>
                     <div className="add-note">
                         <div className="subject-name-teacher">
-                            <select
-                                className="subjects"
-                                value={subjectId}
-                                onChange={(e) => setSubjectId(e.target.value)}
-                            >
-                                {enrollments?.map((enrollment) => (
-                                    <option
-                                        value={enrollment.Subject.subject_id}
-                                    >
-                                        {enrollment.Subject.subject_name}
-                                    </option>
-                                ))}
-                            </select>
+                            <div className="subject-container-select">
+                                <h3>Subject:</h3>
+                                <select
+                                    className="subjects"
+                                    value={subjectId}
+                                    onChange={(e) => {
+                                        setSubjectId(e.target.value)
+                                    }}
+                                >
+                                    {enrollments?.map((enrollment) => (
+                                        <option
+                                            value={
+                                                enrollment.Subject.subject_id
+                                            }
+                                        >
+                                            {enrollment.Subject.subject_name +
+                                                '-' +
+                                                enrollment.Subject.Teacher
+                                                    .teacher_name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
