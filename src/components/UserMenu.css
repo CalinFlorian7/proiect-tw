@@ -20,6 +20,7 @@ img {
     border-color: blanchedalmond;
     background-color: slategray;
     padding: 15px;
+    border-radius: 4px;
     color: black;
 }
 .container-menu-components {

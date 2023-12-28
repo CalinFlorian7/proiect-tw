@@ -1,6 +1,11 @@
 .subject-name-teacher {
     display: flex;
     flex-direction: column;
+    align-items: left;
+}
+.subject-name-teacher button {
+    cursor: pointer;
+    align-self: flex-end;
 }
 .break {
     height: 4px;

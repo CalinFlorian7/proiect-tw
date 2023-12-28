@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import './Notes.css'
 function Notes() {
@@ -17,6 +17,25 @@ function Notes() {
                     <div className="subject-details">
                         <div className="subject-name-teacher">
                             <h1>{subject ? subject.subject_name : null}</h1>
+                            {subject.subject_id ? (
+                                <button className="add-note">
+                                    <Link
+                                        to="/AddNote"
+                                        state={{
+                                            subject: {
+                                                subject_id: subject.subject_id,
+                                                subject_name:
+                                                    subject.subject_name,
+                                                teacher_name:
+                                                    subject.teacher_name,
+                                            },
+                                        }}
+                                    >
+                                        {' '}
+                                        Add Note
+                                    </Link>
+                                </button>
+                            ) : null}
                             <h3>
                                 Teacher: {subject ? subject.teacher_name : null}
                             </h3>
