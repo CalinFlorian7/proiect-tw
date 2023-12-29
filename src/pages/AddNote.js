@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import './AddNote.css'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 function AddNote() {
     const location = useLocation()
 
     const [enrollments, setEnrollments] = useState()
     const [subjectId, setSubjectId] = useState('')
     const [noteTitle, setNoteTitle] = useState('')
+    const [noteText, setNoteText] = useState('')
 
     let subject = []
     const handleButton = () => {
@@ -105,6 +108,11 @@ function AddNote() {
                                         </div>
                                         <div className="note-content-container">
                                             <h3>Note content:</h3>
+                                            <ReactQuill
+                                                theme="snow"
+                                                className="note-content"
+                                                placeholder="Note content:"
+                                            ></ReactQuill>
                                             <div className="note-content"></div>
                                         </div>
                                         <button onClick={handleButton}>

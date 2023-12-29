@@ -6,6 +6,7 @@
 -- DESCRIBE enrollments;
 -- select * from enrollments;
 DESCRIBE notes;
+
 -- describe teacher;
 -- select * from teachers;
 -- update teachers set teacher_name="Zavoianu George" where teacher_id=3;
