@@ -22,3 +22,10 @@ select {
     width: auto;
     border: #131862 2px solid;
 }
+.note-text {
+    background-color: white;
+    min-height: 300px;
+    border: 4px #131862 solid;
+    /* border-color: #131862; */
+    border-radius: 20px;
+}

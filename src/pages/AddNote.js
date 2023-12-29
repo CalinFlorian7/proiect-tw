@@ -14,13 +14,16 @@ function AddNote() {
 
     let subject = []
     const handleButton = () => {
-        console.log('ai apsat pe button dasdasdasdsa')
+        console.log('ai apsat pe butonul de salvare ')
         console.log('sunject id: ', subjectId)
+        console.log('note text:', noteText)
     }
     if (location && location.state)
         if (location.state.subject) {
             subject = location.state.subject
-            console.log('subject from the addnote page:', subject)
+            console.log(
+                'subject from the addnote page is successfully recieved'
+            )
         }
 
     const getStudentEnrollments = async () => {
@@ -110,8 +113,11 @@ function AddNote() {
                                             <h3>Note content:</h3>
                                             <ReactQuill
                                                 theme="snow"
-                                                className="note-content"
-                                                placeholder="Note content:"
+                                                className="note-text"
+                                                placeholder="Note text"
+                                                onChange={(e) => {
+                                                    setNoteText(e)
+                                                }}
                                             ></ReactQuill>
                                             <div className="note-content"></div>
                                         </div>
