@@ -18,7 +18,6 @@ import {
     Navigate,
 } from 'react-router-dom'
 import Subjects from './pages/Subjects.js'
-
 function App() {
     return (
         <div className="App">
