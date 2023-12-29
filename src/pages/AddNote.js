@@ -41,6 +41,7 @@ function AddNote() {
             )
             setNoteId(data.note.note_id)
             console.log('id nota:', data.note.note_id)
+            alert('the note was successfully inserted')
             setNoteStatus('inserted')
         } else if (response.status === 500) {
             console.log('the note was not successfully inserted:', data)
@@ -177,7 +178,9 @@ function AddNote() {
                                             <div className="note-content"></div>
                                         </div>
                                         <button onClick={handleButton}>
-                                            Save the note into bd
+                                            {noteStatus === 'notTested'
+                                                ? 'Save the note into bd'
+                                                : 'Update the note into bd'}
                                         </button>
                                     </div>
                                 ) : (
