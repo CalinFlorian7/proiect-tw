@@ -27,7 +27,7 @@ module.exports = (sequelize, Datatypes) => {
                 foreignKey: true,
             },
             note_text: {
-                type: Datatypes.LONGTEXT,
+                type: Datatypes.STRING,
                 allowNull: true,
             },
         },
