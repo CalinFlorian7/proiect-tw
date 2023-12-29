@@ -14,6 +14,32 @@ function AddNote() {
     const [noteStatus, setNoteStatus] = useState('notTested')
     const [noteId, setNoteId] = useState('')
 
+    const updateNoteTitleText = async () => {
+        const response = await fetch('http://localhost:8080/api/notes/update', {
+            method: 'POST',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                note_title: noteTitle,
+                note_text: noteText,
+                note_id: noteId,
+            }),
+        })
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log(
+                'the note was successfully updated with this data:',
+                data
+            )
+            alert('the note was successfully updated')
+        } else if (response.status === 404) {
+            alert('modifica titlul sau contentul')
+        } else if (response.status === 500) {
+            console.log('the note was not successfully updated:', data)
+        }
+    }
     const insertNote = async () => {
         const response = await fetch(
             'http://localhost:8080/api/notes/insertNote',
@@ -40,7 +66,7 @@ function AddNote() {
                 data
             )
             setNoteId(data.note.note_id)
-            console.log('id nota:', data.note.note_id)
+            console.log('id nota de la server din bd:', data.note.note_id)
             alert('the note was successfully inserted')
             setNoteStatus('inserted')
         } else if (response.status === 500) {
@@ -62,8 +88,16 @@ function AddNote() {
             } else {
                 insertNote()
             }
-        } else if (noteStatus === 'inserted') {
-            alert('the note was already inserted')
+        } else if (noteStatus === 'inserted' && noteId) {
+            if (subjectId === '') {
+                alert('please select  a subject')
+            } else if (noteTitle === '') {
+                alert('please write a title')
+            } else if (noteText === '') {
+                alert('please write a note')
+            } else {
+                updateNoteTitleText()
+            }
         }
     }
     if (location && location.state)
@@ -103,13 +137,12 @@ function AddNote() {
     }
 
     useEffect(() => {
-        console.log('=--------------------', subjectId)
         getStudentEnrollments()
 
         if (subject.subject_id && subject.editable === false) {
             setSubjectId(subject.subject_id)
         }
-    }, [subject.subject_id, subject.editable, subjectId])
+    }, [subject.subject_id, subject.editable, subjectId, noteId])
     return (
         <>
             <div className="page-container">
@@ -177,7 +210,10 @@ function AddNote() {
                                             ></ReactQuill>
                                             <div className="note-content"></div>
                                         </div>
-                                        <button onClick={handleButton}>
+                                        <button
+                                            type="button"
+                                            onClick={handleButton}
+                                        >
                                             {noteStatus === 'notTested'
                                                 ? 'Save the note into bd'
                                                 : 'Update the note into bd'}

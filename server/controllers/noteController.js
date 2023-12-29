@@ -44,7 +44,7 @@ const insertNote = async (req, res) => {
 }
 
 const updateNoteTitleText = async (req, res) => {
-    const note_id = req.params.note_id
+    const note_id = req.body.note_id
     const note_title = req.body.note_title
     const note_text = req.body.note_text
 
@@ -73,5 +73,3 @@ const updateNoteTitleText = async (req, res) => {
 }
 
 module.exports = { insertNote, updateNoteTitleText }
-
-module.exports = { insertNote }
