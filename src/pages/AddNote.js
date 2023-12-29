@@ -10,7 +10,10 @@ function AddNote() {
     const [noteTitle, setNoteTitle] = useState('')
 
     let subject = []
-
+    const handleButton = () => {
+        console.log('ai apsat pe button dasdasdasdsa')
+        console.log('sunject id: ', subjectId)
+    }
     if (location && location.state)
         if (location.state.subject) {
             subject = location.state.subject
@@ -100,6 +103,13 @@ function AddNote() {
                                                 />
                                             </div>
                                         </div>
+                                        <div className="note-content-container">
+                                            <h3>Note content:</h3>
+                                            <div className="note-content"></div>
+                                        </div>
+                                        <button onClick={handleButton}>
+                                            Save the note
+                                        </button>
                                     </div>
                                 ) : (
                                     <h1>You dont have any subjects!!</h1>
