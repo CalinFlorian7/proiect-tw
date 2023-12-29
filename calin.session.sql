@@ -8,7 +8,7 @@
 -- DESCRIBE notes;
 
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
-select * from notes;
+-- select * from notes;
 -- delete from notes;
 
 

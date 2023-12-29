@@ -121,7 +121,19 @@ function UserMenu() {
     return (
         <div className="container-menu-components">
             {localStorage.getItem('userType') === 'student' ? (
-                <Link to="/AddNote">
+                <Link
+                    to="/AddNote"
+                    state={{
+                        subject: {
+                            subject_id: null,
+                            editable: true,
+                            // subject_name:
+                            //     subject.subject_name,
+                            // teacher_name:
+                            //     subject.teacher_name,
+                        },
+                    }}
+                >
                     <div className="add-note">
                         <span className="add-note-icon"></span>
                         <span className="button-add">Add Note</span>

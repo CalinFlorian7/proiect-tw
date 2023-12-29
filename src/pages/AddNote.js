@@ -12,6 +12,7 @@ function AddNote() {
     const [noteTitle, setNoteTitle] = useState('')
     const [noteText, setNoteText] = useState('')
     const [noteStatus, setNoteStatus] = useState('notTested')
+    const [noteId, setNoteId] = useState('')
 
     const insertNote = async () => {
         const response = await fetch(
@@ -38,6 +39,8 @@ function AddNote() {
                 'the note was successfully inserted with this data:',
                 data
             )
+            setNoteId(data.note.note_id)
+            console.log('id nota:', data.note.note_id)
             setNoteStatus('inserted')
         } else if (response.status === 500) {
             console.log('the note was not successfully inserted:', data)
@@ -101,10 +104,11 @@ function AddNote() {
     useEffect(() => {
         console.log('=--------------------', subjectId)
         getStudentEnrollments()
-        if (subject.subject_id) {
+
+        if (subject.subject_id && subject.editable === false) {
             setSubjectId(subject.subject_id)
         }
-    }, [subject.subject_id, subjectId])
+    }, [subject.subject_id, subject.editable, subjectId])
     return (
         <>
             <div className="page-container">
@@ -119,8 +123,14 @@ function AddNote() {
                                         <select
                                             className="subjects"
                                             value={subjectId}
+                                            disabled={!subject.editable}
                                             onChange={(e) => {
                                                 setSubjectId(e.target.value)
+                                                console.log(
+                                                    'valoare select!!!!: ',
+                                                    e.target.value
+                                                )
+                                                setNoteStatus('notTested')
                                             }}
                                         >
                                             {enrollments?.map((enrollment) => (

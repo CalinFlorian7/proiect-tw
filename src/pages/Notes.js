@@ -24,10 +24,11 @@ function Notes() {
                                         state={{
                                             subject: {
                                                 subject_id: subject.subject_id,
-                                                subject_name:
-                                                    subject.subject_name,
-                                                teacher_name:
-                                                    subject.teacher_name,
+                                                editable: false,
+                                                // subject_name:
+                                                //     subject.subject_name,
+                                                // teacher_name:
+                                                //     subject.teacher_name,
                                             },
                                         }}
                                     >
