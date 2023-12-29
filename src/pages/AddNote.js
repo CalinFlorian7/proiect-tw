@@ -7,6 +7,7 @@ function AddNote() {
 
     const [enrollments, setEnrollments] = useState()
     const [subjectId, setSubjectId] = useState('')
+    const [noteTitle, setNoteTitle] = useState('')
 
     let subject = []
 
@@ -84,6 +85,21 @@ function AddNote() {
                                                 </option>
                                             ))}
                                         </select>
+                                        <div className="note-title-container">
+                                            <h3>Note title:</h3>
+                                            <div className="note-title">
+                                                <input
+                                                    className="title"
+                                                    type="text"
+                                                    placeholder="Title for the note:"
+                                                    onChange={(e) => {
+                                                        setNoteTitle(
+                                                            e.target.value
+                                                        )
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 ) : (
                                     <h1>You dont have any subjects!!</h1>
