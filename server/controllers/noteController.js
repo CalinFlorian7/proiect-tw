@@ -2,6 +2,7 @@ const db = require('../models/index.js')
 const Note = db.notes
 
 const insertNote = async (req, res) => {
+    // BEGIN: be15d9bcejpp
     const note_title = req.body.note_title
     const note_date = new Date(Date.now())
     const user_id = req.body.user_id
@@ -27,13 +28,18 @@ const insertNote = async (req, res) => {
                 ],
             }
         )
+
+        const note_id = newNote.note_id // Get the note_id from the newly created note
+
         res.status(201).json({
             message: 'Note created',
             note: newNote,
+            note_id: note_id, // Include the note_id in the response
         })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: error.name })
     }
+    // END: ed8c6549bwf9
 }
 module.exports = { insertNote }

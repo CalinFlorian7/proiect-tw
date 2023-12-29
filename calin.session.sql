@@ -5,7 +5,12 @@
 --
 -- DESCRIBE enrollments;
 -- select * from enrollments;
-DESCRIBE notes;
+-- DESCRIBE notes;
+
+-- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
+select * from notes;
+-- delete from notes;
+
 
 -- describe teacher;
 -- select * from teachers;
