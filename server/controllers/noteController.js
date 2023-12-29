@@ -42,4 +42,36 @@ const insertNote = async (req, res) => {
     }
     // END: ed8c6549bwf9
 }
+
+const updateNoteTitleText = async (req, res) => {
+    const note_id = req.params.note_id
+    const note_title = req.body.note_title
+    const note_text = req.body.note_text
+
+    try {
+        const updatedNote = await Note.update(
+            {
+                note_title: note_title,
+                note_text: note_text,
+            },
+            {
+                where: {
+                    note_id: note_id,
+                },
+            }
+        )
+
+        if (updatedNote[0] === 1) {
+            res.status(200).json({ message: 'Note updated' })
+        } else {
+            res.status(404).json({ message: 'Note not found' })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
+
+module.exports = { insertNote, updateNoteTitleText }
+
 module.exports = { insertNote }
