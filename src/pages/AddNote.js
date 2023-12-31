@@ -15,6 +15,31 @@ function AddNote() {
     const [noteId, setNoteId] = useState('')
     const [files, setFiles] = useState(null)
 
+    const deleteFile = async (file_id) => {
+        const response = await fetch(
+            'http://localhost:8080/api/documents/deleteDocument',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    document_id: file_id,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log('the document was successfully deleted:', data)
+            alert('the document was successfully deleted')
+            getFiles()
+        } else if (response.status === 500) {
+            console.log('the document was not successfully deleted:', data)
+        }
+    }
     const [filesInserted, setFilesInserted] = useState([])
     const getFiles = async () => {
         const response = await fetch(
@@ -353,6 +378,11 @@ function AddNote() {
                                                                             onClick={(
                                                                                 e
                                                                             ) => {
+                                                                                deleteFile(
+                                                                                    e
+                                                                                        .target
+                                                                                        .value
+                                                                                )
                                                                                 console.log(
                                                                                     e
                                                                                         .target
