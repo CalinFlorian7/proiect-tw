@@ -68,3 +68,15 @@ input {
 .message-container-none {
     display: none;
 }
+li {
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px;
+    border: #131862 solid 2px;
+    width: max-content;
+}
+li:hover {
+    background-color: rgb(0, 0, 0, 0.2);
+    text-decoration: line-through;
+    cursor: pointer;
+}
