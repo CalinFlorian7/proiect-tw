@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
             },
             document_path: {
-                type: DataTypes.LONGBLOB,
+                type: DataTypes.BLOB,
                 allowNull: true,
             },
             note_id: {
