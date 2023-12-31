@@ -14,8 +14,32 @@ function AddNote() {
     const [noteStatus, setNoteStatus] = useState('notTested')
     const [noteId, setNoteId] = useState('')
     const [files, setFiles] = useState(null)
-    const [filesInserted, setFilesInserted] = useState([])
 
+    const [filesInserted, setFilesInserted] = useState([])
+    const getFiles = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/documents/getDocumentNameAndId',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    note_id: noteId,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log('files already inserted:', data)
+            setFilesInserted(data)
+        } else if (response.status === 500) {
+            console.log('the response was not successful')
+        }
+    }
     const insertFile = async (fileContent, fileName) => {
         const response = await fetch(
             'http://localhost:8080/api/documents/insertDocument',
@@ -40,13 +64,20 @@ function AddNote() {
                 'the document was successfully inserted with this data:',
                 data
             )
-
-            setFilesInserted([
-                ...filesInserted,
-                data.document.document_id,
-                data.document.document_name,
-            ])
-            console.log('date pt lista:', filesInserted)
+            // setFilesInserted([
+            //     ...filesInserted,
+            //     {
+            //         id: data.document.document_id,
+            //         name: data.document.document_name,
+            //     },
+            // ])
+            getFiles()
+            // const newFile = {
+            //     id: data.document.document_id,
+            //     name: data.document.document_name,
+            // }
+            // setFilesInserted([...filesInserted, newFile])
+            // console.log('date pt lista:', filesInserted)
             console.log('id document de la server din bd:', data.document_id)
             // alert('the document was successfully inserted')
         } else if (response.status === 500) {
@@ -308,6 +339,48 @@ function AddNote() {
                                             </div>
                                             <div className="input-files-names">
                                                 <h3>Files uploaded:</h3>
+                                                <div className="files-names">
+                                                    {filesInserted.length >
+                                                    0 ? (
+                                                        <div className="files-names">
+                                                            <ul className="files-names-ul">
+                                                                {filesInserted.map(
+                                                                    (file) => (
+                                                                        <li
+                                                                            value={
+                                                                                file.document_id
+                                                                            }
+                                                                            onClick={(
+                                                                                e
+                                                                            ) => {
+                                                                                console.log(
+                                                                                    e
+                                                                                        .target
+                                                                                        .value
+                                                                                )
+                                                                            }}
+                                                                        >
+                                                                            {file.document_name +
+                                                                                '-' +
+                                                                                file.document_id}
+                                                                        </li>
+                                                                    )
+                                                                )}
+                                                            </ul>
+                                                        </div>
+                                                    ) : null}
+                                                    {/* {filesInserted.length > 0
+                                                        ? filesInserted.map(
+                                                              (file) => (
+                                                                  <p>
+                                                                      {
+                                                                          file.name
+                                                                      }
+                                                                  </p>
+                                                              )
+                                                          )
+                                                        : null} */}
+                                                </div>
                                             </div>
                                         </div>
                                         <button

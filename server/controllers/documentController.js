@@ -34,5 +34,20 @@ const insertDocument = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
-
-module.exports = { insertDocument }
+const getDocumentNameAndId = async (req, res) => {
+    const note_id = req.body.note_id
+    console.log('note_id: ' + note_id)
+    try {
+        const documents = await Document.findAll({
+            attributes: ['document_id', 'document_name'],
+            where: {
+                note_id: note_id,
+            },
+        })
+        res.status(200).json(documents)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
+module.exports = { insertDocument, getDocumentNameAndId }
