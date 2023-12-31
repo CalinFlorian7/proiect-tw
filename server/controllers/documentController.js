@@ -50,4 +50,18 @@ const getDocumentNameAndId = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
-module.exports = { insertDocument, getDocumentNameAndId }
+const deleteDocument = async (req, res) => {
+    const document_id = req.body.document_id
+    try {
+        await Document.destroy({
+            where: {
+                document_id: document_id,
+            },
+        })
+        res.status(200).json({ message: 'Document deleted' })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
+module.exports = { insertDocument, getDocumentNameAndId, deleteDocument }

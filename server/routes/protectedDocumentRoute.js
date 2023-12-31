@@ -5,4 +5,5 @@ protectedRouter.post(
     '/getDocumentNameAndId',
     documentController.getDocumentNameAndId
 )
+protectedRouter.post('/deleteDocument', documentController.deleteDocument)
 module.exports = protectedRouter
