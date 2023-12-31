@@ -2,13 +2,13 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit
 -- show TABLEs;
---
+DESCRIBE documents;
 -- DESCRIBE enrollments;
 -- select * from enrollments;
 -- DESCRIBE notes;
 
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
-select * from notes;
+-- select * from notes;
 -- delete from notes;
 
 
