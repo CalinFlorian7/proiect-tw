@@ -44,10 +44,29 @@ function Navbar() {
                             ? SidebarDataStudent.map((item, index) => {
                                   return (
                                       <li key={index} className={item.cName}>
-                                          <Link to={item.path}>
-                                              {item.icon}
-                                              <span>{item.title}</span>
-                                          </Link>{' '}
+                                          {item.path === '/AddNote' ? (
+                                              <Link
+                                                  to={item.path}
+                                                  state={{
+                                                      subject: {
+                                                          subject_id: null,
+                                                          editable: true,
+                                                          // subject_name:
+                                                          //     subject.subject_name,
+                                                          // teacher_name:
+                                                          //     subject.teacher_name,
+                                                      },
+                                                  }}
+                                              >
+                                                  {item.icon}
+                                                  <span>{item.title}</span>
+                                              </Link>
+                                          ) : (
+                                              <Link to={item.path}>
+                                                  {item.icon}
+                                                  <span>{item.title}</span>
+                                              </Link>
+                                          )}
                                       </li>
                                   )
                               })
