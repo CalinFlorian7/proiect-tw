@@ -15,7 +15,15 @@ function LogIn() {
     const [facultyId, setFacultyId] = useState('Facula')
 
     const navigate = useNavigate()
-
+    const handleKeyDown = () => {
+        if (window.event.keyCode === 13) {
+            if (action === 'Log In') {
+                handleLogInSubmit()
+            } else {
+                handleSignUpSubmit()
+            }
+        }
+    }
     // const [backendData, setMessageBackendData] = useState({})
     useEffect(() => {
         localStorage.setItem('logged', 'false')
@@ -507,6 +515,7 @@ function LogIn() {
                         className="input-password"
                         placeholder="Enter your password..."
                         onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={handleKeyDown}
                         value={password}
                     />
                     {action === 'Sign Up' ? (

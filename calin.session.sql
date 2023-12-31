@@ -12,10 +12,10 @@
 -- DESCRIBE notes;
 -- SELECT * from documents
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
--- select * from notes;
+select * from notes;
 -- delete from notes;
 
-SELECT * from documents
+-- SELECT * from documents
 -- DELETE from documents;
 
 -- describe teacher;
