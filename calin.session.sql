@@ -2,11 +2,13 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit
 -- show TABLEs;
-DESCRIBE documents;
+-- DESCRIBE documents;
+-- alter TABLE documents add column document_path BLOB;
+-- alter table documents drop column document;
 -- DESCRIBE enrollments;
 -- select * from enrollments;
 -- DESCRIBE notes;
-
+-- SELECT * from documents
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
 -- select * from notes;
 -- delete from notes;

@@ -6,7 +6,8 @@ const app = express()
 const bodyParser = require('body-parser')
 
 // Use the json() method instead of raw()
-app.use(bodyParser.json())
+
+app.use(bodyParser.json({ limit: '50mb' }))
 const FacultyRouter = require('./routes/facultyRoute.js')
 const UserRouter = require('./routes/userRoute.js')
 const TeacherRouter = require('./routes/teacherRoute.js')

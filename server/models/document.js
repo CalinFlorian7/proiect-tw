@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
+
             document_path: {
                 type: DataTypes.BLOB,
                 allowNull: true,

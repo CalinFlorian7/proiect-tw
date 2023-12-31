@@ -6,6 +6,7 @@ const insertDocument = async (req, res) => {
     console.log('Document to be inserted: ' + document_name)
     const document_path = req.body.document_path
     const note_id = req.body.note_id
+
     console.log('document path to be inserted: "' + document_path + '"')
 
     try {

@@ -15,6 +15,35 @@ function AddNote() {
     const [noteId, setNoteId] = useState('')
     const [files, setFiles] = useState(null)
     const [fileNames, setFileNames] = useState([])
+    const insertFile = async (fileContent, fileName) => {
+        const response = await fetch(
+            'http://localhost:8080/api/documents/insertDocument',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    document_name: fileName,
+                    document_path: fileContent,
+                    note_id: noteId,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 201) {
+            console.log(
+                'the document was successfully inserted with this data:',
+                data
+            )
+            // alert('the document was successfully inserted')
+        } else if (response.status === 500) {
+            console.log('the document was not successfully inserted:', data)
+        }
+    }
     const handleUpload = async () => {
         if (noteId) {
             if (!files) {
@@ -29,6 +58,7 @@ function AddNote() {
                 console.log('File content:', fileContent)
                 console.log('File name:', file.name)
                 formData.append(`file${i + 1}`, file)
+                if (fileContent) insertFile(fileContent, file.name)
             }
 
             // Accessing file data
