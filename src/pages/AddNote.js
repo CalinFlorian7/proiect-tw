@@ -13,7 +13,12 @@ function AddNote() {
     const [noteText, setNoteText] = useState('')
     const [noteStatus, setNoteStatus] = useState('notTested')
     const [noteId, setNoteId] = useState('')
-
+    const [files, setFiles] = useState(null)
+    const [fileNames, setFileNames] = useState([])
+    const handleUpload = () => {
+        if (noteId) console.log('Uploading')
+        else console.log('You need to save the note first')
+    }
     const updateNoteTitleText = async () => {
         const response = await fetch('http://localhost:8080/api/notes/update', {
             method: 'POST',
@@ -208,10 +213,38 @@ function AddNote() {
                                                     setNoteText(e)
                                                 }}
                                             ></ReactQuill>
-                                            <div className="note-content"></div>
+                                        </div>
+                                        <div className="input-files-container">
+                                            <div className="input-files">
+                                                <h3>Upload files:</h3>
+                                                <input
+                                                    type="file"
+                                                    name="file"
+                                                    multiple
+                                                    onChange={(e) => {
+                                                        console.log(
+                                                            'files: ',
+                                                            e.target.files
+                                                        )
+                                                        setFiles(
+                                                            e.target.files[0]
+                                                        )
+                                                    }}
+                                                />
+                                                <button
+                                                    onClick={handleUpload}
+                                                    className="buton-upload"
+                                                >
+                                                    Upload the files
+                                                </button>
+                                            </div>
+                                            <div className="input-files-names">
+                                                <h3>Files uploaded:</h3>
+                                            </div>
                                         </div>
                                         <button
                                             type="button"
+                                            className="save-note"
                                             onClick={handleButton}
                                         >
                                             {noteStatus === 'notTested'
