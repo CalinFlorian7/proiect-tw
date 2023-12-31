@@ -7,7 +7,6 @@ const bodyParser = require('body-parser')
 
 // Use the json() method instead of raw()
 app.use(bodyParser.json())
-
 const FacultyRouter = require('./routes/facultyRoute.js')
 const UserRouter = require('./routes/userRoute.js')
 const TeacherRouter = require('./routes/teacherRoute.js')

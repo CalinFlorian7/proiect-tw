@@ -15,9 +15,41 @@ function AddNote() {
     const [noteId, setNoteId] = useState('')
     const [files, setFiles] = useState(null)
     const [fileNames, setFileNames] = useState([])
-    const handleUpload = () => {
-        if (noteId) console.log('Uploading')
-        else console.log('You need to save the note first')
+    const handleUpload = async () => {
+        if (noteId) {
+            if (!files) {
+                alert('No files selected')
+                return
+            }
+            const formData = new FormData()
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]
+                const fileContent = await readFileAsync(file)
+                console.log('File content:', fileContent)
+                console.log('File name:', file.name)
+                formData.append(`file${i + 1}`, file)
+            }
+
+            // Accessing file data
+
+            // Reading file content
+        } else {
+            console.log('You need to save the note first')
+        }
+    }
+
+    const readFileAsync = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onload = (event) => {
+                resolve(event.target.result)
+            }
+            reader.onerror = (event) => {
+                reject(event.target.error)
+            }
+            reader.readAsDataURL(file)
+        })
     }
     const updateNoteTitleText = async () => {
         const response = await fetch('http://localhost:8080/api/notes/update', {
@@ -219,16 +251,13 @@ function AddNote() {
                                                 <h3>Upload files:</h3>
                                                 <input
                                                     type="file"
-                                                    name="file"
                                                     multiple
                                                     onChange={(e) => {
                                                         console.log(
                                                             'files: ',
                                                             e.target.files
                                                         )
-                                                        setFiles(
-                                                            e.target.files[0]
-                                                        )
+                                                        setFiles(e.target.files)
                                                     }}
                                                 />
                                                 <button
