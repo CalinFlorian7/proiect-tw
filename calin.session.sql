@@ -3,6 +3,8 @@
 -- commit
 -- show TABLEs;
 -- DESCRIBE documents;
+
+-- alter TABLE documents modify column document_path LONGBLOB;
 -- alter TABLE documents add column document_path BLOB;
 -- alter table documents drop column document;
 -- DESCRIBE enrollments;
@@ -13,6 +15,8 @@
 -- select * from notes;
 -- delete from notes;
 
+SELECT * from documents
+-- DELETE from documents;
 
 -- describe teacher;
 -- select * from teachers;

@@ -15,6 +15,7 @@ function AddNote() {
     const [noteId, setNoteId] = useState('')
     const [files, setFiles] = useState(null)
     const [fileNames, setFileNames] = useState([])
+
     const insertFile = async (fileContent, fileName) => {
         const response = await fetch(
             'http://localhost:8080/api/documents/insertDocument',
@@ -39,6 +40,7 @@ function AddNote() {
                 'the document was successfully inserted with this data:',
                 data
             )
+            console.log('id document de la server din bd:', data.document_id)
             // alert('the document was successfully inserted')
         } else if (response.status === 500) {
             console.log('the document was not successfully inserted:', data)
