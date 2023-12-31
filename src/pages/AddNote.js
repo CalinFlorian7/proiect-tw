@@ -14,7 +14,7 @@ function AddNote() {
     const [noteStatus, setNoteStatus] = useState('notTested')
     const [noteId, setNoteId] = useState('')
     const [files, setFiles] = useState(null)
-    const [fileNames, setFileNames] = useState([])
+    const [filesInserted, setFilesInserted] = useState([])
 
     const insertFile = async (fileContent, fileName) => {
         const response = await fetch(
@@ -40,6 +40,13 @@ function AddNote() {
                 'the document was successfully inserted with this data:',
                 data
             )
+
+            setFilesInserted([
+                ...filesInserted,
+                data.document.document_id,
+                data.document.document_name,
+            ])
+            console.log('date pt lista:', filesInserted)
             console.log('id document de la server din bd:', data.document_id)
             // alert('the document was successfully inserted')
         } else if (response.status === 500) {
