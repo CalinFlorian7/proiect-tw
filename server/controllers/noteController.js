@@ -1,10 +1,12 @@
+const { DATE } = require('sequelize')
 const db = require('../models/index.js')
 const Note = db.notes
 
 const insertNote = async (req, res) => {
     // BEGIN: be15d9bcejpp
     const note_title = req.body.note_title
-    const note_date = new Date(Date.now())
+
+    const note_date = new Date(DATE.now())
     const user_id = req.body.user_id
     const subject_id = req.body.subject_id
     const note_text = req.body.note_text
