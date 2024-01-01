@@ -71,5 +71,22 @@ const updateNoteTitleText = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
+const getNotesBySubjectAndUser = async (req, res) => {
+    const subject_id = req.body.subject_id
+    const user_id = req.body.user_id
 
-module.exports = { insertNote, updateNoteTitleText }
+    try {
+        const notes = await Note.findAll({
+            where: {
+                subject_id: subject_id,
+                user_id: user_id,
+            },
+        })
+
+        res.status(200).json({ notes: notes })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
+module.exports = { insertNote, updateNoteTitleText, getNotesBySubjectAndUser }
