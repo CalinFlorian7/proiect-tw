@@ -1,14 +1,22 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Notes.css'
+import { useState, useEffect } from 'react'
 function Notes() {
     const location = useLocation()
+    const [subject, setSubject] = useState([])
+    const [subjectId, setSubjectId] = useState(null)
     console.log(location.state)
-    let subject = []
-    if (location.pathname === '/Notes')
-        subject = location.state ? location.state.subject : null
-    console.log(subject)
 
+    useEffect(() => {
+        if (location.pathname === '/Notes')
+            setSubject(location.state ? location.state.subject : null)
+        console.log('current subject: ', subject)
+        if (subject.subject_id !== undefined && subject.subject_id !== null) {
+            setSubjectId(subject.subject_id)
+            console.log('subject id: ', subjectId)
+        }
+    }, [location.state, location.pathname, subject, subjectId])
     return (
         <>
             <div className="page-container">
@@ -42,7 +50,9 @@ function Notes() {
                             <div className="break"></div>
                         </div>
                     </div>
-                    <div className="notes"></div>
+                    <div className="notes-container">
+                        <div className="notes"></div>
+                    </div>
                 </div>
             </div>
         </>
