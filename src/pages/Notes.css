@@ -13,3 +13,22 @@
     background-color: cyan;
     border-radius: 2px;
 }
+.note-link {
+    text-decoration: none;
+    color: black;
+}
+.note-date h3 {
+    border-top: 2px solid #131862;
+    width: max-content;
+}
+.note {
+    padding: 5px 10px;
+    border: 2px solid #131862;
+    border-radius: 4px;
+    margin-top: 10px;
+    background-color: blanchedalmond;
+}
+.note-title-link {
+    margin-left: 10px;
+    padding-top: 0px;
+}

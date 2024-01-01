@@ -96,6 +96,7 @@ function Notes() {
                                     {notes.map((note) => (
                                         <div className="note">
                                             <Link
+                                                className="note-link"
                                                 to="/AddNote"
                                                 state={{
                                                     subject: {
@@ -106,12 +107,12 @@ function Notes() {
                                                     },
                                                 }}
                                             >
-                                                <div className="note-title-">
+                                                <div className="note-title-link">
                                                     <h2>{note.note_title}</h2>
                                                 </div>
                                             </Link>
                                             <div className="note-date">
-                                                <h3>
+                                                <h3 className="note-date">
                                                     {note.note_date.slice(
                                                         0,
                                                         10
