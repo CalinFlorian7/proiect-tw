@@ -278,6 +278,10 @@ function AddNote() {
         if (subject.note.note_title && subject.note.note_text) {
             setNoteText(subject.note.note_text)
             setNoteTitle(subject.note.note_title)
+
+            document.getElementsByClassName('title').value =
+                subject.note.note_title
+
             console.log('sunject title', subject.note.note_title)
             console.log('sunject text', subject.note.note_text)
         }
@@ -329,11 +333,7 @@ function AddNote() {
                                                     className="title"
                                                     type="text"
                                                     placeholder="Title for the note:"
-                                                    defaultValue={
-                                                        subject.note.note_title
-                                                            ? subject.note_title
-                                                            : null
-                                                    }
+                                                    defaultValue={noteTitle}
                                                     onChange={(e) => {
                                                         setNoteTitle(
                                                             e.target.value
@@ -348,6 +348,7 @@ function AddNote() {
                                                 theme="snow"
                                                 className="note-text"
                                                 placeholder="Note text"
+                                                defaultValue={noteText}
                                                 onChange={(e) => {
                                                     setNoteText(e)
                                                 }}
