@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import './AddNote.css'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -41,7 +41,7 @@ function AddNote() {
         }
     }
     const [filesInserted, setFilesInserted] = useState([])
-    const getFiles = async () => {
+    const getFiles = useCallback(async () => {
         const response = await fetch(
             'http://localhost:8080/api/documents/getDocumentNameAndId',
             {
@@ -57,6 +57,7 @@ function AddNote() {
                 }),
             }
         )
+
         const data = await response.json()
         if (response.status === 200) {
             console.log('files already inserted:', data)
@@ -64,7 +65,7 @@ function AddNote() {
         } else if (response.status === 500) {
             console.log('the response was not successful')
         }
-    }
+    }, [noteId])
     const insertFile = async (fileContent, fileName) => {
         const response = await fetch(
             'http://localhost:8080/api/documents/insertDocument',
@@ -275,17 +276,30 @@ function AddNote() {
         if (subject.subject_id && subject.editable === false) {
             setSubjectId(subject.subject_id)
         }
-        if (subject.note.note_title && subject.note.note_text) {
-            setNoteText(subject.note.note_text)
-            setNoteTitle(subject.note.note_title)
+        if (subject.note !== undefined && subject.note !== null) {
+            if (subject.note.note_title && subject.note.note_text) {
+                setNoteText(subject.note.note_text)
+                setNoteTitle(subject.note.note_title)
 
-            document.getElementsByClassName('title').value =
-                subject.note.note_title
+                document.getElementsByClassName('title').value =
+                    subject.note.note_title
 
-            console.log('sunject title', subject.note.note_title)
-            console.log('sunject text', subject.note.note_text)
+                console.log('sunject title', subject.note.note_title)
+                console.log('sunject text', subject.note.note_text)
+            }
+            if (subject.note.note_id) {
+                setNoteId(subject.note.note_id)
+                setNoteStatus('inserted')
+                getFiles()
+            }
         }
-    }, [subject.subject_id, subject.editable, subjectId, subject.note])
+    }, [
+        subject.subject_id,
+        subject.editable,
+        subjectId,
+        subject.note,
+        getFiles,
+    ])
     return (
         <>
             <div className="page-container">
