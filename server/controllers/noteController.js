@@ -2,6 +2,20 @@
 const db = require('../models/index.js')
 const Note = db.notes
 
+const selectCountNotes = async (req, res) => {
+    const user_id = req.body.user_id
+    try {
+        const count = await Note.count({
+            where: {
+                user_id: user_id,
+            },
+        })
+        res.status(200).json(count)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
 const insertNote = async (req, res) => {
     // BEGIN: be15d9bcejpp
     const note_title = req.body.note_title
@@ -91,4 +105,9 @@ const getNotesBySubjectAndUser = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
-module.exports = { insertNote, updateNoteTitleText, getNotesBySubjectAndUser }
+module.exports = {
+    insertNote,
+    updateNoteTitleText,
+    getNotesBySubjectAndUser,
+    selectCountNotes,
+}
