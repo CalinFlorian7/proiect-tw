@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 function Profile() {
     const [image, setImage] = useState(defaultImage300)
     const [numberofSubjects, setnumberofSubjects] = useState(0)
+    const [numberofNotes, setnumberofNotes] = useState(0)
     const [facultyName, setfacultyName] = useState('faculty name')
     const fechUserNameImage = async () => {
         const response = await fetch(
@@ -314,7 +315,7 @@ function Profile() {
                         <div className="profile-info">
                             <div className="profile-info-data">
                                 <h3>
-                                    Username:
+                                    Name:
                                     <span className="span-name">Username</span>
                                 </h3>
                                 <h3>
