@@ -75,7 +75,7 @@ const selectTeacherNameImage = async (req, res) => {
             where: {
                 teacher_id: id,
             },
-            attributes: ['teacher_name', 'teacher_image'],
+            attributes: ['teacher_name', 'teacher_image', 'email'],
         })
 
         // users.forEach((user) => {
@@ -97,6 +97,7 @@ const selectTeacherNameImage = async (req, res) => {
             user_image: users[0].teacher_image
                 ? users[0].teacher_image.toString('base64')
                 : null,
+            email: users[0].email,
         })
     } catch (error) {
         console.log(error)

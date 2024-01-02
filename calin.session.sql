@@ -2,7 +2,7 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit
 -- show TABLEs;
--- DESCRIBE documents;
+-- DESCRIBE users;
 
 -- alter TABLE documents modify column document_path LONGBLOB;
 -- alter TABLE documents add column document_path BLOB;
@@ -13,7 +13,7 @@
 -- SELECT * from documents
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
 -- select * from notes;
--- DESCribe teachers;
+DESCribe teachers;
 
 -- delete from notes;
 -- alter TABLE teachers MODIFY COLUMN teacher_image Longblob;
