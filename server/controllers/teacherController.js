@@ -104,7 +104,26 @@ const selectTeacherNameImage = async (req, res) => {
         res.status(500).json({ error: 'Error selecting user name and image' })
     }
 }
-
+const insertTeacherImage = async (req, res) => {
+    const teacher_id = req.body.teacher_id
+    const teacher_image = req.body.teacher_image
+    try {
+        const teacher = await Teacher.update(
+            {
+                teacher_image: teacher_image,
+            },
+            {
+                where: {
+                    teacher_id: teacher_id,
+                },
+            }
+        )
+        res.status(200).json(teacher)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error inserting teacher image' })
+    }
+}
 const selectTeacherFaculty = async (req, res) => {
     const teacherId = req.body.teacher_id
 
@@ -145,4 +164,5 @@ module.exports = {
     selectAllTeachers,
     selectTeacherNameImage,
     selectTeacherFaculty,
+    insertTeacherImage,
 }

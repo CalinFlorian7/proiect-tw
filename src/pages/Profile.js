@@ -3,7 +3,7 @@ import defaultImage300 from '../Images/profilePicture300x300.png'
 import '../pages/Profile.css'
 // import { FaRegEdit } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 function Profile() {
@@ -11,13 +11,61 @@ function Profile() {
     const [numberofSubjects, setnumberofSubjects] = useState(0)
     const [facultyName, setfacultyName] = useState('faculty name')
     const [imageCopy, setimageCopy] = useState(defaultImage300)
+    const fecthTeacherNameImage = useCallback(async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/teachers/selectTeacherNameImage',
+            {
+                method: 'POST',
 
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify({
+                    id: localStorage.getItem('userId'),
+                }),
+            }
+        ).catch((err) => {
+            console.log(err)
+        })
+        const data = await response.json()
+        if (response.status === 500) {
+            console.log('server error')
+        }
+        if (response.status === 200 && data !== null) {
+            console.log(data)
+
+            if (data.user_name !== null)
+                document.querySelector('.span-name').innerHTML = data.user_name
+            if (data.email !== null) {
+                document.querySelector('.span-email').innerHTML = data.email
+            }
+            if (data.user_image !== null) {
+                try {
+                    console.log('data image is not null')
+
+                    console.log('image type: ', typeof data.user_image)
+                    const imageUrl = `url("${data.user_image}")`
+                    setImage(imageUrl)
+                    // console.log('image url: ', imageUrl)
+                } catch (err) {
+                    console.log(err)
+                }
+            } else {
+                console.log('data image is null for the user menu')
+            }
+        }
+    }, [])
     useEffect(() => {
         if (localStorage.getItem('userType') === 'teacher') {
             selectCountSubjects()
             selectTeacherFaculty()
+            fecthTeacherNameImage()
         }
-    }, [])
+    }, [fecthTeacherNameImage])
     const selectTeacherFaculty = async () => {
         const id = localStorage.getItem('userId')
         const response = await fetch(
