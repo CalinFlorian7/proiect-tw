@@ -232,13 +232,14 @@ function AddNote() {
             }
         }
     }
-    if (location && location.state)
+    if (location && location.state) {
         if (location.state.subject) {
             subject = location.state.subject
             console.log(
                 'subject from the addnote page is successfully recieved'
             )
         }
+    }
 
     const getStudentEnrollments = async () => {
         const response = await fetch(
@@ -274,7 +275,13 @@ function AddNote() {
         if (subject.subject_id && subject.editable === false) {
             setSubjectId(subject.subject_id)
         }
-    }, [subject.subject_id, subject.editable, subjectId, noteId])
+        if (subject.note.note_title && subject.note.note_text) {
+            setNoteText(subject.note.note_text)
+            setNoteTitle(subject.note.note_title)
+            console.log('sunject title', subject.note.note_title)
+            console.log('sunject text', subject.note.note_text)
+        }
+    }, [subject.subject_id, subject.editable, subjectId, subject.note])
     return (
         <>
             <div className="page-container">
@@ -322,6 +329,11 @@ function AddNote() {
                                                     className="title"
                                                     type="text"
                                                     placeholder="Title for the note:"
+                                                    defaultValue={
+                                                        subject.note.note_title
+                                                            ? subject.note_title
+                                                            : null
+                                                    }
                                                     onChange={(e) => {
                                                         setNoteTitle(
                                                             e.target.value

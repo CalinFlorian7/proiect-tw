@@ -102,7 +102,7 @@ function Notes() {
                                                     subject: {
                                                         subject_id:
                                                             subject.subject_id,
-                                                        editable: true,
+                                                        editable: false,
                                                         note: note,
                                                     },
                                                 }}
