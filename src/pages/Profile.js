@@ -325,12 +325,14 @@ function Profile() {
 
                                 {localStorage.getItem('userType') ===
                                 'student' ? (
-                                    <h3>
-                                        Notes:
-                                        <span className="span-notes">
-                                            Total notes
-                                        </span>
-                                    </h3>
+                                    <Link to="/Enrollments" className="link">
+                                        <h3>
+                                            Notes:
+                                            <span className="span-notes">
+                                                Total notes
+                                            </span>
+                                        </h3>
+                                    </Link>
                                 ) : (
                                     <>
                                         <h3>
