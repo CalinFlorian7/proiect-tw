@@ -12,9 +12,11 @@
 -- DESCRIBE notes;
 -- SELECT * from documents
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
-select * from notes;
--- delete from notes;
+-- select * from notes;
+-- DESCribe teachers;
 
+-- delete from notes;
+-- alter TABLE teachers MODIFY COLUMN teacher_image Longblob;
 -- SELECT * from documents
 -- DELETE from documents;
 

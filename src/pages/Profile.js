@@ -10,6 +10,7 @@ function Profile() {
     const [image, setImage] = useState(defaultImage300)
     const [numberofSubjects, setnumberofSubjects] = useState(0)
     const [facultyName, setfacultyName] = useState('faculty name')
+    const [imageCopy, setimageCopy] = useState(defaultImage300)
 
     useEffect(() => {
         if (localStorage.getItem('userType') === 'teacher') {
@@ -94,6 +95,7 @@ function Profile() {
             console.log(data)
             if (response.status === 200) {
                 console.log('success updating image')
+                setImage(imageCopy)
             } else if (response.status === 500) {
                 console.log('error updating image')
             }
@@ -131,8 +133,8 @@ function Profile() {
                                                         'accessToken'
                                                     )
                                                 )
-                                                setImage(e.target.result)
-
+                                                // setImage(e.target.result)
+                                                setimageCopy(e.target.result)
                                                 if (
                                                     localStorage.getItem(
                                                         'userType'
@@ -147,10 +149,11 @@ function Profile() {
                                             if (
                                                 localStorage.getItem(
                                                     'userType'
-                                                ) === 'student'
+                                                ) === 'student' &&
+                                                file.type === 'image/png'
                                             ) {
                                                 sendStudentImage(reader.result)
-                                            }
+                                            } else console.log('nu e png')
                                         }
                                     }}
                                 />
