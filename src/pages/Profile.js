@@ -11,6 +11,33 @@ function Profile() {
     const [numberofSubjects, setnumberofSubjects] = useState(0)
     const [numberofNotes, setnumberofNotes] = useState(0)
     const [facultyName, setfacultyName] = useState('faculty name')
+    const selectCountNotes = async () => {
+        const id = localStorage.getItem('userId')
+
+        const response = await fetch(
+            'http://localhost:8080/api/notes/selectCountNotes',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify({ user_id: id }),
+            }
+        )
+        const data = await response.json()
+        console.log(data)
+        if (response.status === 200) {
+            console.log('success count notes')
+
+            setnumberofNotes(data)
+        } else if (response.status === 500) {
+            console.log('error count notes')
+        }
+    }
     const fechUserNameImage = async () => {
         const response = await fetch(
             'http://localhost:8080/api/users/selectUserNameImage',
@@ -116,6 +143,7 @@ function Profile() {
         }
         if (localStorage.getItem('userType') === 'student') {
             fechUserNameImage()
+            selectCountNotes()
         }
     }, [fecthTeacherNameImage])
     const selectTeacherFaculty = async () => {
@@ -329,7 +357,7 @@ function Profile() {
                                         <h3>
                                             Notes:
                                             <span className="span-notes">
-                                                Total notes
+                                                {numberofNotes?.toString()}
                                             </span>
                                         </h3>
                                     </Link>
