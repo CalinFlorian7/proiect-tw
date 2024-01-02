@@ -13,7 +13,7 @@
 -- SELECT * from documents
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
 -- select * from notes;
-DESCribe teachers;
+DESCribe users;
 
 -- delete from notes;
 -- alter TABLE teachers MODIFY COLUMN teacher_image Longblob;

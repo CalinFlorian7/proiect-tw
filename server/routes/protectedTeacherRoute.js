@@ -8,4 +8,8 @@ protectedRouter.post(
     '/selectTeacherFaculty',
     teacherController.selectTeacherFaculty
 )
+protectedRouter.post(
+    '/insertTeacherImage',
+    teacherController.insertTeacherImage
+)
 module.exports = protectedRouter

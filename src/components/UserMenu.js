@@ -102,9 +102,10 @@ function UserMenu() {
                                 'data image from db for user_menu: ',
                                 data.user_image
                             )
-                            console.log('image type: ', typeof data.user_image)
-                            const imageUrl = `url("${data.user_image}")`
-                            setImage(imageUrl)
+                            // console.log('image type: ', typeof data.user_image)
+                            // const imageUrl = `url("${data.user_image}")`
+                            // setImage(imageUrl)
+                            setImage(data.user_image)
                             // console.log('image url: ', imageUrl)
                         } catch (err) {
                             console.log(err)

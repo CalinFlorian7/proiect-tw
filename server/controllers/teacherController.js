@@ -95,7 +95,7 @@ const selectTeacherNameImage = async (req, res) => {
             user_name: users[0].teacher_name,
 
             user_image: users[0].teacher_image
-                ? users[0].teacher_image.toString('base64')
+                ? users[0].teacher_image.toString()
                 : null,
             email: users[0].email,
         })

@@ -10,7 +10,55 @@ function Profile() {
     const [image, setImage] = useState(defaultImage300)
     const [numberofSubjects, setnumberofSubjects] = useState(0)
     const [facultyName, setfacultyName] = useState('faculty name')
-    const [imageCopy, setimageCopy] = useState(defaultImage300)
+    const fechUserNameImage = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/users/selectUserNameImage',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify({
+                    id: localStorage.getItem('userId'),
+                }),
+            }
+        ).catch((err) => {
+            console.log(err)
+        })
+        const data = await response.json()
+        if (response.status === 500) {
+            console.log('server error')
+        }
+        if (response.status === 200 && data !== null) {
+            console.log(data)
+
+            if (data.user_name !== null)
+                document.querySelector('.span-name').innerHTML = data.user_name
+            if (data.email !== null) {
+                document.querySelector('.span-email').innerHTML = data.email
+            }
+            if (data.user_image !== null) {
+                try {
+                    console.log(
+                        'data image is not null for the user menu image'
+                    )
+                    console.log(
+                        'data image from db for user_menu: ',
+                        data.user_image
+                    )
+                    console.log('image type: ', typeof data.user_image)
+                    // const imageUrl = `url("${data.user_image}")`
+                    setImage(data.user_image)
+                    // console.log('image url: ', imageUrl)
+                } catch (err) {
+                    console.log(err)
+                }
+            } else {
+                console.log('data image is null for the user menu')
+            }
+        }
+    }
     const fecthTeacherNameImage = useCallback(async () => {
         const response = await fetch(
             'http://localhost:8080/api/teachers/selectTeacherNameImage',
@@ -47,9 +95,9 @@ function Profile() {
                 try {
                     console.log('data image is not null')
 
-                    console.log('image type: ', typeof data.user_image)
-                    const imageUrl = `url("${data.user_image}")`
-                    setImage(imageUrl)
+                    // console.log('image type: ', typeof data.user_image)
+                    // const imageUrl = `url("${data.user_image}")`
+                    setImage(data.user_image)
                     // console.log('image url: ', imageUrl)
                 } catch (err) {
                     console.log(err)
@@ -64,6 +112,9 @@ function Profile() {
             selectCountSubjects()
             selectTeacherFaculty()
             fecthTeacherNameImage()
+        }
+        if (localStorage.getItem('userType') === 'student') {
+            fechUserNameImage()
         }
     }, [fecthTeacherNameImage])
     const selectTeacherFaculty = async () => {
@@ -119,6 +170,37 @@ function Profile() {
             console.log('error count subjects')
         }
     }
+    const sendTeacherImage = async (image) => {
+        const id = localStorage.getItem('userId')
+        try {
+            const response = await fetch(
+                'http://localhost:8080/api/teachers/insertTeacherImage',
+                {
+                    method: 'POST',
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem(
+                            'accessToken'
+                        )}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        teacher_id: id,
+                        teacher_image: image,
+                    }),
+                }
+            )
+
+            const data = await response.json()
+            if (response.status === 200) {
+                console.log('success insert image', data)
+                setImage(image)
+            } else if (response.status === 500) {
+                console.log('error insert image')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const sendStudentImage = async (image) => {
         console.log('image: ' + image)
 
@@ -143,7 +225,7 @@ function Profile() {
             console.log(data)
             if (response.status === 200) {
                 console.log('success updating image')
-                setImage(imageCopy)
+                setImage(image)
             } else if (response.status === 500) {
                 console.log('error updating image')
             }
@@ -182,7 +264,7 @@ function Profile() {
                                                     )
                                                 )
                                                 // setImage(e.target.result)
-                                                setimageCopy(e.target.result)
+
                                                 if (
                                                     localStorage.getItem(
                                                         'userType'
@@ -201,6 +283,15 @@ function Profile() {
                                                 file.type === 'image/png'
                                             ) {
                                                 sendStudentImage(reader.result)
+                                            } else console.log('nu e png')
+                                            if (
+                                                localStorage.getItem(
+                                                    'userType'
+                                                ) === 'teacher' &&
+                                                file.type === 'image/png'
+                                            ) {
+                                                sendTeacherImage(reader.result)
+                                                // setimageCopy(reader.result)
                                             } else console.log('nu e png')
                                         }
                                     }}
