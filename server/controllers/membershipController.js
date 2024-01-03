@@ -26,4 +26,24 @@ const insertMember = async (req, res) => {
         })
     }
 }
-module.exports = { insertMember }
+const getMEmberships = async (req, res) => {
+    try {
+        const user_id = req.body.user_id
+        const memberships = await Membership.findAll({
+            where: {
+                user_id: user_id,
+            },
+        })
+        res.status(200).send({
+            message: 'Memberships retrieved successfully',
+            memberships: memberships,
+        })
+    } catch (err) {
+        res.status(500).send({
+            message:
+                err.message ||
+                'Some error occurred while retrieving the memberships',
+        })
+    }
+}
+module.exports = { insertMember, getMEmberships }
