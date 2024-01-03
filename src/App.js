@@ -40,7 +40,7 @@ function App() {
                         <Route path="/AddNote" Component={AddNote} />
                         <Route path="/AddSubject" Component={AddSubject} />
                         <Route path="/Enrollments" Component={Enrollments} />
-                        <Route path="AddGrup" Component={AddGroup} />
+                        <Route path="/AddGroup" Component={AddGroup} />
                     </Route>
                     <Route
                         path="*"
