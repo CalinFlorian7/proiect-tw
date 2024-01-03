@@ -1,6 +1,7 @@
 const db = require('../models/index.js')
 const Membership = db.memberships
-
+const Group = db.groups
+const User = db.users
 const insertMember = async (req, res) => {
     try {
         const user_id = req.body.user_id
@@ -26,6 +27,7 @@ const insertMember = async (req, res) => {
         })
     }
 }
+
 const getMemberships = async (req, res) => {
     try {
         const user_id = req.body.user_id
@@ -33,6 +35,18 @@ const getMemberships = async (req, res) => {
             where: {
                 user_id: user_id,
             },
+            include: [
+                {
+                    model: Group,
+                    attributes: ['group_name'],
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['user_image', 'user_name'],
+                        },
+                    ],
+                },
+            ],
         })
         res.status(200).send({
             message: 'Memberships retrieved successfully',
@@ -46,4 +60,5 @@ const getMemberships = async (req, res) => {
         })
     }
 }
+
 module.exports = { insertMember, getMemberships }
