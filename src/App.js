@@ -6,6 +6,7 @@ import Profile from './pages/Profile.js'
 import Notes from './pages/Notes.js'
 import Settings from './pages/Settings.js'
 import ProtectedRoutes from './ProtectedRoutes.js'
+import AddGroup from './pages/AddGroup.js'
 import AddNote from './pages/AddNote.js'
 import AddSubject from './pages/AddSubject.js'
 import LogIn from './pages/LogIn.js'
@@ -39,6 +40,7 @@ function App() {
                         <Route path="/AddNote" Component={AddNote} />
                         <Route path="/AddSubject" Component={AddSubject} />
                         <Route path="/Enrollments" Component={Enrollments} />
+                        <Route path="AddGrup" Component={AddGroup} />
                     </Route>
                     <Route
                         path="*"
