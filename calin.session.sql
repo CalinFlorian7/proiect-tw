@@ -4,6 +4,20 @@
 -- show TABLEs;
 -- DESCRIBE users;
 
+-- CREATE TABLE bazamea.groups(
+--     group_id INT PRIMARY KEY AUTO_INCREMENT,
+--     user_id INT,
+--     group_date DATE,
+--     group_name VARCHAR(255),
+--     FOREIGN KEY (user_id) REFERENCES users(user_id)
+-- );
+
+-- insert into bazamea.groups (user_id,group_date,group_name) values (2222,"2021-06-22","grupa1");
+-- drop Table bazamea.groups;
+-- SELECT * from bazamea.groups;
+-- DESCRIBE groups;
+-- DELETE  from bazamea.groups;
+
 -- alter TABLE documents modify column document_path LONGBLOB;
 -- alter TABLE documents add column document_path BLOB;
 -- alter table documents drop column document;
@@ -13,7 +27,7 @@
 -- SELECT * from documents
 -- ALTER TABLE notes ADD COLUMN note_title VARCHAR(255);
 -- select * from notes;
-DESCribe notes;
+
 
 -- delete from notes;
 -- alter TABLE teachers MODIFY COLUMN teacher_image Longblob;
