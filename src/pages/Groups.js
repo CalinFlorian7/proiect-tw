@@ -1,7 +1,38 @@
 import React from 'react'
 import '../pages/Groups.css'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useCallback } from 'react'
 function Groups() {
+    const [memberships, setMemberships] = useState([])
+    const getMemberships = useCallback(async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/memberships/getMemberships',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: localStorage.getItem('userId'),
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log('data was successfully retrieved', data)
+            setMemberships(data.memberships)
+        } else if (response.status === 500) {
+            console.log('data was not successfully retrieved')
+        }
+    }, [])
+    useEffect(() => {
+        getMemberships()
+    }, [getMemberships])
+
     return (
         <>
             <div className="page-container">

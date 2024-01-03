@@ -26,7 +26,7 @@ const insertMember = async (req, res) => {
         })
     }
 }
-const getMEmberships = async (req, res) => {
+const getMemberships = async (req, res) => {
     try {
         const user_id = req.body.user_id
         const memberships = await Membership.findAll({
@@ -46,4 +46,4 @@ const getMEmberships = async (req, res) => {
         })
     }
 }
-module.exports = { insertMember, getMEmberships }
+module.exports = { insertMember, getMemberships }
