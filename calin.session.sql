@@ -14,7 +14,7 @@
 
 -- insert into bazamea.groups (user_id,group_date,group_name) values (2222,"2021-06-22","grupa1");
 -- drop Table bazamea.groups;
--- SELECT * from bazamea.groups;
+SELECT * from bazamea.groups;
 -- DESCRIBE groups;
 -- DELETE  from bazamea.groups;
 
