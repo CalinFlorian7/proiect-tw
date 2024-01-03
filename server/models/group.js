@@ -16,7 +16,7 @@ module.exports = (sequelize, Datatypes) => {
             foreignkey: true,
         },
         group_date: {
-            type: Datatypes.Date,
+            type: Datatypes.DATE,
             allowNull: true,
         },
     })
