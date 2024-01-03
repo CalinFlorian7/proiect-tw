@@ -4,6 +4,16 @@
 -- show TABLEs;
 -- DESCRIBE users;
 
+-- CREATE TABLE memberships (
+--     membership_id INT PRIMARY KEY AUTO_INCREMENT,
+--     group_id INT,
+--     user_id INT,
+--     membership_date DATE,
+--     FOREIGN KEY (group_id) REFERENCES bazamea.groups(group_id),
+--     FOREIGN KEY (user_id) REFERENCES users(user_id)
+-- );
+-- SELECT * from memberships;
+DESCRIBE memberships
 -- CREATE TABLE bazamea.groups(
 --     group_id INT PRIMARY KEY AUTO_INCREMENT,
 --     user_id INT,
@@ -14,7 +24,7 @@
 
 -- insert into bazamea.groups (user_id,group_date,group_name) values (2222,"2021-06-22","grupa1");
 -- drop Table bazamea.groups;
-SELECT * from bazamea.groups;
+-- SELECT * from bazamea.groups;
 -- DESCRIBE groups;
 -- DELETE  from bazamea.groups;
 
