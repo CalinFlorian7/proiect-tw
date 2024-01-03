@@ -57,6 +57,12 @@ function AddGroup() {
 
             console.log('data was successfully inserted', data)
             console.log('id group', data.group.group_id)
+            if (
+                data.group.group_id !== undefined &&
+                data.group.group_id !== null
+            ) {
+                insertMember(data.group.group_id)
+            }
             const input = document.getElementById('groupName')
             input.value = ''
             setGroupName('')
@@ -120,7 +126,12 @@ function AddGroup() {
                                     type="submit"
                                     onClick={(e) => {
                                         e.preventDefault()
-                                        if (groupName !== '') insertGroup()
+                                        if (
+                                            groupName !== '' &&
+                                            localStorage.getItem('userType') ===
+                                                'student'
+                                        )
+                                            insertGroup()
                                         else {
                                             setMessageStatus('error')
                                             setMessage(

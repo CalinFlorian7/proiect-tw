@@ -1,6 +1,7 @@
 -- Active: 1698130823267@@127.0.0.1@3306
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit
+SELECT * from memberships
 -- show TABLEs;
 -- DESCRIBE users;
 -- select * from bazamea.groups;
