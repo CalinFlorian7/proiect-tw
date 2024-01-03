@@ -50,6 +50,13 @@ const getMemberships = async (req, res) => {
                 },
             ],
         })
+
+        // Convert user_image to string
+        memberships.forEach((membership) => {
+            membership.Group.User.user_image =
+                membership.Group.User.user_image.toString()
+        })
+
         res.status(200).send({
             message: 'Memberships retrieved successfully',
             memberships: memberships,

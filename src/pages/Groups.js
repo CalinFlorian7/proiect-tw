@@ -3,6 +3,7 @@ import '../pages/Groups.css'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useCallback } from 'react'
+import defaultImage from '../Images/defaultProfilePicture.jpg'
 function Groups() {
     const [memberships, setMemberships] = useState([])
 
@@ -50,7 +51,9 @@ function Groups() {
                             memberships.map((membership) => (
                                 <div className="membership-container">
                                     <div className="membership-name">
-                                        {membership.group_name}
+                                        <h3 className="membership-name-text">
+                                            {membership.Group.group_name}
+                                        </h3>
                                     </div>
 
                                     <div className="membership-join">
@@ -60,6 +63,29 @@ function Groups() {
                                         >
                                             <Link to={`/Group`}>Join</Link>
                                         </button>
+                                    </div>
+                                    <div className="group-creator-container">
+                                        <div className="group-creator">
+                                            <h3>Creator: </h3>
+                                            <img
+                                                height="30"
+                                                width="30"
+                                                src={
+                                                    membership.Group.User
+                                                        .user_image
+                                                        ? membership.Group.User
+                                                              .user_image
+                                                        : defaultImage
+                                                }
+                                                alt="imagine"
+                                            />
+                                            <h3 className="group-creator-text">
+                                                {
+                                                    membership.Group.User
+                                                        .user_name
+                                                }
+                                            </h3>
+                                        </div>
                                     </div>
                                 </div>
                             ))

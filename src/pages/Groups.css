@@ -9,3 +9,33 @@
 .add-group button {
     align-self: flex-end;
 }
+.membership-container {
+    background-color: blanchedalmond;
+    border: 2px solid #131862;
+    border-radius: 20px;
+    margin-top: 20px;
+    /* border: radius 2px; */
+}
+.memberships-container {
+    padding: 20px;
+}
+.group-creator {
+    display: flex;
+    flex-direction: row;
+
+    /* align-items: center; */
+}
+.group-creator img {
+    align-self: center;
+}
+h3 {
+    margin-right: 20px;
+}
+.group-creator-text {
+    margin-left: 5px;
+}
+.membership-join {
+    display: flex;
+    justify-content: right;
+    margin-right: 20px;
+}
