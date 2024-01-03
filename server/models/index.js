@@ -52,7 +52,10 @@ db.enrollments.belongsTo(db.subjects, {
     foreignKey: 'subject_id',
     as: 'Subject',
 })
-
+db.users.hasMany(db.memberships, { foreignKey: 'user_id', as: 'Membership' }) //
+db.memberships.belongsTo(db.users, { foreignKey: 'user_id', as: 'User' })
+db.groups.hasMany(db.memberships, { foreignKey: 'group_id', as: 'Membership' }) //
+db.memberships.belongsTo(db.groups, { foreignKey: 'group_id', as: 'Group' })
 // db.sequelize.sync({ force: false }).then(() => {
 //     console.log('Drop and re-sync db.')
 // })
