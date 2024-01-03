@@ -46,7 +46,7 @@ const insertNote = async (req, res) => {
         )
 
         const note_id = newNote.note_id // Get the note_id from the newly created note
-
+        console.log(note_id)
         res.status(201).json({
             message: 'Note created',
             note: newNote,

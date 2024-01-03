@@ -4,9 +4,9 @@ module.exports = (sequelize, Datatypes) => {
         {
             group_id: {
                 type: Datatypes.INTEGER,
-                allowNull: true,
+                allowNull: false,
                 primaryKey: true,
-                autoincrement: true,
+                autoIncrement: true,
             },
             group_name: {
                 type: Datatypes.STRING,

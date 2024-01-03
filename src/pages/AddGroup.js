@@ -5,6 +5,34 @@ function AddGroup() {
     const [messageStatus, setMessageStatus] = useState('notTested')
     const [message, setMessage] = useState('')
     const [groupName, setGroupName] = useState('')
+    const insertMember = async (groupId) => {
+        const response = await fetch(
+            'http://localhost:8080/api/memberships/insertMember',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    group_id: groupId,
+                    user_id: localStorage.getItem('userId'),
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            setMessageStatus('success')
+            setMessage('membership added successfully ')
+            console.log('data was successfully inserted')
+        } else if (response.status === 500) {
+            setMessageStatus('error')
+            setMessage(data.error)
+            console.log('data was not successfully inserted')
+        }
+    }
     const insertGroup = async () => {
         const response = await fetch(
             'http://localhost:8080/api/groups/insertGroup',
@@ -26,9 +54,12 @@ function AddGroup() {
         if (response.status === 201) {
             setMessageStatus('success')
             setMessage(data.message)
-            console.log('data was successfully inserted')
+
+            console.log('data was successfully inserted', data)
+            console.log('id group', data.group.group_id)
             const input = document.getElementById('groupName')
             input.value = ''
+            setGroupName('')
         } else if (response.status === 500) {
             setMessageStatus('error')
             setMessage(data.error)
