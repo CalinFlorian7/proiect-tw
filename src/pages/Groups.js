@@ -44,6 +44,30 @@ function Groups() {
                         </button>
                     </div>
                     <div className="break"></div>
+                    <div className="memberships-container">
+                        {memberships && memberships.length > 0 ? (
+                            memberships.map((membership) => (
+                                <div className="membership-container">
+                                    <div className="membership-name">
+                                        {membership.group_name}
+                                    </div>
+
+                                    <div className="membership-join">
+                                        <button
+                                            type="button"
+                                            className="btn-join-group"
+                                        >
+                                            <Link to={`/Group`}>Join</Link>
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="no-memberships">
+                                You are not a member of any groups
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </>
