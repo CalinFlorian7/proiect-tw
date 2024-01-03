@@ -38,10 +38,12 @@ const getMemberships = async (req, res) => {
             include: [
                 {
                     model: Group,
+                    as: 'Group',
                     attributes: ['group_name'],
                     include: [
                         {
                             model: User,
+                            as: 'User',
                             attributes: ['user_image', 'user_name'],
                         },
                     ],

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useCallback } from 'react'
 function Groups() {
     const [memberships, setMemberships] = useState([])
+
     const getMemberships = useCallback(async () => {
         const response = await fetch(
             'http://localhost:8080/api/memberships/getMemberships',
