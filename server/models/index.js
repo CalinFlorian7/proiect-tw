@@ -36,6 +36,7 @@ db.teachers = require('../models/teacher.js')(sequelize, DataTypes)
 db.documents = require('../models/document.js')(sequelize, DataTypes)
 db.enrollments = require('../models/enrollment.js')(sequelize, DataTypes)
 db.notes = require('../models/note.js')(sequelize, DataTypes)
+db.groups = require('../models/group.js')(sequelize, DataTypes)
 db.faculties.hasMany(db.teachers, { foreignKey: 'faculty_id', as: 'Teacher' }) //
 db.teachers.belongsTo(db.faculties, { foreignKey: 'faculty_id', as: 'Faculty' })
 db.teachers.hasMany(db.subjects, { foreignKey: 'teacher_id', as: 'Subject' }) //
