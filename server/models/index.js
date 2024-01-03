@@ -34,6 +34,7 @@ db.subjects = require('../models/subject.js')(sequelize, DataTypes) // Fix the c
 db.faculties = require('../models/faculty.js')(sequelize, DataTypes)
 db.teachers = require('../models/teacher.js')(sequelize, DataTypes)
 db.documents = require('../models/document.js')(sequelize, DataTypes)
+db.memberships = require('../models/membership.js')(sequelize, DataTypes)
 db.enrollments = require('../models/enrollment.js')(sequelize, DataTypes)
 db.notes = require('../models/note.js')(sequelize, DataTypes)
 db.groups = require('../models/group.js')(sequelize, DataTypes)
