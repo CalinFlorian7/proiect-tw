@@ -111,6 +111,11 @@ function Notes() {
                                                     <h2>{note.note_title}</h2>
                                                 </div>
                                             </Link>
+                                            <div className="note-button">
+                                                <button className="delete-note">
+                                                    Delete
+                                                </button>
+                                            </div>
                                             <div className="note-date">
                                                 <h3 className="note-date">
                                                     {note.note_date.slice(

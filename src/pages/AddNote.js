@@ -399,7 +399,7 @@ function AddNote() {
                                                                 {filesInserted.map(
                                                                     (file) => (
                                                                         <li
-                                                                            className="file-name"
+                                                                            className="file-name-document"
                                                                             value={
                                                                                 file.document_id
                                                                             }

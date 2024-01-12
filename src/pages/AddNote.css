@@ -36,14 +36,15 @@ ul {
     padding-right: 40px;
     padding-top: 10px;
 }
-.file-name {
+.file-name-document {
     list-style-type: none;
     margin-bottom: 10px;
     padding: 10px;
     border: #131862 solid 2px;
     width: max-content;
 }
-.file-name :hover {
+
+.file-name-document:hover {
     background-color: rgb(0, 0, 0, 0.2);
     text-decoration: line-through;
     cursor: pointer;
