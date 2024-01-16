@@ -3,20 +3,23 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 function Group() {
     const location = useLocation()
+
+    const [email, setEmail] = useState('')
     let membership = []
     membership = location.state.membership
-    console.log('---', membership)
+    // console.log('---', membership)
+
     useEffect(() => {
         // console.log('name', membership.Group.User.group_name)
     }, [])
     const user_id = parseInt(localStorage.getItem('userId'))
-    const admin = user_id === membership.Group.User.user_id
-    console.log('id localStorage.getItem', user_id)
-    console.log(
-        'id membership.Group.User.user_id',
-        membership.Group.User.user_id
-    )
-    console.log('admin', admin)
+    let admin = false
+    if (user_id === membership.Group.User.user_id) {
+        admin = true
+    } else {
+        admin = false
+    }
+
     return (
         <>
             <div className="page-container">
@@ -45,9 +48,33 @@ function Group() {
 
                 {admin ? (
                     <div className="add-member">
-                        <button type="button" className="btn-add-member">
-                            Add a new member
-                        </button>
+                        <div className="form">
+                            {' '}
+                            <div className="add-member-container-form">
+                                <label className="member-name">
+                                    Member email:
+                                </label>
+                                <input
+                                    type="text"
+                                    defaultValue={email}
+                                    onChange={(e) => {
+                                        e.preventDefault()
+                                        setEmail(e.target.value)
+                                        // console.log(email)
+                                    }}
+                                ></input>
+                                <button
+                                    type="button"
+                                    className="btn-add-member"
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        console.log(email)
+                                    }}
+                                >
+                                    Add the member
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     <div>nu esti tu</div>
