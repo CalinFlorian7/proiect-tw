@@ -5,12 +5,16 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
     const [userChecked, setUserChecked] = useState(true)
     const [groupChecked, setGroupChecked] = useState(false)
     const handleUserChecked = () => {
-        setUserChecked(!userChecked)
-        setGroupChecked(!groupChecked)
+        if (!userChecked) {
+            setUserChecked(!userChecked)
+            setGroupChecked(!groupChecked)
+        }
     }
     const handleGroupChecked = () => {
-        setGroupChecked(!groupChecked)
-        setUserChecked(!userChecked)
+        if (!groupChecked) {
+            setGroupChecked(!groupChecked)
+            setUserChecked(!userChecked)
+        }
     }
     return (
         console.log('noteId', noteId),
