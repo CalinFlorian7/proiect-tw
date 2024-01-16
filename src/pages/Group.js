@@ -9,7 +9,14 @@ function Group() {
     useEffect(() => {
         // console.log('name', membership.Group.User.group_name)
     }, [])
-
+    const user_id = parseInt(localStorage.getItem('userId'))
+    const admin = user_id === membership.Group.User.user_id
+    console.log('id localStorage.getItem', user_id)
+    console.log(
+        'id membership.Group.User.user_id',
+        membership.Group.User.user_id
+    )
+    console.log('admin', admin)
     return (
         <>
             <div className="page-container">
@@ -36,11 +43,16 @@ function Group() {
                     </div>
                 </div>
 
-                <div className="add-member">
-                    <button type="button" className="btn-add-member">
-                        Add a new member
-                    </button>
-                </div>
+                {admin ? (
+                    <div className="add-member">
+                        <button type="button" className="btn-add-member">
+                            Add a new member
+                        </button>
+                    </div>
+                ) : (
+                    <div>nu esti tu</div>
+                )}
+
                 <div className="break"></div>
                 <div className="notes-container"></div>
             </div>

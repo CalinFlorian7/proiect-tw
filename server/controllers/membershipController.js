@@ -44,7 +44,7 @@ const getMemberships = async (req, res) => {
                         {
                             model: User,
                             as: 'User',
-                            attributes: ['user_image', 'user_name'],
+                            attributes: ['user_image', 'user_name', 'user_id'],
                         },
                     ],
                 },
