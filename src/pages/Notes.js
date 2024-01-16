@@ -153,6 +153,7 @@ function Notes() {
                                                         console.log(
                                                             'share clicked'
                                                         )
+                                                        openPopUp()
                                                     }}
                                                 >
                                                     <FaShare />
