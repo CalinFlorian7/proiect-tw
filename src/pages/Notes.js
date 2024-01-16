@@ -10,6 +10,9 @@ function Notes() {
     const [subjectId, setSubjectId] = useState(null)
     const [notes, setNotes] = useState([])
     const [showPopUp, setShowPopUp] = useState(false)
+    const [noteId, setNoteId] = useState(null)
+    const [title, setTitle] = useState(null)
+
     console.log(location.state)
     const deleteNote = async (noteId, noteIndex) => {
         try {
@@ -107,7 +110,14 @@ function Notes() {
             <button type="button" onClick={openPopUp}>
                 arata overlay
             </button>
-            {showPopUp && <Share onClose={closePopUp} />}
+            {showPopUp && (
+                <Share
+                    onClose={closePopUp}
+                    noteId={noteId}
+                    noteTitle={title}
+                    subjectId={subjectId}
+                />
+            )}
 
             <div className="page-container">
                 <div className="notes-container">
@@ -152,6 +162,10 @@ function Notes() {
                                                     onClick={(e) => {
                                                         console.log(
                                                             'share clicked'
+                                                        )
+                                                        setNoteId(note.note_id)
+                                                        setTitle(
+                                                            note.note_title
                                                         )
                                                         openPopUp()
                                                     }}

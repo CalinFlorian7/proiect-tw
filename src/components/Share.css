@@ -47,3 +47,13 @@
     display: inline-block;
     content: '\00D7';
 } */
+.checkbox {
+    width: min-content;
+}
+
+.note-destination-container {
+    display: flex;
+
+    align-items: center;
+    margin-bottom: 10px;
+}
