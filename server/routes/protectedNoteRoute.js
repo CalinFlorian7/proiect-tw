@@ -7,4 +7,5 @@ protectedRouter.post(
     noteController.getNotesBySubjectAndUser
 )
 protectedRouter.post('/selectCountNotes', noteController.selectCountNotes)
+protectedRouter.post('./deleteNote', noteController.deleteNote)
 module.exports = protectedRouter
