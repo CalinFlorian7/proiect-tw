@@ -4,8 +4,8 @@
 -- SELECT * from memberships
 -- delete  from memberships where user_id=56 
 -- show TABLEs;
-
-
+-- DESCRIBE enrollments;
+DESCRIBE MESSAGEs;
 
 -- DESCRIBE users;
 -- select * from bazamea.groups;
