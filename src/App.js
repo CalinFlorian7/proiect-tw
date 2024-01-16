@@ -10,6 +10,7 @@ import AddGroup from './pages/AddGroup.js'
 import AddNote from './pages/AddNote.js'
 import AddSubject from './pages/AddSubject.js'
 import LogIn from './pages/LogIn.js'
+import Group from './pages/Group.js'
 import Enrollments from './pages/Enrollments.js'
 import RestrictedNavbar from './components/RestrictedNavbar.js'
 import {
@@ -41,6 +42,7 @@ function App() {
                         <Route path="/AddSubject" Component={AddSubject} />
                         <Route path="/Enrollments" Component={Enrollments} />
                         <Route path="/AddGroup" Component={AddGroup} />
+                        <Route path="/Group" Component={Group} />
                     </Route>
                     <Route
                         path="*"
