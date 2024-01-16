@@ -1,7 +1,7 @@
 // const { DATE } = require('sequelize')
 const db = require('../models/index.js')
 const Note = db.notes
-const Documnet = db.documents
+const Document = db.documents
 
 const selectCountNotes = async (req, res) => {
     const user_id = req.body.user_id
