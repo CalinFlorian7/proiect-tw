@@ -109,11 +109,20 @@ const getNotesBySubjectAndUser = async (req, res) => {
 const deleteNote = async (req, res) => {
     const note_id = req.body.note_id
     try {
+        // Delete the document associated with the note
+        await Document.destroy({
+            where: {
+                note_id: note_id,
+            },
+        })
+
+        // Delete the note
         const deletedNote = await Note.destroy({
             where: {
                 note_id: note_id,
             },
         })
+
         if (deletedNote === 1) {
             res.status(200).json({ message: 'Note deleted' })
         } else {

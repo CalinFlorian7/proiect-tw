@@ -9,6 +9,34 @@ function Notes() {
     const [subjectId, setSubjectId] = useState(null)
     const [notes, setNotes] = useState([])
     console.log(location.state)
+    const deleteNote = async (noteId) => {
+        try {
+            const response = await fetch(
+                'http://localhost:8080/api/notes/deleteNote',
+                {
+                    method: 'POST',
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem(
+                            'accessToken'
+                        )}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        note_id: noteId,
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (response.status === 200) {
+                console.log('note deleted', data)
+            }
+            if (response.status === 500) {
+                console.log('Something went wrong!')
+            }
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
     useEffect(() => {
         const getNotesBySubjectAndUser = async () => {
             try {
@@ -112,7 +140,18 @@ function Notes() {
                                                 </div>
                                             </Link>
                                             <div className="note-button">
-                                                <button className="delete-note">
+                                                <button
+                                                    className="delete-note"
+                                                    value={note.note_id}
+                                                    onClick={(e) => {
+                                                        console.log(
+                                                            e.target.value
+                                                        )
+                                                        deleteNote(
+                                                            e.target.value
+                                                        )
+                                                    }}
+                                                >
                                                     Delete
                                                 </button>
                                             </div>
