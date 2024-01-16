@@ -3,11 +3,13 @@ import { Link, useLocation } from 'react-router-dom'
 import './Notes.css'
 import { useState, useEffect } from 'react'
 import { FaShare } from 'react-icons/fa'
+import Share from '../components/Share'
 function Notes() {
     const location = useLocation()
     const [subject, setSubject] = useState([])
     const [subjectId, setSubjectId] = useState(null)
     const [notes, setNotes] = useState([])
+    const [showPopUp, setShowPopUp] = useState(false)
     console.log(location.state)
     const deleteNote = async (noteId, noteIndex) => {
         try {
@@ -94,8 +96,19 @@ function Notes() {
         }
     }, [location.state, location.pathname, subject, subjectId])
 
+    const openPopUp = () => {
+        setShowPopUp(true)
+    }
+    const closePopUp = () => {
+        setShowPopUp(false)
+    }
     return (
         <>
+            <button type="button" onClick={openPopUp}>
+                arata overlay
+            </button>
+            {showPopUp && <Share onClose={closePopUp} />}
+
             <div className="page-container">
                 <div className="notes-container">
                     <div className="subject-details">
