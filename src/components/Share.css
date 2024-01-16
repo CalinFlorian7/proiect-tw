@@ -1,0 +1,43 @@
+.overlay-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 9;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: fadein 0.5s; */
+}
+.overlay-container {
+    background-color: blanchedalmond;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 10;
+    padding: 30px;
+    width: min-content;
+    height: min-content;
+}
+.overlay-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.overlay-close {
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    cursor: pointer;
+}
+.overlay-close::after {
+    display: inline-block;
+    content: '\00D7';
+}
