@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Notes.css'
 import { useState, useEffect } from 'react'
-
+import { FaShare } from 'react-icons/fa'
 function Notes() {
     const location = useLocation()
     const [subject, setSubject] = useState([])
@@ -133,6 +133,18 @@ function Notes() {
                                 <div className="note-container">
                                     {notes.map((note) => (
                                         <div className="note">
+                                            <div className="share-container">
+                                                <button
+                                                    className="share-button"
+                                                    onClick={(e) => {
+                                                        console.log(
+                                                            'share clicked'
+                                                        )
+                                                    }}
+                                                >
+                                                    <FaShare />
+                                                </button>
+                                            </div>
                                             <Link
                                                 className="note-link"
                                                 to="/AddNote"
