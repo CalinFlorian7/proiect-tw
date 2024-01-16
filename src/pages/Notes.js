@@ -9,7 +9,7 @@ function Notes() {
     const [subjectId, setSubjectId] = useState(null)
     const [notes, setNotes] = useState([])
     console.log(location.state)
-    const deleteNote = async (noteId) => {
+    const deleteNote = async (noteId, noteIndex) => {
         try {
             const response = await fetch(
                 'http://localhost:8080/api/notes/deleteNote',
@@ -29,6 +29,16 @@ function Notes() {
             const data = await response.json()
             if (response.status === 200) {
                 console.log('note deleted', data)
+                const updatedNotes = [...notes]
+                // const index = updatedNotes.findIndex(
+                //     (n) => n.note_id === noteId
+                // )
+                console.log('note index', noteIndex)
+                if (noteIndex !== -1) {
+                    console.log('ar trebui sa se stearga nota')
+                    updatedNotes.splice(noteIndex, 1)
+                    setNotes(updatedNotes)
+                }
             }
             if (response.status === 500) {
                 console.log('Something went wrong!')
@@ -143,12 +153,34 @@ function Notes() {
                                                 <button
                                                     className="delete-note"
                                                     value={note.note_id}
+                                                    onMouseMove={(e) => {
+                                                        const noteIndex =
+                                                            notes.findIndex(
+                                                                (note) =>
+                                                                    note.note_id ===
+                                                                    e.target
+                                                                        .value
+                                                            )
+                                                        console.log(
+                                                            'noteIndex',
+                                                            noteIndex
+                                                        )
+                                                    }}
                                                     onClick={(e) => {
                                                         console.log(
                                                             e.target.value
                                                         )
+
+                                                        const noteIndex =
+                                                            notes.findIndex(
+                                                                (note) =>
+                                                                    note.note_id ===
+                                                                    e.target
+                                                                        .value
+                                                            )
                                                         deleteNote(
-                                                            e.target.value
+                                                            e.target.value,
+                                                            noteIndex
                                                         )
                                                     }}
                                                 >

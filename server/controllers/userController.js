@@ -147,6 +147,7 @@ const selectUserNameImage = async (req, res) => {
         res.status(500).json({ error: 'Error selecting user name and image' })
     }
 }
+
 module.exports = {
     insertUser,
     selectAllUsers,

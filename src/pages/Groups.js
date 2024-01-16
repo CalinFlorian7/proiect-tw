@@ -6,6 +6,7 @@ import { useCallback } from 'react'
 import defaultImage from '../Images/defaultProfilePicture.jpg'
 function Groups() {
     const [memberships, setMemberships] = useState([])
+    
 
     const getMemberships = useCallback(async () => {
         const response = await fetch(
