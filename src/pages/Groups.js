@@ -61,7 +61,8 @@ function Groups() {
                                             type="button"
                                             className="btn-join-group"
                                         >
-                                            <Link to={`/Group`}>Join</Link>
+                                            Enter
+                                            {/* <Link to={`/Group`}>Join</Link> */}
                                         </button>
                                     </div>
                                     <div className="group-creator-container">
