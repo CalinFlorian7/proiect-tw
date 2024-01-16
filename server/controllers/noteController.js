@@ -1,6 +1,7 @@
 // const { DATE } = require('sequelize')
 const db = require('../models/index.js')
 const Note = db.notes
+const Documnet = db.documents
 
 const selectCountNotes = async (req, res) => {
     const user_id = req.body.user_id
@@ -105,9 +106,28 @@ const getNotesBySubjectAndUser = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
+const deleteNote = async (req, res) => {
+    const note_id = req.body.note_id
+    try {
+        const deletedNote = await Note.destroy({
+            where: {
+                note_id: note_id,
+            },
+        })
+        if (deletedNote === 1) {
+            res.status(200).json({ message: 'Note deleted' })
+        } else {
+            res.status(404).json({ message: 'Note not found' })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.name })
+    }
+}
 module.exports = {
     insertNote,
     updateNoteTitleText,
     getNotesBySubjectAndUser,
     selectCountNotes,
+    deleteNote,
 }
