@@ -60,6 +60,7 @@ db.users.hasMany(db.groups, { foreignKey: 'user_id', as: 'User' }) //
 db.groups.belongsTo(db.users, { foreignKey: 'user_id', as: 'User' })
 db.notes.hasMany(db.documents, { foreignKey: 'note_id', as: 'Document' }) //
 db.documents.belongsTo(db.notes, { foreignKey: 'note_id', as: 'Note' })
+
 // db.sequelize.sync({ force: false }).then(() => {
 //     console.log('Drop and re-sync db.')
 // })

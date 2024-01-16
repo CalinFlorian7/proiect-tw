@@ -31,6 +31,7 @@ const insertMember = async (req, res) => {
 const insertMemberByEmail = async (req, res) => {
     const email = req.body.email
     const group_id = req.body.group_id
+
     try {
         const user = await User.findOne({
             where: {
@@ -42,17 +43,29 @@ const insertMemberByEmail = async (req, res) => {
                 message: 'User not found',
             })
         } else {
-            const user_id = user.user_id
-            const membership_date = new Date()
-            const membership = await Membership.create({
-                user_id: user_id,
-                group_id: group_id,
-                membership_date: membership_date,
+            const count = await Membership.count({
+                where: {
+                    user_id: user.user_id,
+                    group_id: group_id,
+                },
             })
-            res.status(200).send({
-                message: 'Membership created successfully',
-                membership: membership,
-            })
+            if (count === 0) {
+                const user_id = user.user_id
+                const membership_date = new Date()
+                const membership = await Membership.create({
+                    user_id: user_id,
+                    group_id: group_id,
+                    membership_date: membership_date,
+                })
+                res.status(200).send({
+                    message: 'Membership created successfully',
+                    membership: membership,
+                })
+            } else {
+                res.status(200).send({
+                    message: 'Membership already exists',
+                })
+            }
         }
     } catch (err) {
         res.status(500).send({

@@ -19,7 +19,39 @@ function Group() {
     } else {
         admin = false
     }
+    const handleAddMember = () => {
+        if (email !== '') {
+            insertMemberByEmail()
+        }
+    }
 
+    const insertMemberByEmail = async (req, res) => {
+        const response = await fetch(
+            'http://localhost:8080/api/memberships/insertMemberByEmail',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    group_id: membership.group_id,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log('data was successfully inserted', data)
+        } else if (response.status === 500) {
+            console.log('data was not successfully inserted')
+        } else if (response.status === 404) {
+            console.log('user not found')
+        }
+    }
     return (
         <>
             <div className="page-container">
@@ -69,6 +101,7 @@ function Group() {
                                     onClick={(e) => {
                                         e.preventDefault()
                                         console.log(email)
+                                        handleAddMember()
                                     }}
                                 >
                                     Add the member

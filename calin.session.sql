@@ -2,7 +2,10 @@
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit
 -- SELECT * from memberships
-show TABLEs;
+-- delete  from memberships where user_id=56 
+-- show TABLEs;
+
+
 
 -- DESCRIBE users;
 -- select * from bazamea.groups;
