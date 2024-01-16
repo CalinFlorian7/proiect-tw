@@ -28,6 +28,40 @@ const insertMember = async (req, res) => {
     }
 }
 
+const insertMemberByEmail = async (req, res) => {
+    const email = req.body.email
+    const group_id = req.body.group_id
+    try {
+        const user = await User.findOne({
+            where: {
+                user_email: email,
+            },
+        })
+        if (user === null) {
+            res.status(404).send({
+                message: 'User not found',
+            })
+        } else {
+            const user_id = user.user_id
+            const membership_date = new Date()
+            const membership = await Membership.create({
+                user_id: user_id,
+                group_id: group_id,
+                membership_date: membership_date,
+            })
+            res.status(200).send({
+                message: 'Membership created successfully',
+                membership: membership,
+            })
+        }
+    } catch (err) {
+        res.status(500).send({
+            message:
+                err.message ||
+                'Some error occurred while creating the membership',
+        })
+    }
+}
 const getMemberships = async (req, res) => {
     try {
         const user_id = req.body.user_id
@@ -70,4 +104,4 @@ const getMemberships = async (req, res) => {
     }
 }
 
-module.exports = { insertMember, getMemberships }
+module.exports = { insertMember, getMemberships, insertMemberByEmail }
