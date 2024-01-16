@@ -23,18 +23,24 @@
     margin: auto;
     z-index: 10;
     padding: 30px;
-    width: min-content;
-    height: min-content;
+    width: 600px;
+    height: max-content;
 }
-.overlay-content {
+/* .overlay-content {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+} */
+.overlay-button-close {
+    display: flex;
+    justify-content: right;
 }
+
 .overlay-close {
-    border: none;
+    border: 2px solid #131862;
+
     background-color: transparent;
-    font-size: 30px;
+    font-size: 20px;
     cursor: pointer;
 }
 /* .overlay-close::after {
