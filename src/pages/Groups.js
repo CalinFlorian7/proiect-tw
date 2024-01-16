@@ -6,7 +6,6 @@ import { useCallback } from 'react'
 import defaultImage from '../Images/defaultProfilePicture.jpg'
 function Groups() {
     const [memberships, setMemberships] = useState([])
-    
 
     const getMemberships = useCallback(async () => {
         const response = await fetch(
@@ -53,7 +52,14 @@ function Groups() {
                                 <div className="membership-container">
                                     <div className="membership-name">
                                         <h3 className="membership-name-text">
-                                            {membership.Group.group_name}
+                                            <Link
+                                                to={`/Group`}
+                                                state={{
+                                                    membership: membership,
+                                                }}
+                                            >
+                                                {membership.Group.group_name}
+                                            </Link>
                                         </h3>
                                     </div>
 
@@ -62,8 +68,7 @@ function Groups() {
                                             type="button"
                                             className="btn-join-group"
                                         >
-                                            Enter
-                                            {/* <Link to={`/Group`}>Join</Link> */}
+                                            Delete
                                         </button>
                                     </div>
                                     <div className="group-creator-container">
