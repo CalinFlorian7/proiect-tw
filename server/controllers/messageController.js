@@ -45,7 +45,12 @@ const getMessagesForGroup = async (req, res) => {
                 {
                     model: Note,
                     as: 'Note',
-                    attributes: ['note_id'], // Selecting the note_id
+                    attributes: [
+                        'note_id',
+                        'note_title',
+                        'user_id',
+                        'note_date',
+                    ], // Selecting the note_id
                 },
             ],
         })
@@ -60,6 +65,7 @@ const getMessagesForGroup = async (req, res) => {
 
         res.status(200).json({
             notes,
+            messages,
         })
     } catch (error) {
         console.log(error)

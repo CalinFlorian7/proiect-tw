@@ -5,6 +5,7 @@ function Group() {
     const location = useLocation()
     let groupId = null
     const [email, setEmail] = useState('')
+    const [notes, setNotes] = useState([])
     let membership = []
     membership = location.state.membership
     console.log('---', membership)
@@ -32,6 +33,7 @@ function Group() {
             const data = await response.json()
             if (response.status === 200) {
                 console.log(data)
+                setNotes(data.notes)
             }
             if (response.status === 500) {
                 console.log('error received')
@@ -55,7 +57,9 @@ function Group() {
             insertMemberByEmail()
         }
     }
-
+    if (notes) {
+        console.log('notes', notes)
+    }
     const insertMemberByEmail = async (req, res) => {
         const response = await fetch(
             'http://localhost:8080/api/memberships/insertMemberByEmail',
