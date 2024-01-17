@@ -6,7 +6,7 @@
 -- show TABLEs;
 -- DESCRIBE enrollments;
 -- DESCRIBE MESSAGEs;
-DESCRIBE MESSAGEs;
+select * from messages;
 
 -- DESCRIBE users;
 -- select * from bazamea.groups;

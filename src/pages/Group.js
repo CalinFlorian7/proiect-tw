@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 function Group() {
     const location = useLocation()
-
+    let groupId = null
     const [email, setEmail] = useState('')
     let membership = []
     membership = location.state.membership
-    // console.log('---', membership)
+    console.log('---', membership)
+    groupId = membership.group_id
+    console.log('groupId------', groupId)
 
     useEffect(() => {
         // console.log('name', membership.Group.User.group_name)
@@ -46,10 +48,13 @@ function Group() {
         const data = await response.json()
         if (response.status === 200) {
             console.log('data was successfully inserted', data)
+            alert('user successfully added')
         } else if (response.status === 500) {
             console.log('data was not successfully inserted')
+            alert('user already added')
         } else if (response.status === 404) {
             console.log('user not found')
+            alert("User doesn't exist")
         }
     }
     return (

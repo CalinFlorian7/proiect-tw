@@ -51,7 +51,7 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
         const data = await response.json()
         if (response.status === 201) {
             console.log('data was successfully retrieved', data)
-            alert('The note was successfully sent')
+            alert('The note was successfully sent to the group')
         } else if (response.status === 500) {
             console.log('Internal Server Error')
         }
@@ -108,7 +108,10 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
             }
         } else if (groupChecked) {
             console.log('group')
-            if (membershipId != null && noteId) {
+            if (noteId) {
+                if (membershipId === null) {
+                    alert('select a group please')
+                } else insertMessage()
             }
         }
     }
