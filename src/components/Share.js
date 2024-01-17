@@ -198,6 +198,11 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
                                                     className="note-destination-input"
                                                     name="group"
                                                     id="group"
+                                                    onClick={(e) => {
+                                                        setMembershipId(
+                                                            e.target.value
+                                                        )
+                                                    }}
                                                     onChange={(e) => {
                                                         setMembershipId(
                                                             e.target.value

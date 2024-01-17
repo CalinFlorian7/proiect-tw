@@ -1,0 +1,28 @@
+.note-group {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid blue;
+    background-color: rgb(255, 235, 205, 0.7);
+    border-radius: 20px;
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.note-admin-group {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid blue;
+    border-radius: 20px;
+    background-color: blanchedalmond;
+    width: 70%;
+    margin-bottom: 20px;
+}
+.note-container-group .note-admin-group {
+    display: flex;
+    flex-direction: column;
+    float: right;
+}
+
+.note-container-group {
+    padding: 20px;
+}

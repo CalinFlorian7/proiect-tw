@@ -2,6 +2,7 @@ const db = require('../models/index.js')
 const Message = db.messages
 const Membership = db.memberships
 const Note = db.notes
+const User = db.users
 const insertMessage = async (req, res) => {
     const membership_id = req.body.membership_id
     const note_id = req.body.note_id
@@ -38,6 +39,13 @@ const getMessagesForGroup = async (req, res) => {
                 {
                     model: Membership,
                     as: 'Membership',
+                    include: [
+                        {
+                            model: User,
+                            as: 'User',
+                            attributes: ['user_id', 'user_name'],
+                        },
+                    ],
                     where: {
                         group_id: group_id,
                     },

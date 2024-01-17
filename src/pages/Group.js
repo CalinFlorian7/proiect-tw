@@ -1,11 +1,12 @@
 import React from 'react'
 import { useEffect, useState, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
+import '../pages/Group.css'
 function Group() {
     const location = useLocation()
     let groupId = null
     const [email, setEmail] = useState('')
-    const [notes, setNotes] = useState([])
+    const [messages, setMessages] = useState([])
     let membership = []
     membership = location.state.membership
     console.log('---', membership)
@@ -33,7 +34,7 @@ function Group() {
             const data = await response.json()
             if (response.status === 200) {
                 console.log(data)
-                setNotes(data.notes)
+                setMessages(data.messages)
             }
             if (response.status === 500) {
                 console.log('error received')
@@ -57,8 +58,8 @@ function Group() {
             insertMemberByEmail()
         }
     }
-    if (notes) {
-        console.log('notes', notes)
+    if (messages) {
+        console.log('messages', messages)
     }
     const insertMemberByEmail = async (req, res) => {
         const response = await fetch(
@@ -152,7 +153,37 @@ function Group() {
                 )}
 
                 <div className="break"></div>
-                <div className="notes-container"></div>
+                <div className="notes-container">
+                    {messages.map((message) => (
+                        <div className="note-container-group">
+                            <div
+                                className={
+                                    message.Membership.user_id ===
+                                    parseInt(localStorage.getItem('userId'))
+                                        ? 'note-admin-group'
+                                        : 'note-group'
+                                }
+                            >
+                                <div className="creator">
+                                    <h4>
+                                        {' '}
+                                        From:{message.Membership.User.user_name}
+                                    </h4>
+                                </div>
+                                <div className="note-title">
+                                    <h3 className="note-title-text">
+                                        {message.Note.note_title}
+                                    </h3>
+                                </div>
+                                <div className="note-date">
+                                    <h3 className="note-date-text">
+                                        {message.message_date}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     )
