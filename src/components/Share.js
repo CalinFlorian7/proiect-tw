@@ -11,10 +11,46 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
             setGroupChecked(!groupChecked)
         }
     }
+
+    const insertNoteToStudentEmail = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/enrollments/inserNoteToStudentEmail',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_email: email,
+                    note_id: noteId,
+                    subject_id: subjectId,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log('data was successfully retrieved', data)
+            alert('The note was successfully sent')
+        } else if (response.status === 500) {
+            console.log('Internal Server Error')
+        } else if (response.status === 404) {
+            console.log('student not found')
+            alert('The student could not be found')
+        } else if (response.status === 201) {
+            alert('The student is not enrolled in this subject')
+        }
+    }
     const handleShareSubmit = () => {
         console.log('click')
         if (userChecked) {
             console.log('email', email)
+            if (email !== '' && subjectId && noteId) {
+                console.log('se apeleaza')
+                insertNoteToStudentEmail()
+            }
         } else if (groupChecked) {
             console.log('group')
         }

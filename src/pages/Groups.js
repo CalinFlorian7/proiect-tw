@@ -55,7 +55,7 @@ function Groups() {
                                             <Link
                                                 to={`/Group`}
                                                 state={{
-                                                    membership,
+                                                      membership,
                                                 }}
                                             >
                                                 {membership.Group.group_name}

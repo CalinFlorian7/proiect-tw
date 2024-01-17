@@ -17,61 +17,54 @@ const insertNoteToStudentEmail = async (req, res) => {
     const user_email = req.body.user_email
     const note_id = req.body.note_id
     const subject_id = req.body.subject_id
+    let user_id = null
 
     try {
-        const note = await Enrollment.findOne({ where: { note_id } })
         const user = await User.findOne({ where: { user_email } })
-        if (user.user_id === undefined) {
-            res.status(500).json({ message: 'Error retrieving user' })
-        } else if (user.user_id === null) {
-            res.status(500).json({ message: 'Error retrieving user' })
-        } else {
-            const count = await Enrollment.count({
-                where: {
-                    user_id: user.user_id,
-                    subject_id: subject_id,
-                },
-            })
-            if (count > 0) {
-                const newNote = await Note.create({
-                    user_id: user.user_id,
-                    subject_id: subject_id,
-                    note_text: note.text,
-                    note_date: new Date(Date.now()),
-                    note_title: note.title,
+        const note = await Note.findOne({ where: { note_id } })
+        if (user) {
+            user_id = user.user_id
+            console.log('student found', user_id)
+            // res.status(200).json({ message: 'student found' })
+            console.log('student found', user)
+            if (user_id) {
+                const count = await Enrollment.count({
+                    where: { user_id, subject_id },
                 })
-                if (newNote) {
-                    res.status(200).json(newNote)
-                } else {
-                    res.status(500).json({ message: 'Error inserting note' })
-                }
-            } else {
-                const enrollment = await Enrollment.create({
-                    user_id: user.user_id,
-                    subject_id: subject_id,
-                    enrollment_date: new Date(Date.now()),
-                })
-                if (enrollment && note) {
-                    const newNote = await Note.create({
-                        user_id: user.user_id,
-                        subject_id: subject_id,
-                        note_text: note.text,
-                        note_date: new Date(Date.now()),
-                        note_title: note.title,
-                    })
-                    if (newNote) {
-                        res.status(200).json(newNote)
-                    } else {
-                        res.status(500).json({
-                            message: 'Error inserting note',
+                if (count > 0) {
+                    // res.status(200).json({ message: 'he is enrolled' })
+                    if (note) {
+                        // const newNote = await Note.create({})
+
+                        const newNote = await Note.create({
+                            user_id: user_id,
+                            subject_id: subject_id,
+                            note_title: note.note_title,
+                            note_text: note.note_text,
+                            note_date: Date(Date.now()),
                         })
-                    }
+                        if (newNote) {
+                            res.status(200).json({ message: 'note created' })
+                        } else {
+                            res.status(500).json({
+                                message: 'note not created',
+                            })
+                        }
+                    } else res.status(404).json({ message: 'note not found' })
+                } else {
+                    res.status(201).json({ message: 'he is not enrolled' })
                 }
             }
+        } else {
+            res.status(404).json({ message: 'student not found' })
+            console.log('student not found')
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving user', error })
+        console.error(error)
+        res.status(500).json({ message: 'Error retrieving enrollments' })
     }
+
+    // console.log(user_email, note_id, subject_id)
 }
 const getStudentEnrollments = async (req, res) => {
     const user_id = req.body.user_id
