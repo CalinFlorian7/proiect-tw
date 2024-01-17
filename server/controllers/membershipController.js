@@ -127,7 +127,7 @@ const getGroupsByMemberships = async (req, res) => {
                 {
                     model: Group,
                     as: 'Group',
-                    attributes: ['group_name'],
+                    attributes: ['group_name', 'group_id'],
                 },
             ],
         })
