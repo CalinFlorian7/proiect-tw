@@ -1,12 +1,13 @@
 -- Active: 1698130823267@@127.0.0.1@3306
 -- ALTER TABLE users MODIFY COLUMN your_column_name INT AUTO_INCREMENT;
 -- commit
--- SELECT * from memberships
+SELECT * from memberships
 -- delete  from memberships where user_id=56 
 -- show TABLEs;
 -- DESCRIBE enrollments;
 -- DESCRIBE MESSAGEs;
-select * from messages;
+-- select * from messages;
+
 
 -- DESCRIBE users;
 -- select * from bazamea.groups;
