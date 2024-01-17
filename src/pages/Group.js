@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 function Group() {
     const location = useLocation()
@@ -11,9 +11,38 @@ function Group() {
     groupId = membership.group_id
     console.log('groupId------', groupId)
 
+    const getMessagesForGroup = useCallback(
+        async (req, res) => {
+            const response = await fetch(
+                'http://localhost:8080/api/messages/getMessagesForGroup',
+                {
+                    method: 'POST',
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem(
+                            'accessToken'
+                        )}`,
+                        'Content-Type': 'application/json',
+                    },
+
+                    body: JSON.stringify({
+                        group_id: groupId,
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (response.status === 200) {
+                console.log(data)
+            }
+            if (response.status === 500) {
+                console.log('error received')
+            }
+        },
+        [groupId]
+    )
     useEffect(() => {
+        if (groupId !== null) getMessagesForGroup()
         // console.log('name', membership.Group.User.group_name)
-    }, [])
+    }, [getMessagesForGroup, groupId])
     const user_id = parseInt(localStorage.getItem('userId'))
     let admin = false
     if (user_id === membership.Group.User.user_id) {

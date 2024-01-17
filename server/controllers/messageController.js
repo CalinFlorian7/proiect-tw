@@ -6,6 +6,7 @@ const insertMessage = async (req, res) => {
     const membership_id = req.body.membership_id
     const note_id = req.body.note_id
     const message_date = Date(Date.now())
+
     try {
         const newMessage = await Message.create(
             {
@@ -27,34 +28,37 @@ const insertMessage = async (req, res) => {
         res.status(500).json({ error: error.name })
     }
 }
+
 const getMessagesForGroup = async (req, res) => {
     const group_id = req.body.group_id
 
     try {
-        // Get memberships where group_id
-        const memberships = await Membership.findAll({
-            where: {
-                group_id: group_id,
-            },
-        })
-
-        // Get messages where membership_id
         const messages = await Message.findAll({
-            where: {
-                membership_id: memberships.map((membership) => membership.id),
-            },
+            include: [
+                {
+                    model: Membership,
+                    as: 'Membership',
+                    where: {
+                        group_id: group_id,
+                    },
+                },
+                {
+                    model: Note,
+                    as: 'Note',
+                    attributes: ['note_id'], // Selecting the note_id
+                },
+            ],
         })
 
-        // Get notes where message_id
+        const noteIds = messages.map((message) => message.Note.note_id) // Extracting the note_ids
+
         const notes = await Note.findAll({
             where: {
-                message_id: messages.map((message) => message.id),
+                note_id: noteIds, // Filtering by note_ids
             },
         })
 
         res.status(200).json({
-            memberships,
-            messages,
             notes,
         })
     } catch (error) {
