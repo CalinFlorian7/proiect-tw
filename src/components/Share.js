@@ -41,6 +41,10 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
             alert('The student could not be found')
         } else if (response.status === 201) {
             alert('The student is not enrolled in this subject')
+        } else {
+            if (response.status === 222) {
+                alert('documents loaded')
+            }
         }
     }
     const handleShareSubmit = () => {

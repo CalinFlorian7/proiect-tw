@@ -3,6 +3,7 @@ const Enrollment = db.enrollments
 const Subject = db.subjects
 const Teacher = db.teachers
 const User = db.users
+const Document = db.documents
 const Note = db.notes
 const getAllEnrollments = async (req, res) => {
     const user_id = req.body.user_id
@@ -44,6 +45,24 @@ const insertNoteToStudentEmail = async (req, res) => {
                             note_date: Date(Date.now()),
                         })
                         if (newNote) {
+                            if (newNote.note_id && note.note_id) {
+                                const documents = await Document.findAll({
+                                    where: { note_id: note.note_id },
+                                })
+
+                                if (documents.length > 0) {
+                                    documents.forEach(async (document) => {
+                                        await Document.create({
+                                            note_id: newNote.note_id,
+                                            document_name:
+                                                document.document_name,
+                                            document_path:
+                                                document.document_path,
+                                        })
+                                    })
+                                }
+                            }
+
                             res.status(200).json({ message: 'note created' })
                         } else {
                             res.status(500).json({
