@@ -31,6 +31,31 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
             console.log('data was not successfully retrieved')
         }
     }
+    const insertMessage = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/messages/insertMessage',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    membership_id: membershipId,
+                    note_id: noteId,
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 201) {
+            console.log('data was successfully retrieved', data)
+            alert('The note was successfully sent')
+        } else if (response.status === 500) {
+            console.log('Internal Server Error')
+        }
+    }
     const handleUserChecked = () => {
         if (!userChecked) {
             setUserChecked(!userChecked)
@@ -83,8 +108,7 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
             }
         } else if (groupChecked) {
             console.log('group')
-            if (membershipId!=null && noteId) {
-              
+            if (membershipId != null && noteId) {
             }
         }
     }
