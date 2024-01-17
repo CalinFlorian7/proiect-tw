@@ -5,6 +5,32 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
     const [userChecked, setUserChecked] = useState(true)
     const [groupChecked, setGroupChecked] = useState(false)
     const [email, setEmail] = useState('')
+    const [memberships, setMemberships] = useState([])
+    const [membershipId, setMembershipId] = useState(null)
+    const getGroupsByMemberships = async () => {
+        const response = await fetch(
+            'http://localhost:8080/api/memberships/getGroupsByMemberships',
+            {
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        'accessToken'
+                    )}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: localStorage.getItem('userId'),
+                }),
+            }
+        )
+        const data = await response.json()
+        if (response.status === 200) {
+            console.log('data was successfully retrieved', data)
+            setMemberships(data.memberships)
+        } else if (response.status === 500) {
+            console.log('data was not successfully retrieved')
+        }
+    }
     const handleUserChecked = () => {
         if (!userChecked) {
             setUserChecked(!userChecked)
@@ -63,6 +89,7 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
         if (!groupChecked) {
             setGroupChecked(!groupChecked)
             setUserChecked(!userChecked)
+            getGroupsByMemberships()
         }
     }
     return (
@@ -141,7 +168,33 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
                                                     className="note-destination-input"
                                                     name="group"
                                                     id="group"
-                                                ></select>
+                                                    onChange={(e) => {
+                                                        setMembershipId(
+                                                            e.target.value
+                                                        )
+
+                                                        console.log(
+                                                            'id????????',
+                                                            e.target.value
+                                                        )
+                                                    }}
+                                                >
+                                                    {memberships.map(
+                                                        (membership) => (
+                                                            <option
+                                                                value={
+                                                                    membership.membership_id
+                                                                }
+                                                            >
+                                                                {
+                                                                    membership
+                                                                        .Group
+                                                                        .group_name
+                                                                }
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </select>
                                             </div>
                                         )}
 
