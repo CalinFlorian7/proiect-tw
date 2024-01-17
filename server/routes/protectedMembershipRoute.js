@@ -6,4 +6,8 @@ protectedRouter.post(
     '/insertMemberByEmail',
     MembershipController.insertMemberByEmail
 )
+protectedRouter.post(
+    '/getGroupsByMemberships',
+    MembershipController.getGroupsByMemberships
+)
 module.exports = protectedRouter
