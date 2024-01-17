@@ -4,10 +4,19 @@ import { useState } from 'react'
 function Share({ onClose, noteId, noteTitle, subjectId }) {
     const [userChecked, setUserChecked] = useState(true)
     const [groupChecked, setGroupChecked] = useState(false)
+    const [email, setEmail] = useState('')
     const handleUserChecked = () => {
         if (!userChecked) {
             setUserChecked(!userChecked)
             setGroupChecked(!groupChecked)
+        }
+    }
+    const handleShareSubmit = () => {
+        console.log('click')
+        if (userChecked) {
+            console.log('email', email)
+        } else if (groupChecked) {
+            console.log('group')
         }
     }
     const handleGroupChecked = () => {
@@ -65,6 +74,51 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
                                         onChange={handleUserChecked}
                                         defaultValue="0"
                                     />
+                                    <div className="share-form-container">
+                                        {userChecked === true ? (
+                                            <div className="share-form">
+                                                stud
+                                                <label className="note-destination-label">
+                                                    The email of the user:
+                                                </label>
+                                                <input
+                                                    className="note-destination-input"
+                                                    type="text"
+                                                    placeholder="Enter the email of the user"
+                                                    onChange={(e) =>
+                                                        setEmail(e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="share-form">
+                                                group
+                                                <label className="note-destination-label">
+                                                    Select the name of the
+                                                    group:
+                                                </label>
+                                                <select
+                                                    className="note-destination-input"
+                                                    name="group"
+                                                    id="group"
+                                                ></select>
+                                            </div>
+                                        )}
+
+                                        <button
+                                            onClick={handleShareSubmit}
+                                            type="button"
+                                            className={
+                                                userChecked
+                                                    ? 'button-user'
+                                                    : 'button-group'
+                                            }
+                                        >
+                                            {userChecked
+                                                ? 'Send to the user'
+                                                : 'Send to the group'}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
