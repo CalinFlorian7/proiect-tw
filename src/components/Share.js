@@ -83,6 +83,9 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
             }
         } else if (groupChecked) {
             console.log('group')
+            if (membershipId!=null && noteId) {
+              
+            }
         }
     }
     const handleGroupChecked = () => {
@@ -179,7 +182,29 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
                                                         )
                                                     }}
                                                 >
-                                                    {memberships.map(
+                                                    {memberships.length > 0 ? (
+                                                        memberships.map(
+                                                            (membership) => (
+                                                                <option
+                                                                    value={
+                                                                        membership.membership_id
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        membership
+                                                                            .Group
+                                                                            .group_name
+                                                                    }
+                                                                </option>
+                                                            )
+                                                        )
+                                                    ) : (
+                                                        <option value={null}>
+                                                            You don't have any
+                                                            groups
+                                                        </option>
+                                                    )}
+                                                    {/* {memberships.map(
                                                         (membership) => (
                                                             <option
                                                                 value={
@@ -193,7 +218,7 @@ function Share({ onClose, noteId, noteTitle, subjectId }) {
                                                                 }
                                                             </option>
                                                         )
-                                                    )}
+                                                    )} */}
                                                 </select>
                                             </div>
                                         )}
