@@ -9,4 +9,8 @@ protectedRouter.post(
     enrollmentController.getStudentEnrollments
 )
 protectedRouter.post('/enrollStudent', enrollmentController.enrollStudent)
+protectedRouter.post(
+    '/inserNoteToStudentEmail',
+    enrollmentController.insertNoteToStudentEmail
+)
 module.exports = protectedRouter
