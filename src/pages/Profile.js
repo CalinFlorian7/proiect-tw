@@ -324,7 +324,11 @@ function Profile() {
                                             ) {
                                                 sendTeacherImage(reader.result)
                                                 // setimageCopy(reader.result)
-                                            } else console.log('nu e png')
+                                            } else {
+                                                alert(
+                                                    'Please choose a png file'
+                                                )
+                                            }
                                         }
                                     }}
                                 />
