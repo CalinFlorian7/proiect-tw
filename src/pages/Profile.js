@@ -312,7 +312,10 @@ function Profile() {
                                                 file.type === 'image/png'
                                             ) {
                                                 sendStudentImage(reader.result)
-                                            } else console.log('nu e png')
+                                            } else
+                                                alert(
+                                                    'Please choose a png file'
+                                                )
                                             if (
                                                 localStorage.getItem(
                                                     'userType'
