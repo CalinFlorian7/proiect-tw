@@ -7,8 +7,8 @@
 }
 .navbar > .menu-container {
     margin-left: auto;
-    margin-right: 40px;
-    right: 30px;
+    margin-right: 10px;
+    right: 10px;
 }
 
 .menu-bars {
@@ -74,5 +74,5 @@
 }
 
 span {
-    margin-left: 16px;
+    margin-left: 1px;
 }

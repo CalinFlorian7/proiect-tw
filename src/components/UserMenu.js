@@ -143,7 +143,7 @@ function UserMenu() {
             ) : (
                 <Link to="/AddSubject">
                     <div className="add-note">
-                        <span className="add-note-icon"></span>
+                        {/* <span className="add-note-icon"></span> */}
                         <span className="button-add">Add Subject</span>
                     </div>
                 </Link>
