@@ -18,7 +18,7 @@ select {
     justify-content: center;
 }
 .title {
-    min-width: 500px;
+    min-width: 70%;
     width: auto;
     border: #131862 2px solid;
 }
