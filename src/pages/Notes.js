@@ -4,6 +4,7 @@ import './Notes.css'
 import { useState, useEffect } from 'react'
 import { FaShare } from 'react-icons/fa'
 import Share from '../components/Share'
+
 function Notes() {
     const location = useLocation()
     const [subject, setSubject] = useState([])
@@ -14,7 +15,8 @@ function Notes() {
     const [title, setTitle] = useState(null)
 
     console.log(location.state)
-    const deleteNote = async (noteId) => {
+    const deleteNote = async (noteIdDelete) => {
+        console.log('note to be deleted', noteIdDelete)
         try {
             const response = await fetch(
                 'http://localhost:8080/api/notes/deleteNote',
@@ -27,13 +29,24 @@ function Notes() {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        note_id: noteId,
+                        note_id: noteIdDelete,
                     }),
                 }
             )
             const data = await response.json()
             if (response.status === 200) {
                 console.log('note deleted', data)
+
+                console.log('notes before delete', notes)
+                let newNotes = notes.filter(
+                    (note) => parseInt(note.note_id) !== parseInt(noteIdDelete)
+                )
+
+                console.log('new notes', newNotes)
+
+                setNotes(newNotes)
+                // console.log('notes after delete:', notes)
+
                 // const updatedNotes = [...notes]
                 // // const index = updatedNotes.findIndex(
                 // //     (n) => n.note_id === noteId
@@ -190,7 +203,18 @@ function Notes() {
                                                 </div>
                                             </Link>
                                             <div className="note-button">
-                                                <button className="delete-note">
+                                                <button
+                                                    className="delete-note"
+                                                    value={note.note_id}
+                                                    onClick={(e) => {
+                                                        deleteNote(
+                                                            e.target.value
+                                                        )
+                                                        console.log(
+                                                            `Deleting ${note.note_id}`
+                                                        )
+                                                    }}
+                                                >
                                                     Delete
                                                 </button>
                                             </div>
