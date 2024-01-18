@@ -236,6 +236,7 @@ function AddNote() {
     if (location && location.state) {
         if (location.state.subject) {
             subject = location.state.subject
+
             console.log(
                 'subject from the addnote page is successfully recieved'
             )
