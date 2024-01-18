@@ -2,7 +2,7 @@
 const db = require('../models/index.js')
 const Note = db.notes
 const Document = db.documents
-
+const Message = db.messages
 const selectCountNotes = async (req, res) => {
     const user_id = req.body.user_id
     try {
@@ -111,6 +111,11 @@ const deleteNote = async (req, res) => {
     try {
         // Delete the document associated with the note
         await Document.destroy({
+            where: {
+                note_id: note_id,
+            },
+        })
+        await Message.destroy({
             where: {
                 note_id: note_id,
             },
