@@ -49,3 +49,7 @@ ul {
     text-decoration: line-through;
     cursor: pointer;
 }
+.ql-toolbar.ql-snow {
+    margin: 10px;
+    border-color: transparent;
+}
