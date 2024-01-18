@@ -129,6 +129,10 @@ function Subjects() {
             subj
             <div className="page-container">
                 <div className="subjects-container"></div>
+                {localStorage.getItem('userType') === 'teacher' &&
+                subjects.length <= 0 ? (
+                    <h3>You don't have any subjects yet</h3>
+                ) : null}
                 {localStorage.getItem('userType') === 'teacher'
                     ? subjects?.map((subject) => (
                           <div
