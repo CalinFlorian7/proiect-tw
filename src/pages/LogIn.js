@@ -461,11 +461,11 @@ function LogIn() {
                         <div></div>
                     )}
 
-                    <span className="label-span">Username:</span>
+                    <span className="label-span">Email:</span>
                     <input
                         type="text"
                         className="input-username"
-                        placeholder="Enter your username..."
+                        placeholder="Enter your email..."
                         value={username}
                         onChange={usernameChange}
 
