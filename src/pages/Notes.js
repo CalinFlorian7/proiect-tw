@@ -107,9 +107,9 @@ function Notes() {
     }
     return (
         <>
-            <button type="button" onClick={openPopUp}>
+            {/* <button type="button" onClick={openPopUp}>
                 arata overlay
-            </button>
+            </button> */}
             {showPopUp && (
                 <Share
                     onClose={closePopUp}
