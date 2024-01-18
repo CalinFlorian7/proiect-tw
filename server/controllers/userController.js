@@ -137,9 +137,14 @@ const selectUserNameImage = async (req, res) => {
 
         if (users[0].user_image) console.log('user image is not null')
         else console.log('user image is null')
+        let image = null
+        if (users[0].user_image != null) {
+            image = users[0].user_image.toString()
+        }
         res.status(200).json({
             user_name: users[0].user_name,
-            user_image: users[0].user_image.toString(),
+            // user_image: users[0].user_image.toString(),
+            user_image: image,
             email: users[0].user_email,
         })
     } catch (error) {

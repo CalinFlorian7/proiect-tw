@@ -312,10 +312,13 @@ function Profile() {
                                                 file.type === 'image/png'
                                             ) {
                                                 sendStudentImage(reader.result)
-                                            } else
+                                            } else if (
+                                                file.type !== 'image/png'
+                                            ) {
                                                 alert(
                                                     'Please choose a png file'
                                                 )
+                                            }
                                             if (
                                                 localStorage.getItem(
                                                     'userType'
@@ -324,7 +327,9 @@ function Profile() {
                                             ) {
                                                 sendTeacherImage(reader.result)
                                                 // setimageCopy(reader.result)
-                                            } else {
+                                            } else if (
+                                                file.type !== 'image/png'
+                                            ) {
                                                 alert(
                                                     'Please choose a png file'
                                                 )

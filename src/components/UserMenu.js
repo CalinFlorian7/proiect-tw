@@ -33,7 +33,7 @@ function UserMenu() {
                     console.log('server error')
                 }
                 if (response.status === 200 && data !== null) {
-                    console.log(data)
+                    console.log('data for the student ', data)
 
                     if (data.user_name !== null)
                         document.querySelector('.user-name').innerHTML =
